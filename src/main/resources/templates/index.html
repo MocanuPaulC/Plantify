@@ -1,32 +1,32 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <title>MyPlantify</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="../static/img/logoSimple.png">
-  <link rel="stylesheet" href="../static/css/header.css">
-  <link rel="stylesheet" href="../static/css/index.css">
-  <link rel="stylesheet" href="../static/css/main.css">
-  <link rel="script" href="../static/js/plantContainer.js">
-  <link rel="manifest" href="../static/html/manifest.json" crossorigin="use-credentials">
+  <link rel="icon" th:href="@{img/logoSimple.png}">
+  <link rel="stylesheet"  type="text/css"  th:href="@{css/header.css}">
+  <link rel="stylesheet"  type="text/css"  th:href="@{css/index.css}">
+   <link rel="stylesheet"  type="text/css"  th:href="@{css/main.css}">
+   <link rel="script"   th:href="@{js/plantContainer.js}">
+   <link rel="manifest" th:href="@{html/manifest.json}" crossorigin="use-credentials">
+   <link rel="stylesheet"  type="text/css"  th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}">
 </head>
 
 <body>
 <header>
   <nav>
     <div class="navBox darkGreen">
-      <img src="../static/img/plantify_Black_on_white-removebg-preview.png ">
+      <img th:src="@{img/plantify_Black_on_white-removebg-preview.png} " alt="blackPlantifyLogo" >
       <a>About Plantify</a>
     </div>
     <div class="bigNavBox green">
       <div>
-        <img src="../static/img/plantify_Black_on_white.png">
+        <img th:src="@{img/plantify_Black_on_white.png}">
       </div>
       <div>
-        <a href="index.html">Plant List</a>
-        <a href="index.html">Dashboard</a>
-        <a href="index.html">Log out</a>
+        <a th:href="@{index.html}">Plant List</a>
+        <a th:href="@{index.html}">Dashboard</a>
+        <a th:href="@{index.html}">Log out</a>
       </div>
     </div>
   </nav>
@@ -34,25 +34,28 @@
 
 <div id="infoContainer">
   <div>
-    <img src="../static/img/simpleLogoInverted.png" alt="plantifyLogo">
+    <img th:src="@{img/simpleLogoInverted.png}" alt="plantifyLogo">
   </div>
 </div>
 <div id="mainContainer">
+  <menu class="arrow-box">
+    <div class="arrow-round"></div>
+  </menu>
   <main id="plantContainter">
     <div class="plant">
-      <h3>Plant name:</h3>
+      <h3 th:each="plant:${plants}">Plant name: <span th:text="${plant.name}"></span></h3>
         <article>
           <p>
-            Humidity: 1
+            Humidity: <!--<span th:text="${plant.humidity}">--></span>
           </p>
           <p>
-            Temperature:
+            Temperature:<!--<span th:text="${plant.temperature}">--> </span>
           </p>
           <p>
-            Brightness:
+            Brightness: <!--<span th:text="${plant.brightness}">--></span>
           </p>
           <p>
-            Moisture:
+            Moisture: <!--<span th:text="${plant.moisture}">--></span>
           </p>
         </article>
     </div>

@@ -16,8 +16,7 @@ public class PlantifybackendApplication{
 		View view = context.getBean(View.class);
 		view.refreshPlantDetails();
 		view.showMenu();
-
-
+		
 
 	}
 }

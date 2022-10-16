@@ -6,6 +6,7 @@ import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.util.List;
 
 @Component
 public class PlantServiceImplementation implements PlantService{
@@ -23,5 +24,9 @@ public class PlantServiceImplementation implements PlantService{
     }
     public void getplant(){
         plantRepository.getPlantsFromDB();
+    }
+
+    public List<Plant> readPlants(){
+        return plantRepository.getPlants();
     }
 }

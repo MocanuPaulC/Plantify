@@ -49,7 +49,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
         plantList.add(plant);
-        getCurrentReadings();;
+        getCurrentReadings();
         return plant;
     }
 

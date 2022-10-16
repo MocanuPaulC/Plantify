@@ -14,10 +14,51 @@
   width: 40em;
 }
 /*---------------------------main ------------------------*/
+menu{
+  display: block;
+  width: 80%;
+}
+
+:root {
+  --width: 20px;
+}
+
+body {
+  ovewrflow: hidden;
+}
+
+
+
+.arrow-box .arrow-round {
+  position: absolute;
+  width: var(--width);
+  height: var(--width);
+  border: calc(var(--width) / 4) solid #4C7F2E;
+  border-radius: 50%;
+  border-right-color: transparent;
+  transition: transform 1s;
+}
+
+.arrow-box .arrow-round::after {
+  content: "";
+  position: absolute;
+  top: -22.5%;
+  left: 65%;
+  border: calc(var(--width) * 0.5) solid #fff;
+  border-bottom-color: #4C7F2E;
+  border-left-color: transparent;
+  border-top-width: 0;
+  border-right-width: 0;
+}
+
+.arrow-box:active .arrow-round {
+  transform: rotate(1turn) scale(1.2);
+}
+/**/
 body #mainContainer{
   display: flex;
   justify-content: center;
-
+  flex-wrap: wrap;
 }
 #plantContainter{
   width: 80%;
@@ -25,7 +66,7 @@ body #mainContainer{
   flex-wrap: wrap;
   justify-content: space-around;
 
-  margin-top: 5em;
+  margin-top: 1.5em;
   margin-bottom: 15px;
   border: 4px solid #a5c99f;
   border-radius: 50px;
