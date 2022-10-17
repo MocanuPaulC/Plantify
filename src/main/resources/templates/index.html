@@ -43,19 +43,20 @@
   </menu>
   <main id="plantContainter">
     <div class="plant">
-      <h3 th:each="plant:${plants}">Plant name: <span th:text="${plant.name}"></span></h3>
-        <article>
+
+        <article th:each="plants:${plant}">
+          <h3 >Plant name: <span th:text="${plant.name}"></span></h3>
           <p>
-            Humidity: <!--<span th:text="${plant.humidity}">--></span>
+            Humidity: <span th:text="${plant.humidity}"></span>
           </p>
           <p>
-            Temperature:<!--<span th:text="${plant.temperature}">--> </span>
+            Temperature:<span th:text="${plant.temperature}"> </span>
           </p>
           <p>
-            Brightness: <!--<span th:text="${plant.brightness}">--></span>
+            Brightness: <span th:text="${plant.brightness}"></span>
           </p>
           <p>
-            Moisture: <!--<span th:text="${plant.moisture}">--></span>
+            Moisture: <span th:text="${plant.moisture}"></span>
           </p>
         </article>
     </div>

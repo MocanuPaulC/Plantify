@@ -20,9 +20,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Autowired
     public PlantRepositoryImplementation() {
-
         plantList = new ArrayList<>();
-
     }
 
     @Override
