@@ -1,8 +1,9 @@
 package be.kdg.integration.plantifybackend.domain;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 
-public class Plant {
+public class Plant implements Serializable {
 
     public class Details{
         private double temperature;
@@ -106,6 +107,10 @@ public class Plant {
 
     public Arduino getArduino() {
         return arduino;
+    }
+
+    public Details getDetails() {
+        return details;
     }
 
     public String getSensorData(){

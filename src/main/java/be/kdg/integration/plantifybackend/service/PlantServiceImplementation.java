@@ -30,6 +30,7 @@ public class PlantServiceImplementation implements PlantService{
         return plantRepository.getPlants();
     }
 
+
     @Override
     public void refreshPlantData() {
         plantRepository.getCurrentReadings();

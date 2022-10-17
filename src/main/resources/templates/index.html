@@ -39,24 +39,25 @@
 </div>
 <div id="mainContainer">
   <menu class="arrow-box">
-    <div class="arrow-round"></div>
+    <form method="post">
+      <input type="submit" value="Submit"><div class="arrow-round"></div>
+    </form>
   </menu>
   <main id="plantContainter">
     <div class="plant">
-
-        <article th:each="plants:${plant}">
+        <article th:each="plant: ${plants}">
           <h3 >Plant name: <span th:text="${plant.name}"></span></h3>
           <p>
-            Humidity: <span th:text="${plant.humidity}"></span>
+            Humidity: <span th:text="${plant.details.humidity}"></span>
           </p>
           <p>
-            Temperature:<span th:text="${plant.temperature}"> </span>
+            Temperature:<span th:text="${plant.details.temperature}"> </span>
           </p>
           <p>
-            Brightness: <span th:text="${plant.brightness}"></span>
+            Brightness: <span th:text="${plant.details.brightness}"></span>
           </p>
           <p>
-            Moisture: <span th:text="${plant.moisture}"></span>
+            Moisture: <span th:text="${plant.details.moisture}"></span>
           </p>
         </article>
     </div>
