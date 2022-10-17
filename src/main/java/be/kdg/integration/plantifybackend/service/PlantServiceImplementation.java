@@ -22,11 +22,16 @@ public class PlantServiceImplementation implements PlantService{
     public Plant addPlant(String name, PlantType plantType, Arduino arduino) {
         return plantRepository.savePlant(new Plant(name,plantType,arduino));
     }
-    public void getplant(){
+    public void getPlantFromDB(){
         plantRepository.getPlantsFromDB();
     }
 
     public List<Plant> readPlants(){
         return plantRepository.getPlants();
+    }
+
+    @Override
+    public void refreshPlantData() {
+        plantRepository.getCurrentReadings();
     }
 }

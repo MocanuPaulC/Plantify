@@ -27,7 +27,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public List<Plant> getPlants() {
-        return null;
+        return plantList;
     }
 
     @Override

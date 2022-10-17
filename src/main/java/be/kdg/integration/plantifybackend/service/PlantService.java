@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface PlantService {
     Plant addPlant(String name, PlantType plantType, Arduino arduino);
-    void getplant();
+    void getPlantFromDB();
+
+    void refreshPlantData();
 
     List<Plant> readPlants();
 
