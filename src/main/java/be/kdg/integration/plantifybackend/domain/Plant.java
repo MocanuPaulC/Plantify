@@ -7,7 +7,7 @@ public class Plant implements Serializable {
 
     public class Details{
         private double temperature;
-        private int brightness;
+        private double brightness;
         private double humidity;
         private double moisture;
 
@@ -15,7 +15,7 @@ public class Plant implements Serializable {
             this.temperature = temperature;
         }
 
-        public void setBrightness(int brightness) {
+        public void setBrightness(double brightness) {
             this.brightness = brightness;
         }
 
@@ -31,7 +31,7 @@ public class Plant implements Serializable {
             return temperature;
         }
 
-        public int getBrightness() {
+        public double getBrightness() {
             return brightness;
         }
 
