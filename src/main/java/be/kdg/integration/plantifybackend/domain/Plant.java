@@ -114,7 +114,6 @@ public class Plant implements Serializable {
     }
 
     public String getSensorData(){
-//        System.out.println(getArduino().getData());
 
         arduino.getData();
         return "id="+this.getId()+getArduino().getData();

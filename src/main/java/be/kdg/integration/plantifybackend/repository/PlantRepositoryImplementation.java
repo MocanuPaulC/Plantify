@@ -56,6 +56,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
     @Override
     public void getCurrentReadings() {
 
+
         List<String> plantJsonsWithIds = plantList.stream().map(Plant::getSensorData).toList();
         List<String> plantIds = plantList.stream().map(Plant::getSensorData).map(s -> String.valueOf(s.charAt(3))).toList();
         List<String> jsons = plantJsonsWithIds.stream().map(plant -> plant.substring(5,plant.length()-4)).toList();
