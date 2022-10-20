@@ -88,3 +88,10 @@ body #mainContainer{
 .plant p{
   padding-left: 15px;
 }
+/* --------------------- form -----------------------*/
+.arrow-round input{
+  border-radius: 50%;
+  opacity: 0;
+  width: 30px;
+  height: 30px;
+}
