@@ -40,7 +40,9 @@ public class SerialArduinoConnection {
         }
         StringBuilder text = new StringBuilder();
         for (byte oneByte : this.receiveBytes()) {
-            text.append((char) oneByte);
+            if((char)oneByte!='['&&(char)oneByte!=']') {
+                text.append((char) oneByte);
+            }
         }
         return text.toString();
     }

@@ -58,9 +58,10 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
 
         List<String> plantJsonsWithIds = plantList.stream().map(Plant::getSensorData).toList();
-        List<String> plantIds = plantList.stream().map(Plant::getSensorData).map(s -> String.valueOf(s.charAt(3))).toList();
-        List<String> jsons = plantJsonsWithIds.stream().map(plant -> plant.substring(5,plant.length()-4)).toList();
-
+        plantJsonsWithIds.forEach(System.out::println);
+        List<String> plantIds = plantJsonsWithIds.stream().map(s -> String.valueOf(s.charAt(3))).toList();
+//        plantIds.forEach(System.out::println);
+        List<String> jsons = plantJsonsWithIds.stream().map(plant -> plant.substring(4,plant.length())).toList();
         Gson gson = new Gson();
 
 

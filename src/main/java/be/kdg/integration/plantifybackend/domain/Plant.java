@@ -1,5 +1,11 @@
 package be.kdg.integration.plantifybackend.domain;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 
@@ -10,6 +16,7 @@ public class Plant implements Serializable {
         private double brightness;
         private double humidity;
         private double moisture;
+
 
         public void setTemperature(double temperature) {
             this.temperature = temperature;
@@ -58,6 +65,8 @@ public class Plant implements Serializable {
     private PlantType typeOfPlant;
     private Arduino arduino;
     private int id;
+    final TypeAdapter<JsonElement> strictAdapter = new Gson().getAdapter(JsonElement.class);
+
 
     private Details details=new Details();
 
@@ -114,9 +123,16 @@ public class Plant implements Serializable {
     }
 
     public String getSensorData(){
-
         arduino.getData();
-        return "id="+this.getId()+getArduino().getData();
+        String data=arduino.getData();
+        while (!isValid(data) || data.charAt(0)!='{')
+        {
+            data=arduino.getData();
+        }
+
+        System.out.println("Data is "+ data);
+        return "id="+this.getId()+data;
+
     }
 
     public void setArduino(Arduino arduino) {
@@ -135,6 +151,14 @@ public class Plant implements Serializable {
         this.id = id;
     }
 
+    public boolean isValid(String json) {
+        try {
+            strictAdapter.fromJson(json);
+        } catch (JsonSyntaxException | IOException e) {
+            return false;
+        }
+        return true;
+    }
 
 }
 

@@ -15,11 +15,7 @@ public class PlantifybackendApplication{
 		context.getBean(PlantService.class).refreshPlantData();
 
 
-//		System.out.println("woks");
-//		View view = context.getBean(View.class);
-//		view.refreshPlantDetails();
-//		view.showMenu();
-//
+
 
 	}
 }
