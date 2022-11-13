@@ -22,7 +22,7 @@ public class PlantRowMapper implements RowMapper<Plant> {
 
 
         //hardcoded cuz we only have one arduino
-        plant.setArduino(new Arduino(0,"1"));
+        plant.setArduino(new Arduino("1"));
 
 
         return plant;

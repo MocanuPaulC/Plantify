@@ -60,7 +60,7 @@ public class View {
         String type = scanner.next();
         System.out.println("What series of our product do you own? (1,2,3,4)");
         String series = scanner.next();
-        plantService.addPlant(name, PlantType.valueOf(type.toUpperCase(Locale.ROOT)), new Arduino(0, series));
+        plantService.addPlant(name, PlantType.valueOf(type.toUpperCase(Locale.ROOT)), new Arduino(series));
 
     }
 

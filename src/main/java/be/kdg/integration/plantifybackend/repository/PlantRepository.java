@@ -8,9 +8,8 @@ import java.util.List;
 @Component
 public interface PlantRepository {
 
+    void saveCurrentReadingsToDB(Plant.Details details, int plantId);
     Plant savePlant(Plant plant);
-
-    void getCurrentReadings();
 
     void getPlantsFromDB();
     List<Plant> getPlants();
