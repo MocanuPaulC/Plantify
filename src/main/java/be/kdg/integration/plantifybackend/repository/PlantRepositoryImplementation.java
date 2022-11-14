@@ -31,11 +31,10 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public void getPlantsFromDB(){
-        // to modify based on UserId
+        // to modify based on UserID//
+
         String getPlants = "SELECT plantid, plantname,planttype FROM currentplants";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
-        plantList.forEach(Plant::bufferArduino);
-        getCurrentReadings();
         System.out.println(plantList);
     }
 
@@ -43,39 +42,25 @@ public class PlantRepositoryImplementation implements PlantRepository {
     @Override
     public Plant savePlant(Plant plant) {
         String saveSql =
-                String.format("INSERT INTO currentplants (plantname,dateadded,planttype) " +
-                        "VALUES ('%s',CURRENT_TIMESTAMP,'%s')", plant.getName(), plant.getTypeOfPlant());
+                String.format("INSERT INTO currentplants (plantname,useremail,dateadded,planttype) " +
+                        "VALUES ('%s','fake@email.com',CURRENT_TIMESTAMP,'%s')", plant.getName(), plant.getTypeOfPlant());
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
         plantList.add(plant);
-        getCurrentReadings();
         return plant;
     }
 
 
+    public void saveCurrentReadingsToDB(Plant.Details details, int plantId){
+        String sql=String.format("INSERT INTO plantCurrentData (plantid,temperature, humidity,moisture, light, refreshtime)" +
+                "VALUES (%d,%f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
+        jdbcTemplate.execute(sql);
+    }
+
     @Override
-    public void getCurrentReadings() {
-
-
-        List<String> plantJsonsWithIds = plantList.stream().map(Plant::getSensorData).toList();
-        plantJsonsWithIds.forEach(System.out::println);
-        List<String> plantIds = plantJsonsWithIds.stream().map(s -> String.valueOf(s.charAt(3))).toList();
-//        plantIds.forEach(System.out::println);
-        List<String> jsons = plantJsonsWithIds.stream().map(plant -> plant.substring(4,plant.length())).toList();
-        Gson gson = new Gson();
-
-
-        for (int i = 0 ; i < plantList.size();i++){
-            for(int j = 0 ; j<plantList.size();j++){
-                if(plantIds.get(i).equals(String.valueOf(plantList.get(j).getId()))){
-                    Plant.Details plant = gson.fromJson(jsons.get(j),Plant.Details.class);
-                    plantList.get(j).setDetails(plant);
-                }
-            }
-
-        }
-
-
+    public void updatePlantData(Plant.Details details, int physicalId) {
+        plantList.stream().filter(plant-> plant.getArduino().getPhysicalIdentifier()==physicalId)
+                .forEach(plant -> plant.setDetails(details));
     }
 }
 

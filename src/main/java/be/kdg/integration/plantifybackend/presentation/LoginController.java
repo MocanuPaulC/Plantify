@@ -1,6 +1,6 @@
 package be.kdg.integration.plantifybackend.presentation;
 
-import be.kdg.integration.plantifybackend.domain.User;
+import  be.kdg.integration.plantifybackend.domain.User;
 import be.kdg.integration.plantifybackend.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,9 @@
 @font-face {
-  font-family:SoftClouds-Medium;
-  src: url('../img/SoftClouds-Medium.ttf');
-}/*import the font family*/
+  font-family: quincy-cf, serif;
+  font-weight: 500;
+  font-style: normal;
+}
+/*import the font family*/
 
 /*CENTER PICTURE ABOVE PLANTLIST*/
 #infoContainer{

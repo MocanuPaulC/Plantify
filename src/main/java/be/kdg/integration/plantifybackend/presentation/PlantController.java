@@ -36,7 +36,7 @@ public class PlantController {
     @GetMapping("/plants")
     public String showPlantsView(Model model) {
         model.addAttribute("plants", plantService.readPlants());
-        return "index";
+        return "dashboard";
     }
 
 
