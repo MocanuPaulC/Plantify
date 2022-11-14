@@ -1,17 +1,17 @@
 package be.kdg.integration.plantifybackend.presentation;
 
+import be.kdg.integration.plantifybackend.domain.Arduino;
+import be.kdg.integration.plantifybackend.domain.Plant;
+import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
-import be.kdg.integration.plantifybackend.service.PlantServiceImplementation;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +24,13 @@ import java.util.List;
 @Controller
 public class plantController {
     PlantService plantService;
+    Gson gson =new Gson();
+    ArduinoService arduinoService;
 
     @Autowired
-    public plantController(PlantService plantService) {
+    public plantController(PlantService plantService, ArduinoService arduinoService) {
         this.plantService = plantService;
+        this.arduinoService=arduinoService;
     }
 
     @GetMapping("/plants")
@@ -39,7 +42,20 @@ public class plantController {
 
     @PostMapping("/plants")
     public String refreshData(){
-        plantService.refreshPlantData();
+//        plantService.updatePageData();
+//        plantService.refreshPlantData();-------------------------------------------
+        return "redirect:/plants";
+    }
+
+    @GetMapping("plants/addplant")
+    public String showAddPlant(Model model){
+        model.addAttribute("add","chill");
+        return "addplant";
+    }
+    @PostMapping("plants/addplant")
+    public String addPlant(String name, String plantType, String arduinoSeries, int physicalIdentifier){
+      Arduino arduino= this.arduinoService.addArduino(arduinoSeries,physicalIdentifier);
+        this.plantService.addPlant(name, PlantType.PLAIN,arduino);
         return "redirect:/plants";
     }
 
@@ -56,10 +72,14 @@ public class plantController {
 
         final List<String> list = new BufferedReader(new InputStreamReader(inputStream))
                 .lines().toList();
-        String json=list.get(0).substring(1,list.get(0).length()-1);
 
-        System.out.println(json);
 
+        int physicalId=Integer.parseInt(list.get(0).substring(0,3));
+        String json=list.get(0).substring(4,list.get(0).length()-1);
+        if(!json.contains("[")) {
+            Plant.Details details = gson.fromJson(json, Plant.Details.class);
+            this.plantService.updatePlantData(details, physicalId);
+        }
         return "adddetails";
     }
 

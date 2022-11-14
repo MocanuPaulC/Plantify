@@ -10,7 +10,7 @@ public interface PlantService {
 
     void getPlantFromDB();
 
-    void refreshPlantData();
+    void updatePlantData(Plant.Details details,int physicalId);
 
     List<Plant> readPlants();
 

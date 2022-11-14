@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>addPlant</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+  <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}">
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <div class="container-fluid">
+    <form method="post" class="was-validated">
+      <div class="mb-3 mt-3">
+        <label for="name" class="form-label" >Plant Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="plantType" class="form-label" >Plant Type</label>
+        <input type="text" class="form-control" id="plantType" placeholder="Enter Net Worth" name="netWorth"
+               required>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="arduinoSeries" class="form-label">Arduino Series</label>
+        <input type="text" class="form-control" id="arduinoSeries" placeholder="Enter Net Worth" name="netWorth"
+               required>
+      </div>
+      <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
+  </div>
+</div>
+</body>
+</html>

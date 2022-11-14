@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public interface PlantRepository {
 
     void saveCurrentReadingsToDB(Plant.Details details, int plantId);
@@ -14,5 +13,6 @@ public interface PlantRepository {
     void getPlantsFromDB();
     List<Plant> getPlants();
 
+    void updatePlantData(Plant.Details details,int physicalId);
 
 }

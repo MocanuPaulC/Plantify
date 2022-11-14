@@ -32,7 +32,7 @@ public class PlantServiceImplementation implements PlantService{
 
 //    Refactor
     @Override
-    public void refreshPlantData() {
-
+    public void updatePlantData(Plant.Details details,int physicalId) {
+        plantRepository.updatePlantData(details,physicalId);
     }
 }
