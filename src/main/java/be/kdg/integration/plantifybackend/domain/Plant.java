@@ -84,7 +84,6 @@ public class Plant implements Serializable {
         return "Plant{" +
                 "name='" + name + '\'' +
                 ", typeOfPlant=" + typeOfPlant +
-                ", arduino=" + arduino +
                 ", id=" + id +
                 ", details=" + details +
                 '}';

@@ -22,13 +22,13 @@ import java.util.List;
 
 
 @Controller
-public class plantController {
+public class PlantController {
     PlantService plantService;
     Gson gson =new Gson();
     ArduinoService arduinoService;
 
     @Autowired
-    public plantController(PlantService plantService, ArduinoService arduinoService) {
+    public PlantController(PlantService plantService, ArduinoService arduinoService) {
         this.plantService = plantService;
         this.arduinoService=arduinoService;
     }
@@ -53,9 +53,13 @@ public class plantController {
         return "addplant";
     }
     @PostMapping("plants/addplant")
-    public String addPlant(String name, String plantType, String arduinoSeries, int physicalIdentifier){
-      Arduino arduino= this.arduinoService.addArduino(arduinoSeries,physicalIdentifier);
-        this.plantService.addPlant(name, PlantType.PLAIN,arduino);
+    public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
+//        System.out.println(name);
+//        System.out.println(plantType);
+//        System.out.println(arduinoSeries);
+//        System.out.println(physicalId);
+      Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
+        this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino);
         return "redirect:/plants";
     }
 
@@ -80,6 +84,10 @@ public class plantController {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
             this.plantService.updatePlantData(details, physicalId);
         }
+
+//        System.out.println(physicalId);
+//        System.out.println(json);
+        this.plantService.readPlants().forEach(System.out::println);
         return "adddetails";
     }
 
