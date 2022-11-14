@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create User</title>
-    <link rel="icon" th:href="@{/img/img/icon.png}">
+    <link rel="icon" th:src="@{/img/icon.png}">
     <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/forms.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/fragments.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
     <script defer th:src="@{js/formvalidation.js}"></script>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-    <script defer type="module" src="../js/jsfile.js"></script>
+    <script defer type="module" th:src="@{js/jsfile.js}"></script>
     <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
 </head>
 <body>

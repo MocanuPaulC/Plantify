@@ -1,13 +1,14 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>MyPlantify</title>
     <!--<link rel="manifest" href="manifest.json">-->
-    <link rel="icon" href="../static/img/img/icon.png">
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/main.css}"/>
+    <link rel="icon" th:href="@{img/img/icon.png}">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/signInForm/css/main.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/index.css}"/>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/forms.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/fragments.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
     <script defer th:src="@{js/formvalidation.js}"></script>
@@ -23,7 +24,7 @@
     <h1>Plantify
         <section style="font-size: 40px">The first digital self watering system <br> to improve your life!</section>
     </h1>
-    <a style="text-decoration: none" class="buttonClass" id="redirect" type="button" href="login.html">Sign In</a>
+    <a style="text-decoration: none" class="buttonClass" id="redirect" type="button" th:href="@{/login.html}">Sign In</a>
 </main>
 
 <div th:insert="~{fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
