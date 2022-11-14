@@ -1,7 +1,4 @@
-const button = document.getElementById('button')
-button.addEventListener('click', event => {
-    document.getElementById('form').style.display = 'block'
-})
+
 
 const logout = document.getElementById('logout')
 logout.addEventListener('click', event => {

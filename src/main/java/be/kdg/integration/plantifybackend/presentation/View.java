@@ -1,7 +1,6 @@
 package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
-import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class View {
     public void showMenu() {
         int choice;
         boolean show = true;
-        plantService.getplant();
+        plantService.getPlantFromDB();
         while (show) {
             System.out.println("""
                     1) Show plant details
@@ -47,11 +46,11 @@ public class View {
     }
 
     public void showPlant() {
-
+        System.out.println(plantService.readPlants());
     }
 
     public void refreshPlantDetails() {
-
+        plantService.refreshPlantData();
     }
 
     public void addPlant() {

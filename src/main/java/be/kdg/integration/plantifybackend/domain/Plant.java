@@ -1,20 +1,28 @@
 package be.kdg.integration.plantifybackend.domain;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.TypeAdapter;
+
+import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 
-public class Plant {
+public class Plant implements Serializable {
 
     public class Details{
         private double temperature;
-        private int brightness;
+        private double brightness;
         private double humidity;
         private double moisture;
+
 
         public void setTemperature(double temperature) {
             this.temperature = temperature;
         }
 
-        public void setBrightness(int brightness) {
+        public void setBrightness(double brightness) {
             this.brightness = brightness;
         }
 
@@ -30,7 +38,7 @@ public class Plant {
             return temperature;
         }
 
-        public int getBrightness() {
+        public double getBrightness() {
             return brightness;
         }
 
@@ -57,6 +65,8 @@ public class Plant {
     private PlantType typeOfPlant;
     private Arduino arduino;
     private int id;
+    final TypeAdapter<JsonElement> strictAdapter = new Gson().getAdapter(JsonElement.class);
+
 
     private Details details=new Details();
 
@@ -108,11 +118,21 @@ public class Plant {
         return arduino;
     }
 
-    public String getSensorData(){
-//        System.out.println(getArduino().getData());
+    public Details getDetails() {
+        return details;
+    }
 
+    public String getSensorData(){
         arduino.getData();
-        return "id="+this.getId()+getArduino().getData();
+        String data=arduino.getData();
+        while (!isValid(data) || data.charAt(0)!='{')
+        {
+            data=arduino.getData();
+        }
+
+        System.out.println("Data is "+ data);
+        return "id="+this.getId()+data;
+
     }
 
     public void setArduino(Arduino arduino) {
@@ -131,6 +151,14 @@ public class Plant {
         this.id = id;
     }
 
+    public boolean isValid(String json) {
+        try {
+            strictAdapter.fromJson(json);
+        } catch (JsonSyntaxException | IOException e) {
+            return false;
+        }
+        return true;
+    }
 
 }
 

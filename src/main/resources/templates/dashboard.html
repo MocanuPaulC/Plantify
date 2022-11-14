@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="icon" href="img/icon.png">
+    <link rel="icon" href="/img/icon.png">
     <link rel="stylesheet" media="all" href="../static/dashboard.css" type="module" th:href="@{/static/dashboard.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="../static/forms.css" th:href="@{/static/forms.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="../static/fragments.css" th:href="@{/static/fragments.css}"/>
@@ -11,15 +11,15 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
     <script defer th:src="@{js/formvalidation.js}"></script>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-    <script defer type="module" src="js/jsfile.js"></script>
+    <script defer type="module" src="/js/jsfile.js"></script>
     <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
 </head>
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
 <main>
-    <button style="border: transparent; background-color: transparent; color: black; font-weight: bold; font-size: 20px; width: 8em" id="button"
-            type="button">+ Add Plant
+    <button style="border: transparent; background-color: transparent; color: black; font-weight: bold; font-size: 20px; width: 8em; font-family: quincy-cf, serif" id="button"
+            type="button">+
     </button>
     <form class="addPlant" id="form">
         <fieldset>
@@ -39,5 +39,12 @@
 </main>
 
 <div th:insert="~{fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
+
+<script>
+    const button = document.getElementById('button')
+    button.addEventListener('click', event => {
+        document.getElementById('form').style.display = 'block'
+    })
+</script>
 </body>
 </html>

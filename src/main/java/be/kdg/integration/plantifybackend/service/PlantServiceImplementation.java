@@ -6,6 +6,7 @@ import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.util.List;
 
 @Component
 public class PlantServiceImplementation implements PlantService{
@@ -21,7 +22,21 @@ public class PlantServiceImplementation implements PlantService{
     public Plant addPlant(String name, PlantType plantType, Arduino arduino) {
         return plantRepository.savePlant(new Plant(name,plantType,arduino));
     }
-    public void getplant(){
+    public void getPlantFromDB(){
         plantRepository.getPlantsFromDB();
+    }
+
+    public List<Plant> readPlants(){
+        return plantRepository.getPlants();
+    }
+
+    @Override
+    public Plant addDummyPlant(String name, PlantType plantType) {
+        return null;
+    }
+
+    @Override
+    public void refreshPlantData() {
+        plantRepository.getCurrentReadings();
     }
 }
