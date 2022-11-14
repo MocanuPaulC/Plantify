@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/fragments.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/signInForm/css/fragments.css}"/>
 </head>
 <body>
-<div th:fragment="footer">
+<div class="footer" th:fragment="footer">
     <p> All rights reserved to Team 6&copy;</p>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigationbar(index)">
+<nav class="navbar" th:fragment="navigationbar(index)">
     <div class="container-fluid">
         <div class="navBox darkGreen" id="navbarCollapse">
             <img src="/img/plantify_Black_on_white-removebg-preview.png" alt="black_on_white_remove_preview">
