@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/forms.css" th:href="@{/static/forms.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/fragments.css"
+          th:href="@{/static/fragments.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
+    <script defer th:src="@{js/formvalidation.js}"></script>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script defer type="module" src="js/jsfile.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
+</head>
+<body>
+<div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
+
+<form class="createUser" id="createUser">
+    <fieldset>
+        <p style="text-align: center">Sign In</p>
+        <label><input type="text" id="username" name="username" placeholder="Username" required></label>
+        <label><input type="text" id="password" name="password" placeholder="Password" required></label>
+        <button class="button" id="login" type="button">Log In</button>
+        <p style="font-size: 15px; font-weight: normal">Don't have an account?
+            <a href="createUser.html" style="color: black">Register</a>
+        </p>
+        <p class="error">Wrong password or username!</p>
+    </fieldset>
+</form>
+
+<div th:insert="~{fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
+</body>
+</html>

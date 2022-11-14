@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Plantify</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/aboutPlantify.css"
+          th:href="@{/static/aboutPlantify.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/fragments.css"
+          th:href="@{/static/fragments.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
+</head>
+<body>
+<div th:replace="~{fragments/fragments::navigationbar(3)}"></div>
+
+<main>
+    <h1>About Plantify</h1>
+    <p><strong>Plantify is the first digital watering system that has a built-in reservoir. <br> It was created to make
+        it easier to
+        take care of plants by notifying the user that they need to water<br> their plant or that they need to refill
+        the
+        reservoir. By building an easy-to-understand platform,<br> makes creating an account and installing the device
+        an
+        easy task.</strong></p>
+    <p><strong>The watering system was created using Arduino components and C programming,<br> while the self-watering
+        pot is made using 3D printing and connected via Wi-Fi to make Plantify
+
+
+    </strong></p>
+</main>
+
+<div th:insert="~{/fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
+</body>
+</html>

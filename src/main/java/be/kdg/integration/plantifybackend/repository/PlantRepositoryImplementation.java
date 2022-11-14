@@ -31,7 +31,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
     }
 
     @Override
-    public void getPlantsFromDB(){
+    public void getPlantsFromDB() {
         // to modify based on UserId
         String getPlants = "SELECT plantid, plantname,planttype FROM currentplants";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
@@ -49,7 +49,8 @@ public class PlantRepositoryImplementation implements PlantRepository {
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
         plantList.add(plant);
-        getCurrentReadings();;
+        getCurrentReadings();
+        ;
         return plant;
     }
 
@@ -59,21 +60,20 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
         List<String> plantJsonsWithIds = plantList.stream().map(Plant::getSensorData).toList();
         List<String> plantIds = plantList.stream().map(Plant::getSensorData).map(s -> String.valueOf(s.charAt(3))).toList();
-        List<String> jsons = plantJsonsWithIds.stream().map(plant -> plant.substring(5,plant.length()-4)).toList();
+        List<String> jsons = plantJsonsWithIds.stream().map(plant -> plant.substring(5, plant.length() - 4)).toList();
 
         Gson gson = new Gson();
 
 
-        for (int i = 0 ; i < plantList.size();i++){
-            for(int j = 0 ; j<plantList.size();j++){
-                if(plantIds.get(i).equals(String.valueOf(plantList.get(j).getId()))){
-                    Plant.Details plant = gson.fromJson(jsons.get(j),Plant.Details.class);
+        for (int i = 0; i < plantList.size(); i++) {
+            for (int j = 0; j < plantList.size(); j++) {
+                if (plantIds.get(i).equals(String.valueOf(plantList.get(j).getId()))) {
+                    Plant.Details plant = gson.fromJson(jsons.get(j), Plant.Details.class);
                     plantList.get(j).setDetails(plant);
                 }
             }
 
         }
-
     }
 }
 

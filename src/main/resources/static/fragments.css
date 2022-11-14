@@ -1,0 +1,70 @@
+body {
+    font-family: quincy-cf,serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body header nav .navBox {
+    display: flex;
+    margin: 0;
+    justify-content: space-between;
+    height: 2em;
+    left: 0;
+}
+
+.bigNavBox {
+    display: flex;
+    margin: 0;
+    height: 4em;
+    /*justify-content: space-between;*/
+    left: 0;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+.bigNavBox div {
+    display: flex;
+}
+
+.navBox a, .navBox img {
+    display: flex;
+    font-size: 0.75em;
+}
+
+.navBox a, .bigNavBox div a {
+    justify-content: center;
+    align-self: center;
+    margin-right: 10px;
+}
+
+.bigNavBox div a {
+    font-size: 1.8em;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.bigNavBox img {
+    border-bottom-right-radius: 10px;
+}
+
+.navBox img {
+    border-top-right-radius: 10px;
+}
+
+.bigNavBox div:nth-of-type(2) {
+    display: flex;
+    justify-content: flex-end;
+}
+
+footer{
+    background-color: #4a6434;
+    color: white;
+    height: 3em;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    left: 0;
+}
