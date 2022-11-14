@@ -58,7 +58,7 @@ public class PlantController {
 //        System.out.println(plantType);
 //        System.out.println(arduinoSeries);
 //        System.out.println(physicalId);
-      Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
+        Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
         this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino);
         return "redirect:/plants";
     }
@@ -95,4 +95,3 @@ public class PlantController {
 
 
 }
-

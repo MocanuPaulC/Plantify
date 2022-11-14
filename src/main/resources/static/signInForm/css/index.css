@@ -12,6 +12,10 @@ body {
     text-align: center;
 }
 
+main {
+    margin-top: 15em;
+}
+
 main > h1 {
     font-size: 100px;
 }
