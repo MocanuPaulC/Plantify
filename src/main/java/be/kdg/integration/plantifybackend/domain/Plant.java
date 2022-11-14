@@ -64,8 +64,10 @@ public class Plant implements Serializable {
     private PlantType typeOfPlant;
     private Arduino arduino;
     private int id;
-    final TypeAdapter<JsonElement> strictAdapter = new Gson().getAdapter(JsonElement.class);
 
+    public Arduino getArduino() {
+        return arduino;
+    }
 
     private Details details=new Details();
 
@@ -81,7 +83,6 @@ public class Plant implements Serializable {
         return "Plant{" +
                 "name='" + name + '\'' +
                 ", typeOfPlant=" + typeOfPlant +
-                ", arduino=" + arduino +
                 ", id=" + id +
                 ", details=" + details +
                 '}';
@@ -94,7 +95,6 @@ public class Plant implements Serializable {
         this.name = name;
         this.typeOfPlant = typeOfPlant;
         this.arduino = arduino;
-        bufferArduino();
     }
 
     public String getName() {
@@ -113,33 +113,14 @@ public class Plant implements Serializable {
         this.typeOfPlant = typeOfPlant;
     }
 
-    public Arduino getArduino() {
-        return arduino;
-    }
 
     public Details getDetails() {
         return details;
     }
 
-    public String getSensorData(){
-        arduino.getData();
-        String data=arduino.getData();
-        while (!isValid(data) || data.charAt(0)!='{')
-        {
-            data=arduino.getData();
-        }
-
-        System.out.println("Data is "+ data);
-        return "id="+this.getId()+data;
-
-    }
 
     public void setArduino(Arduino arduino) {
         this.arduino = arduino;
-    }
-
-    public void bufferArduino(){
-        arduino.buffer();
     }
 
     public int getId() {
@@ -150,14 +131,6 @@ public class Plant implements Serializable {
         this.id = id;
     }
 
-    public boolean isValid(String json) {
-        try {
-            strictAdapter.fromJson(json);
-        } catch (JsonSyntaxException | IOException e) {
-            return false;
-        }
-        return true;
-    }
 
 }
 

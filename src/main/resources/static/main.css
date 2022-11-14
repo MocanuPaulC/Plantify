@@ -1,0 +1,17 @@
+/*html, body {
+  margin:0;
+  padding:0;
+}*/
+
+body {
+  background-image: url("../templates/img/background.png");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: quincy-cf, serif;
+  font-weight: 400;
+  text-align: center;
+  height: 100%;
+  margin-bottom: 200px;
+}

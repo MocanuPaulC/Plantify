@@ -37,7 +37,6 @@ public class View {
             switch (choice) {
                 case 0 -> show = false;
                 case 1 -> showPlant();
-                case 2 -> refreshPlantDetails();
                 case 3 -> addPlant();
             }
         }
@@ -49,9 +48,9 @@ public class View {
         System.out.println(plantService.readPlants());
     }
 
-    public void refreshPlantDetails() {
-        plantService.refreshPlantData();
-    }
+//    public void refreshPlantDetails() {
+//        plantService.refreshPlantData();
+//    }
 
     public void addPlant() {
         System.out.println("What's the name of the plant?");
@@ -60,7 +59,7 @@ public class View {
         String type = scanner.next();
         System.out.println("What series of our product do you own? (1,2,3,4)");
         String series = scanner.next();
-        plantService.addPlant(name, PlantType.valueOf(type.toUpperCase(Locale.ROOT)), new Arduino(0, series));
+        plantService.addPlant(name, PlantType.valueOf(type.toUpperCase(Locale.ROOT)), new Arduino(series,101));
 
     }
 

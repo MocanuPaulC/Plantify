@@ -20,18 +20,17 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Autowired
     public PlantRepositoryImplementation() {
-
         plantList = new ArrayList<>();
 
     }
 
     @Override
     public List<Plant> getPlants() {
-        return null;
+        return plantList;
     }
 
     @Override
-    public void getPlantsFromDB() {
+    public void getPlantsFromDB(){
         // to modify based on UserId
         String getPlants = "SELECT plantid, plantname,planttype FROM currentplants";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
@@ -57,22 +56,26 @@ public class PlantRepositoryImplementation implements PlantRepository {
     @Override
     public void getCurrentReadings() {
 
-        List<String> plantJsonsWithIds = plantList.stream().map(Plant::getSensorData).toList();
-        List<String> plantIds = plantList.stream().map(Plant::getSensorData).map(s -> String.valueOf(s.charAt(3))).toList();
-        List<String> jsons = plantJsonsWithIds.stream().map(plant -> plant.substring(5, plant.length() - 4)).toList();
 
+        List<String> plantJsonsWithIds = plantList.stream().map(Plant::getSensorData).toList();
+        plantJsonsWithIds.forEach(System.out::println);
+        List<String> plantIds = plantJsonsWithIds.stream().map(s -> String.valueOf(s.charAt(3))).toList();
+//        plantIds.forEach(System.out::println);
+        List<String> jsons = plantJsonsWithIds.stream().map(plant -> plant.substring(4,plant.length())).toList();
         Gson gson = new Gson();
 
 
-        for (int i = 0; i < plantList.size(); i++) {
-            for (int j = 0; j < plantList.size(); j++) {
-                if (plantIds.get(i).equals(String.valueOf(plantList.get(j).getId()))) {
-                    Plant.Details plant = gson.fromJson(jsons.get(j), Plant.Details.class);
+        for (int i = 0 ; i < plantList.size();i++){
+            for(int j = 0 ; j<plantList.size();j++){
+                if(plantIds.get(i).equals(String.valueOf(plantList.get(j).getId()))){
+                    Plant.Details plant = gson.fromJson(jsons.get(j),Plant.Details.class);
                     plantList.get(j).setDetails(plant);
                 }
             }
 
         }
+
+
     }
 }
 

@@ -1,24 +1,68 @@
 package be.kdg.integration.plantifybackend.domain;
 
+
 public class Arduino {
-    private String series;
-    private SerialArduinoConnection connection;
+    private final String series;
+    private boolean ledSetting=false;
+    private short pumpInstruction;
+    private int physicalIdentifier;
+    private RGBColor ledColor= new RGBColor();
+    private int id;
 
-    public Arduino(int arduinoPort, String series) {
+    public int getPhysicalIdentifier() {
+        return physicalIdentifier;
+    }
+
+    public void setPhysicalIdentifier(int physicalIdentifier) {
+        this.physicalIdentifier = physicalIdentifier;
+    }
+
+    public Arduino(String series, int physicalIdentifier) {
+
         this.series=series;
-        this.connection = new SerialArduinoConnection(arduinoPort);
+        this.physicalIdentifier=physicalIdentifier;
+    }
+    public void setColors(RGBColor color){
+        // to change values with parameter
+        ledColor.setBlue(color.getBlue());
+        ledColor.setGreen(color.getGreen());
+        ledColor.setRed(color.getRed());
+
+    }
+    public void setBrightness(short brightness){
+        ledColor.setBrightness(brightness);
     }
 
-    public String getData(){
-        return connection.showData();
+    public int getId() {
+        return id;
     }
 
-    public void buffer(){
-        connection.showData();
-        connection.showData();
-        connection.showData();
-        connection.showData();
+    public void setId(int id) {
+        this.id = id;
     }
 
+    public void setLedSetting(boolean setting){
+        this.ledSetting=setting;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public boolean getLedSetting() {
+        return ledSetting;
+    }
+
+    public short getPumpInstruction() {
+        return pumpInstruction;
+    }
+
+    public void setPumpInstruction(short pumpInstruction) {
+        this.pumpInstruction = pumpInstruction;
+    }
+
+    public RGBColor getLedColor() {
+        return ledColor;
+    }
 
 }

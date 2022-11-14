@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Log In</title>
-    <link rel="icon" href="../static/img/img/icon.png">
-    <link rel="stylesheet" type="text/css" media="all" href="../static/signInForm/css/forms.css" th:href="@{/signInForm/css/forms.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/signInForm/css/fragments.css"
-          th:href="@{/signInForm/css/fragments.css}"/>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/forms.css" th:href="@{/static/forms.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/fragments.css"
+          th:href="@{/static/fragments.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
     <script defer th:src="@{js/formvalidation.js}"></script>
@@ -17,14 +17,14 @@
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
-<form class="createUser" id="createUser">
+<form method="post">
     <fieldset>
         <p style="text-align: center">Sign In</p>
-        <label><input type="text" id="username" name="username" placeholder="Username" required></label>
+        <label><input type="text" id="email" name="email" placeholder="Email" required></label>
         <label><input type="text" id="password" name="password" placeholder="Password" required></label>
-        <button class="button" id="login" type="button">Log In</button>
+        <button class="button" id="login" type="submit">Log In</button>
         <p style="font-size: 15px; font-weight: normal">Don't have an account?
-            <a href="createUser.html" style="color: black">Register</a>
+            <a href="http://localhost:8080/createUser" style="color: black">Register</a>
         </p>
         <p class="error">Wrong password or username!</p>
     </fieldset>

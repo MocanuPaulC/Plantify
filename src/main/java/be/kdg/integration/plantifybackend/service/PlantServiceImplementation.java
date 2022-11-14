@@ -30,13 +30,9 @@ public class PlantServiceImplementation implements PlantService{
         return plantRepository.getPlants();
     }
 
+//    Refactor
     @Override
-    public Plant addDummyPlant(String name, PlantType plantType) {
-        return null;
-    }
-
-    @Override
-    public void refreshPlantData() {
-        plantRepository.getCurrentReadings();
+    public void updatePlantData(Plant.Details details,int physicalId) {
+        plantRepository.updatePlantData(details,physicalId);
     }
 }
