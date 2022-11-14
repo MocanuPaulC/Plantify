@@ -15,9 +15,15 @@
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script defer type="module" src="/js/jsfile.js"></script>
     <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
+    <style>
+        body{
+            background-image: url("@{img/background.png}");
+        }
+    </style>
 </head>
 
 <body>
+
 <div th:replace="~{fragments/fragments::navigationbar(1)}"></div>
 
 <main>

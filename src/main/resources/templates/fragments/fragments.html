@@ -13,13 +13,16 @@
 <nav class="navbar" th:fragment="navigationbar(index)">
     <div class="container-fluid">
         <div class="navBox darkGreen" id="navbarCollapse">
-            <img src="/img/logo.png" alt="black_on_white_remove_preview">
+            <a th:href="@{/index}">
+                <img src="/img/logo.png" alt="logo">
+            </a>
+
             <div class="links">
-                <a th:href="@{/static}"
+                <a th:href="@{/plantList}"
                    th:class="${index==1}?'nav-item nav-link active':'nav-item nav-link'">Plant List</a>
-                <a th:href="@{/templates/dashboard.html}"
+                <a th:href="@{/plants}"
                    th:class="${index==2}?'nav-item nav-link active':'nav-item nav-link'">Dashboard</a>
-                <a th:href="@{/templates/aboutPlantify.html}"
+                <a th:href="@{/aboutPlantify}"
                    th:class="${index==3}?'nav-item nav-link active':'nav-item nav-link'">About Plantify</a>
             </div>
         </div>
