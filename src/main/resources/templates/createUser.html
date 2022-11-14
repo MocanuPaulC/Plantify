@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/forms.css" th:href="@{/static/forms.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/fragments.css"
+          th:href="@{/static/fragments.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
+    <script defer th:src="@{js/formvalidation.js}"></script>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script defer type="module" src="js/jsfile.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
+</head>
+<body>
+<div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
+
+<form method="post">
+    <fieldset>
+        <p>Create Account</p>
+        <label><input type="text" id="email" name="email" placeholder="Email" required></label>
+        <p class="error" id="errorEmail">Invalid email format!</p>
+        <label><input type="text" id="newPassword" name="password" placeholder="Password" required></label>
+        <p class="error" id="passwordError"> </p>
+        <label><input type="text" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required></label>
+        <p class="error" id="confirmPasswordError"></p>
+        <button class="button" id="createAccount" type="submit">Sign In</button>
+        <p class="message" style="font-weight: normal">Already have and account?
+            <a href="login" style="color: black">Log in</a>
+        </p>
+    </fieldset>
+</form>
+
+<div th:insert="~{fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
+</body>
+</html>

@@ -1,75 +1,32 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="">
 
 <head>
     <title>MyPlantify</title>
-    <link rel="icon" th:href="@{img/logoSimple.png}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/header.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}">
-    <link rel="script" th:href="@{js/plantContainer.js}">
-    <link rel="manifest" th:href="@{html/manifest.json}" crossorigin="use-credentials">
-    <link rel="stylesheet" type="text/css"
-          th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}">
+    <!--<link rel="manifest" href="manifest.json">-->
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/main.css" th:href="@{/static/main.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/index.css" th:href="@{/static/index.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/forms.css" th:href="@{/static/forms.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
+    <script defer th:src="@{js/formvalidation.js}"></script>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script defer type="module" src="js/jsfile.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
 </head>
 
 <body>
-<header>
-    <nav>
-        <div class="navBox darkGreen">
-            <img th:src="@{img/plantify_Black_on_white-removebg-preview.png} " alt="blackPlantifyLogo">
-            <a>About Plantify</a>
-        </div>
-        <div class="bigNavBox green">
-            <div>
-                <img th:src="@{img/plantify_Black_on_white.png}">
-            </div>
-            <div>
-                <a th:href="@{index.html}">Plant List</a>
-                <a th:href="@{index.html}">Dashboard</a>
-                <a th:href="@{index.html}">Log out</a>
-            </div>
-        </div>
-    </nav>
-</header>
+<div th:replace="~{fragments/fragments::navigationbar(1)}"></div>
 
-<div id="infoContainer">
-    <div>
-        <img th:src="@{img/simpleLogoInverted.png}" alt="plantifyLogo">
-    </div>
-</div>
-<div id="mainContainer">
-    <menu class="arrow-box">
-        <form method="post">
+<main>
+    <h1>Plantify
+        <section style="font-size: 40px">The first digital self watering system <br> to improve your life!</section>
+    </h1>
+    <a style="text-decoration: none" class="buttonClass" id="redirect" type="button" href="login.html">Sign In</a>
+</main>
 
-                <div class="arrow-round"> <input type="submit" value="Submit"></div>
-
-        </form>
-    </menu>
-    <main id="plantContainter">
-        <div class="plant">
-            <article th:each="plant: ${plants}">
-                <h3>Plant name: <span th:text="${plant.name}"></span></h3>
-                <p>
-                    Air Humidity: <span th:text="${plant.details.humidity}"></span> %
-                </p>
-                <p>
-                    Temperature:<span th:text="${plant.details.temperature}"> </span> °C
-                </p>
-                <p>
-                    Brightness: <span th:text="${plant.details.brightness}"></span> lux
-                </p>
-                <p>
-                    Soil Moisture: <span th:text="${plant.details.moisture}"></span> %
-                </p>
-            </article>
-        </div>
-
-
-    </main>
-
-</div>
-</div>
+<div th:insert="~{fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
 </body>
 
 </html>
