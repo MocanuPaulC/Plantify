@@ -50,7 +50,6 @@ public class PlantRepositoryImplementation implements PlantRepository {
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
         plantList.add(plant);
         getCurrentReadings();
-        ;
         return plant;
     }
 
