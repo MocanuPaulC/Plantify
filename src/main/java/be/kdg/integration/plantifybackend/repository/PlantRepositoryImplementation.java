@@ -31,7 +31,8 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public void getPlantsFromDB(){
-        // to modify based on UserID
+        // to modify based on UserID//
+
         String getPlants = "SELECT plantid, plantname,planttype FROM currentplants";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
         System.out.println(plantList);
