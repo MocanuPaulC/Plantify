@@ -56,6 +56,10 @@ public class PlantRepositoryImplementation implements PlantRepository {
         jdbcTemplate.execute(sql);
     }
 
-
+    @Override
+    public void updatePlantData(Plant.Details details, int physicalId) {
+        plantList.stream().filter(plant-> plant.getArduino().getPhysicalIdentifier()==physicalId)
+                .forEach(plant -> plant.setDetails(details));
+    }
 }
 

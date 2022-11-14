@@ -65,8 +65,10 @@ public class Plant implements Serializable {
     private PlantType typeOfPlant;
     private Arduino arduino;
     private int id;
-    final TypeAdapter<JsonElement> strictAdapter = new Gson().getAdapter(JsonElement.class);
 
+    public Arduino getArduino() {
+        return arduino;
+    }
 
     private Details details=new Details();
 
@@ -113,9 +115,6 @@ public class Plant implements Serializable {
         this.typeOfPlant = typeOfPlant;
     }
 
-    public Arduino getArduino() {
-        return arduino;
-    }
 
     public Details getDetails() {
         return details;
