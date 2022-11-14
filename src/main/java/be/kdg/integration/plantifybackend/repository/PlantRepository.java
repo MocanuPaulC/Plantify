@@ -11,6 +11,7 @@ public interface PlantRepository {
     Plant savePlant(Plant plant);
 
     void getPlantsFromDB();
+
     List<Plant> getPlants();
 
     void updatePlantData(Plant.Details details,int physicalId);
