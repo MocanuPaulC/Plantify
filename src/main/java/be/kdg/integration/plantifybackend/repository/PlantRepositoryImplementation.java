@@ -13,13 +13,13 @@ import java.util.List;
 
 @Component
 public class PlantRepositoryImplementation implements PlantRepository {
-    @Autowired
     JdbcTemplate jdbcTemplate;
 
     List<Plant> plantList;
 
     @Autowired
-    public PlantRepositoryImplementation() {
+    public PlantRepositoryImplementation(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
         plantList = new ArrayList<>();
 
     }

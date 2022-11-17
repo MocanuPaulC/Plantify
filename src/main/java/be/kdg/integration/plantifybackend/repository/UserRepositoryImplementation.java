@@ -16,13 +16,11 @@ import java.util.logging.Logger;
 @Component
 public class UserRepositoryImplementation implements UserRepository {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
-    SpringJdbcConfig springJdbcConfig;
 
-    public UserRepositoryImplementation() {
-        springJdbcConfig= new SpringJdbcConfig();
-        jdbcTemplate= new JdbcTemplate(springJdbcConfig.mysqlDataSource());
+    @Autowired
+    public UserRepositoryImplementation(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override

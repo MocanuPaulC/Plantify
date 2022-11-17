@@ -12,10 +12,11 @@ import java.util.List;
 @Component
 public class ArduinoRepositoryImplementation implements ArduinoRepository{
     @Autowired
-    public ArduinoRepositoryImplementation() {
+    public ArduinoRepositoryImplementation(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
         arduinoList=new ArrayList<>();
     }
-    @Autowired
+
     JdbcTemplate jdbcTemplate;
     List<Arduino> arduinoList;
 
