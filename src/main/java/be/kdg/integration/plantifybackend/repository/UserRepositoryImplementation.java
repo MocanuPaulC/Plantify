@@ -15,10 +15,11 @@ import java.util.logging.Logger;
 @Component
 public class UserRepositoryImplementation implements UserRepository {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public UserRepositoryImplementation() {
+    @Autowired
+    public UserRepositoryImplementation(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
