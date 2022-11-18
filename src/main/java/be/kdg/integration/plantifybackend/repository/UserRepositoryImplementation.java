@@ -1,7 +1,6 @@
 package be.kdg.integration.plantifybackend.repository;
 
 import be.kdg.integration.plantifybackend.domain.User;
-import be.kdg.integration.plantifybackend.domain.jdbc.SpringJdbcConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -18,11 +17,8 @@ public class UserRepositoryImplementation implements UserRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-    SpringJdbcConfig springJdbcConfig;
 
     public UserRepositoryImplementation() {
-        springJdbcConfig= new SpringJdbcConfig();
-        jdbcTemplate= new JdbcTemplate(springJdbcConfig.mysqlDataSource());
     }
 
     @Override

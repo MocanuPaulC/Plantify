@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -52,11 +54,10 @@ public class PlantController {
         model.addAttribute("add","chill");
         return "addplant";
     }
+
+    //To make this using viewModel
     @PostMapping("plants/addplant")
     public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
-//        System.out.println(name);
-//        System.out.println(plantType);
-//        System.out.println(arduinoSeries);
 //        System.out.println(physicalId);
       Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
         this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino);
@@ -85,10 +86,8 @@ public class PlantController {
             this.plantService.updatePlantData(details, physicalId);
         }
 
-//        System.out.println(physicalId);
-//        System.out.println(json);
         this.plantService.readPlants().forEach(System.out::println);
-        return "adddetails";
+        return "postDetailsReturnPage";
     }
 
 //    [[{"humidity":53,"temperature":24.4,"brightness":14.37147,"moisture":1}]]
