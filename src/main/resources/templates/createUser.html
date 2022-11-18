@@ -17,6 +17,7 @@
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
 <form class="createUser inputForms" id="createUser" >
+<!--    Shouldn't this be a form with a POST method so the controller gets triggered?-->
     <fieldset>
         <p>Create Account</p>
         <label><input type="text" id="newUsername" name="username" placeholder="Username"></label>

@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 
 @Controller
@@ -56,11 +57,14 @@ public class PlantController {
     }
 
     //To make this using viewModel
+
+    //Make this a viewmodel with a converter for the plant type and make that a dropdown select instead of text
+
     @PostMapping("plants/addplant")
     public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
 //        System.out.println(physicalId);
         Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
-        this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino);
+        this.plantService.addPlant(name, PlantType.valueOf(plantType.toUpperCase(Locale.ROOT)),arduino);
         return "redirect:/plants";
     }
 
