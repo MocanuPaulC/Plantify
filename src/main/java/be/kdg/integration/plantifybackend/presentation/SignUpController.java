@@ -21,14 +21,14 @@ public class SignUpController {
     }
 
     @GetMapping
-    public String showSignInView(){
+    public String showSignInView() {
         return "createUser";
     }
 
     @PostMapping
-    public String signUp(HttpSession httpSession, String email, String password){
-        userService.addUser(email, password);
-        User newUser = new User(email, password);
+    public String signUp(HttpSession httpSession, String email, String username, String password) {
+        userService.addUser(email, username, password);
+        User newUser = new User(email, username, password);
         httpSession.setAttribute("user", newUser);
         return "redirect:/dashboard";
     }

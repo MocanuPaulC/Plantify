@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     UserService userService;
 
-
     public LoginController(UserService userService) {
         this.userService = userService;
     }
@@ -26,8 +25,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public String checkUser(HttpSession httpSession, String email, String password){
-        User userToCheck = new User(email, password);
+    public String checkUser(HttpSession httpSession, String email, String username, String password){
+        User userToCheck = new User(email, username, password);
         if(userService.checkUser(userToCheck)){
             httpSession.setAttribute("user", userToCheck);
             return "redirect:/dashboard";

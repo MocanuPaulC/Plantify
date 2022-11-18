@@ -14,8 +14,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void addUser(String email, String password) {
-        userRepository.saveUser(new User(email, password));
+    public void addUser(String email, String username, String password) {
+        userRepository.saveUser(new User(email, username, password));
     }
 
     @Override

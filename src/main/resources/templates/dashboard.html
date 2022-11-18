@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="icon" href="/img/icon.png">
-    <link rel="stylesheet" media="all" type="text/css" th:href="@{/css/dashboard.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/signInForm/css/forms.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/signInForm/css/fragments.css}"/>
+    <link rel="stylesheet" media="all" type="text/css" href="/css/dashboard.css" th:href="@{/css/dashboard.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/forms.css" th:href="@{/css/forms.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/fragments.css" th:href="@{/css/fragments.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
     <script defer th:src="@{js/formvalidation.js}"></script>
@@ -17,61 +17,39 @@
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
-<main>
-    <div id="infoContainer">
-        <div>
-            <img th:src="@{img/simpleLogoInverted.png}" alt="plantifyLogo">
-        </div>
-    </div>
-    <div id="mainContainer">
-        <menu class="arrow-box">
-            <form method="post">
-                <div class="arrow-round"> <input type="submit" value="Submit"></div>
-            </form>
-        </menu>
-        <main id="plantContainter">
-            <div class="plant">
-                <article th:each="plant: ${plants}">
-                    <h3>Plant name: <span th:text="${plant.name}"></span></h3>
-                    <p>
-                        Air Humidity: <span th:text="${plant.details.humidity}"></span> %
-                    </p>
-                    <p>
-                        Temperature:<span th:text="${plant.details.temperature}"> </span> °C
-                    </p>
-                    <p>
-                        Brightness: <span th:text="${plant.details.brightness}"></span> lux
-                    </p>
-                    <p>
-                        Soil Moisture: <span th:text="${plant.details.moisture}"></span> %
-                    </p>
-                </article>
-            </div>
+<!--<main>-->
+<!--    <div id="mainContainer">-->
+<!--        <menu class="arrow-box">-->
+<!--            <form method="post">-->
+<!--                <div class="arrow-round"> <input type="submit" value="Submit"></div>-->
+<!--            </form>-->
+<!--        </menu>-->
+<!--        <main id="plantContainter">-->
+<!--            <div class="plant">-->
+<!--                <article th:each="plant: ${plants}">-->
+<!--                    <h3>Plant name: <span th:text="${plant.name}"></span></h3>-->
+<!--                    <p>-->
+<!--                        Air Humidity: <span th:text="${plant.details.humidity}"></span> %-->
+<!--                    </p>-->
+<!--                    <p>-->
+<!--                        Temperature:<span th:text="${plant.details.temperature}"> </span> °C-->
+<!--                    </p>-->
+<!--                    <p>-->
+<!--                        Brightness: <span th:text="${plant.details.brightness}"></span> lux-->
+<!--                    </p>-->
+<!--                    <p>-->
+<!--                        Soil Moisture: <span th:text="${plant.details.moisture}"></span> %-->
+<!--                    </p>-->
+<!--                </article>-->
+<!--            </div>-->
+<!--        </main>-->
+<!--    </div>-->
 
-
-        </main>
-
-    </div>
-
-<button style="border: transparent; background-color: transparent; color: black; font-weight: bold; font-size: 20px; width: 8em; font-family: quincy-cf, serif" id="button"
-            type="button">+
-    </button>
-    <form class="addPlant inputForms" id="form" >
-        <fieldset>
-            <p style="text-align: center">Add plant</p>
-            <label><input type="text" id="name" name="name" placeholder="Name" required></label>
-            <label for="type"></label>
-            <select name="type" id="type">
-                <option value="water">Water</option>
-                <option value="desert">Desert</option>
-                <option value="mountain">Mountain</option>
-                <option value="plain">Plain</option>
-            </select>
-            <button class="button" id="createPlant" type="submit">Submit</button>
-            <p class="error">Plant already exists!</p>
-        </fieldset>
-    </form>
-</main>
+<a style="text-decoration:none; color: black; font-weight: bold; font-size: 20px; width: 8em; font-family: quincy-cf, serif"
+   id="button"
+   type="button" th:href="@{/addPlant}">+ Add Plant
+</a>
+<!--</main>-->
 
 <div th:insert="~{fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
 

@@ -34,6 +34,7 @@ public class UserRepositoryImplementation implements UserRepository {
     public User searchUser(String email) {
         String searchUser=String.format("SELECT password FROM users WHERE email='%s'", email);
         String password=jdbcTemplate.queryForObject(searchUser, String.class);
-        return new User(email, password);
+        String username=jdbcTemplate.queryForObject(searchUser, String.class);
+        return new User(email, username, password);
     }
 }

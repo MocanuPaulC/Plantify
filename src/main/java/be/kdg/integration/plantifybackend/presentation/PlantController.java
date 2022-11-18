@@ -24,13 +24,13 @@ import java.util.List;
 @Controller
 public class PlantController {
     PlantService plantService;
-    Gson gson =new Gson();
+    Gson gson = new Gson();
     ArduinoService arduinoService;
 
     @Autowired
     public PlantController(PlantService plantService, ArduinoService arduinoService) {
         this.plantService = plantService;
-        this.arduinoService=arduinoService;
+        this.arduinoService = arduinoService;
     }
 
     @GetMapping("/plants")
@@ -41,29 +41,13 @@ public class PlantController {
 
 
     @PostMapping("/plants")
-    public String refreshData(){
+    public String refreshData() {
 //        plantService.updatePageData();
 //        plantService.refreshPlantData();-------------------------------------------
         return "redirect:/plants";
     }
 
-    @GetMapping("plants/addplant")
-    public String showAddPlant(Model model){
-        model.addAttribute("add","chill");
-        return "addplant";
-    }
-    @PostMapping("plants/addplant")
-    public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
-//        System.out.println(name);
-//        System.out.println(plantType);
-//        System.out.println(arduinoSeries);
-//        System.out.println(physicalId);
-        Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
-        this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino);
-        return "redirect:/plants";
-    }
-
-    @PostMapping(value="/plants/adddetails",consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public String demo(HttpServletRequest httpServletRequest) {
 
         ServletInputStream inputStream;
@@ -78,9 +62,9 @@ public class PlantController {
                 .lines().toList();
 
 
-        int physicalId=Integer.parseInt(list.get(0).substring(0,3));
-        String json=list.get(0).substring(4,list.get(0).length()-1);
-        if(!json.contains("[")) {
+        int physicalId = Integer.parseInt(list.get(0).substring(0, 3));
+        String json = list.get(0).substring(4, list.get(0).length() - 1);
+        if (!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
             this.plantService.updatePlantData(details, physicalId);
         }
