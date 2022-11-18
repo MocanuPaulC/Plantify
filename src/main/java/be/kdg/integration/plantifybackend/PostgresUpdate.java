@@ -2,7 +2,6 @@ package be.kdg.integration.plantifybackend;
 
 import be.kdg.integration.plantifybackend.domain.PlantData;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDataRowMapper;
-import be.kdg.integration.plantifybackend.domain.jdbc.SpringJdbcConfig;
 import be.kdg.integration.plantifybackend.repository.PlantRepositoryImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,12 +13,10 @@ import java.util.List;
 @Component
 public class PostgresUpdate {
 
-    SpringJdbcConfig springJdbcConfig;
     JdbcTemplate jdbcTemplate;
     @Autowired
-    public PostgresUpdate() {
-        this.springJdbcConfig = new SpringJdbcConfig();
-        this.jdbcTemplate = new JdbcTemplate(springJdbcConfig.mysqlDataSource());
+    public PostgresUpdate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate=jdbcTemplate;
     }
 
     public void update(){
