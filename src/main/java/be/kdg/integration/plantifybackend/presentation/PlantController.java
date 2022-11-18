@@ -88,7 +88,7 @@ public class PlantController {
 //        System.out.println(physicalId);
 //        System.out.println(json);
         this.plantService.readPlants().forEach(System.out::println);
-        return "adddetails";
+        return "addetails";
     }
 
 //    [[{"humidity":53,"temperature":24.4,"brightness":14.37147,"moisture":1}]]
