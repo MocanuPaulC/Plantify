@@ -1,18 +1,26 @@
 body {
-    font-family: quincy-cf,serif;
+    font-family: quincy-cf, serif;
     font-weight: 400;
     font-style: normal;
 }
-
-body header nav .navBox {
-    display: flex;
-    margin: 0;
-    justify-content: space-between;
-    height: 2em;
-    left: 0;
+img{
+    width: 20em;
 }
 
-.bigNavBox {
+nav{
+    display: flex;
+    justify-content: end;
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: space-between;
+    height: 2em;
+    align-items: flex-end;
+    margin: 0;
+}
+
+.navbar-nav {
     display: flex;
     margin: 0;
     height: 4em;
@@ -23,22 +31,22 @@ body header nav .navBox {
     width: 100%; /* Full width */
 }
 
-.bigNavBox div {
-    display: flex;
+.bigNavBox{
+    position: absolute;
+    left: 0;
 }
 
-.navBox a, .navBox img {
+#navbarCollapse{
     display: flex;
-    font-size: 0.75em;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-.navBox a, .bigNavBox div a {
+.links a {
     justify-content: center;
     align-self: center;
     margin-right: 10px;
-}
-
-.bigNavBox div a {
     font-size: 1.8em;
     padding-left: 10px;
     padding-right: 10px;
@@ -46,20 +54,21 @@ body header nav .navBox {
     color: black;
 }
 
-.bigNavBox img {
-    border-bottom-right-radius: 10px;
+.links{
+    position: absolute;
+    top: 6em;
+    left: 32em;
+    font-size: 10px;
+    width: 36em;
 }
 
-.navBox img {
-    border-top-right-radius: 10px;
+.logOut{
+    display: none;
+    position: absolute;
+    top: 3.7em;
 }
 
-.bigNavBox div:nth-of-type(2) {
-    display: flex;
-    justify-content: flex-end;
-}
-
-footer{
+.footer {
     background-color: #4a6434;
     color: white;
     height: 3em;

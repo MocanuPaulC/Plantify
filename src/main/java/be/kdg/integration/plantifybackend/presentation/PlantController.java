@@ -38,7 +38,7 @@ public class PlantController {
     @GetMapping("/plants")
     public String showPlantsView(Model model) {
         model.addAttribute("plants", plantService.readPlants());
-        return "index";
+        return "dashboard";
     }
 
 
@@ -59,7 +59,7 @@ public class PlantController {
     @PostMapping("plants/addplant")
     public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
 //        System.out.println(physicalId);
-      Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
+        Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
         this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino);
         return "redirect:/plants";
     }
@@ -94,4 +94,3 @@ public class PlantController {
 
 
 }
-

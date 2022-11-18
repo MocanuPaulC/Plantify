@@ -4,6 +4,7 @@ import be.kdg.integration.plantifybackend.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
@@ -12,14 +13,14 @@ import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.logging.Logger;
 
-@Component
+@Repository
 public class UserRepositoryImplementation implements UserRepository {
 
+    @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    public UserRepositoryImplementation(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public UserRepositoryImplementation() {
+    //    jdbcTemplate= new JdbcTemplate(springJdbcConfig.mysqlDataSource());
     }
 
     @Override

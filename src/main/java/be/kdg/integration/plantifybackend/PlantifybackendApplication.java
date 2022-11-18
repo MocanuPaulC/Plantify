@@ -14,7 +14,7 @@ public class PlantifybackendApplication{
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(PlantifybackendApplication.class,args);
-
+ ;
 		context.getBean(PlantService.class).getPlantFromDB();
 
 

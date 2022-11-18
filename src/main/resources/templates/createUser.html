@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-
-<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create User</title>
-    <link rel="icon" href="img/icon.png">
-    <link rel="stylesheet" type="text/css" media="all" href="../static/forms.css" th:href="@{/static/forms.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/fragments.css"
-          th:href="@{/static/fragments.css}"/>
+    <link rel="icon" th:src="@{/img/icon.png}">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/forms.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{signInForm/css/fragments.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
     <script defer th:src="@{js/formvalidation.js}"></script>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-    <script defer type="module" src="js/jsfile.js"></script>
+    <script defer type="module" th:src="@{js/jsfile.js}"></script>
     <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
 </head>
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
-<form method="post">
+<form class="createUser inputForms" id="createUser" >
     <fieldset>
         <p>Create Account</p>
+        <label><input type="text" id="newUsername" name="username" placeholder="Username"></label>
+        <p class="error" id="errorUsername">Username can only contain letters and numbers!</p>
         <label><input type="text" id="email" name="email" placeholder="Email" required></label>
         <p class="error" id="errorEmail">Invalid email format!</p>
         <label><input type="text" id="newPassword" name="password" placeholder="Password" required></label>
@@ -30,7 +29,7 @@
         <p class="error" id="confirmPasswordError"></p>
         <button class="button" id="createAccount" type="submit">Sign In</button>
         <p class="message" style="font-weight: normal">Already have and account?
-            <a href="login" style="color: black">Log in</a>
+            <a href="login.html" style="color: black">Log in</a>
         </p>
     </fieldset>
 </form>

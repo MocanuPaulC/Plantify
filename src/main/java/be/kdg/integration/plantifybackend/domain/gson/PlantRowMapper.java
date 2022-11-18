@@ -3,7 +3,6 @@ package be.kdg.integration.plantifybackend.domain.gson;
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
-
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="icon" href="/img/icon.png">
-    <link rel="stylesheet" media="all" href="../static/dashboard.css" type="module" th:href="@{/static/dashboard.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/forms.css" th:href="@{/static/forms.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/fragments.css" th:href="@{/static/fragments.css}"/>
+    <link rel="stylesheet" media="all" type="text/css" th:href="@{/css/dashboard.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/signInForm/css/forms.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/signInForm/css/fragments.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
     <script defer th:src="@{js/formvalidation.js}"></script>
@@ -19,10 +18,45 @@
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
 <main>
-    <button style="border: transparent; background-color: transparent; color: black; font-weight: bold; font-size: 20px; width: 8em; font-family: quincy-cf, serif" id="button"
+    <div id="infoContainer">
+        <div>
+            <img th:src="@{img/simpleLogoInverted.png}" alt="plantifyLogo">
+        </div>
+    </div>
+    <div id="mainContainer">
+        <menu class="arrow-box">
+            <form method="post">
+                <div class="arrow-round"> <input type="submit" value="Submit"></div>
+            </form>
+        </menu>
+        <main id="plantContainter">
+            <div class="plant">
+                <article th:each="plant: ${plants}">
+                    <h3>Plant name: <span th:text="${plant.name}"></span></h3>
+                    <p>
+                        Air Humidity: <span th:text="${plant.details.humidity}"></span> %
+                    </p>
+                    <p>
+                        Temperature:<span th:text="${plant.details.temperature}"> </span> °C
+                    </p>
+                    <p>
+                        Brightness: <span th:text="${plant.details.brightness}"></span> lux
+                    </p>
+                    <p>
+                        Soil Moisture: <span th:text="${plant.details.moisture}"></span> %
+                    </p>
+                </article>
+            </div>
+
+
+        </main>
+
+    </div>
+
+<button style="border: transparent; background-color: transparent; color: black; font-weight: bold; font-size: 20px; width: 8em; font-family: quincy-cf, serif" id="button"
             type="button">+
     </button>
-    <form class="addPlant" id="form">
+    <form class="addPlant inputForms" id="form" >
         <fieldset>
             <p style="text-align: center">Add plant</p>
             <label><input type="text" id="name" name="name" placeholder="Name" required></label>
