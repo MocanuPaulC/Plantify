@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/signInForm/css/fragments.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/fragments.css" th:href="@{/css/fragments.css}"/>
 </head>
 <body>
 <div class="footer" th:fragment="footer">
@@ -18,9 +18,9 @@
             </a>
 
             <div class="links">
-                <a th:href="@{/plantlist}"
+                <a th:href="@{/plantList}"
                    th:class="${index==1}?'nav-item nav-link active':'nav-item nav-link'">Plant List</a>
-                <a th:href="@{/plants}"
+                <a th:href="@{/dashboard}"
                    th:class="${index==2}?'nav-item nav-link active':'nav-item nav-link'">Dashboard</a>
                 <a th:href="@{/aboutPlantify}"
                    th:class="${index==3}?'nav-item nav-link active':'nav-item nav-link'">About Plantify</a>

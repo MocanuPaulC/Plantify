@@ -18,22 +18,19 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 
 @Controller
 public class PlantController {
     PlantService plantService;
-    Gson gson =new Gson();
+    Gson gson = new Gson();
     ArduinoService arduinoService;
 
     @Autowired
     public PlantController(PlantService plantService, ArduinoService arduinoService) {
         this.plantService = plantService;
-        this.arduinoService=arduinoService;
+        this.arduinoService = arduinoService;
     }
 
     @GetMapping("/plants")
@@ -44,31 +41,13 @@ public class PlantController {
 
 
     @PostMapping("/plants")
-    public String refreshData(){
+    public String refreshData() {
 //        plantService.updatePageData();
 //        plantService.refreshPlantData();-------------------------------------------
         return "redirect:/plants";
     }
 
-    @GetMapping("plants/addplant")
-    public String showAddPlant(Model model){
-        model.addAttribute("add","chill");
-        return "addplant";
-    }
-
-    //To make this using viewModel
-
-    //Make this a viewmodel with a converter for the plant type and make that a dropdown select instead of text
-
-    @PostMapping("plants/addplant")
-    public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
-//        System.out.println(physicalId);
-        Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
-        this.plantService.addPlant(name, PlantType.valueOf(plantType.toUpperCase(Locale.ROOT)),arduino);
-        return "redirect:/plants";
-    }
-
-    @PostMapping(value="/plants/adddetails",consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public String demo(HttpServletRequest httpServletRequest) {
 
         ServletInputStream inputStream;
@@ -83,15 +62,17 @@ public class PlantController {
                 .lines().toList();
 
 
-        int physicalId=Integer.parseInt(list.get(0).substring(0,3));
-        String json=list.get(0).substring(4,list.get(0).length()-1);
-        if(!json.contains("[")) {
+        int physicalId = Integer.parseInt(list.get(0).substring(0, 3));
+        String json = list.get(0).substring(4, list.get(0).length() - 1);
+        if (!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
             this.plantService.updatePlantData(details, physicalId);
         }
 
+//        System.out.println(physicalId);
+//        System.out.println(json);
         this.plantService.readPlants().forEach(System.out::println);
-        return "postDetailsReturnPage";
+        return "addetails";
     }
 
 //    [[{"humidity":53,"temperature":24.4,"brightness":14.37147,"moisture":1}]]
