@@ -18,4 +18,5 @@ public interface PlantService {
 
     List<Plant> readPlants();
 
+    Plant removePlant(String name, PlantType plantType, Arduino arduino);
 }

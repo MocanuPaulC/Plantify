@@ -63,5 +63,12 @@ public class PlantRepositoryImplementation implements PlantRepository {
         plantList.stream().filter(plant-> plant.getArduino().getPhysicalIdentifier()==physicalId)
                 .forEach(plant -> plant.setDetails(details));
     }
+
+    @Override
+    public Plant deletePlant(Plant plant){
+        String saveSql = "DELETE FROM currentplants WHERE ID = ?";
+        jdbcTemplate.execute(saveSql);plantList.remove(plant);
+        return plant;
+    }
 }
 

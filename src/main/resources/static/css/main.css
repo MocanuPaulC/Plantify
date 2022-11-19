@@ -6,13 +6,14 @@ body {
   background-size: cover;
   font-family: quincy-cf, serif;
   font-weight: 400;
-  text-align: center;
   height: 100%;
   margin-bottom: 200px;
+  resize: none;
 }
 
 main{
   margin-top: 10em;
+  text-align: center;
 }
 
 h1{

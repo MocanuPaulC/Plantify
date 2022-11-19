@@ -17,14 +17,24 @@
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
-<br>
-<br>
-<br>
-<br>
 <main>
     <div id="mainContainer">
+
+        <menu class="arrow-box">
+            <a style="text-decoration:none; color: black; font-weight: bold; font-size: 20px; font-family: quincy-cf, serif"
+               id="button2"
+               type="button" th:href="@{/removePlant}">- Remove Plant
+            </a>
+            <a style="text-decoration:none; color: black; font-weight: bold; font-size: 20px; font-family: quincy-cf, serif"
+               id="button"
+               type="button" th:href="@{/addPlant}">+ Add Plant
+            </a>
+            <form id="listForm" method="post">
+                <div class="arrow-round"> <input type="submit" value="Submit"></div>
+            </form>
+        </menu>
         <main id="plantContainter">
-            <div class="plantFlexContainer">
+            <div class="plant">
                 <article th:each="plant: ${plants}">
                     <h3>Plant name: <span th:text="${plant.name}"></span></h3>
                     <p>
@@ -34,7 +44,8 @@
                         Temperature:<span th:text="${plant.details.temperature}"> </span> °C
                     </p>
                     <p>
-                        Brightness: <span th:text="${plant.details.brightness}"></span> lux
+
+                       Brightness: <span th:text="${plant.details.brightness}"></span> lux
                     </p>
                     <p>
                         Soil Moisture: <span th:text="${plant.details.moisture}"></span> %
@@ -43,12 +54,8 @@
             </div>
         </main>
     </div>
+
 </main>
-<a style="text-decoration:none; color: black; font-weight: bold; font-size: 20px; width: 8em; font-family: quincy-cf, serif"
-   id="button"
-   type="button" th:href="@{/addPlant}">+ Add Plant
-</a>
-<!--</main>-->
 
 <div th:insert="~{fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
 

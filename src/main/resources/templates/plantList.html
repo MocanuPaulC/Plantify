@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Plant List</title>
+    <link rel="icon" href="/img/icon.png" th:href="@{/img/icon.png}">
     <link rel="stylesheet" type="text/css" media="all" href="/css/fragments.css" th:href="@{/css/fragments.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/plantList.css" th:href="@{/css/plantList.css}"/>
 </head>
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(3)}"></div>
+
+<main>
+    <section class="arrow-box">
+<!--        <a style="text-decoration:none; color: black; font-weight: bold; font-size: 20px; font-family: quincy-cf, serif"-->
+<!--           id="button2"-->
+<!--           type="button" th:href="@{/addPlant}">- Remove Plant-->
+<!--        </a>-->
+        <a style="text-decoration:none; color: black; font-weight: bold; font-size: 20px; font-family: quincy-cf, serif"
+           id="button"
+           type="button" th:href="@{/addPlant}">+ Add Plant
+        </a>
+<!--        <form id="listForm" method="post">-->
+<!--            <div class="arrow-round"> <input type="submit" value="Submit"></div>-->
+<!--        </form>-->
+    </section>
+</main>
 
 <div th:insert="~{/fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
 </body>
