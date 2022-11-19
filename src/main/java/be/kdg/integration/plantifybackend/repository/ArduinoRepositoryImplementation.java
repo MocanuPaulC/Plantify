@@ -34,10 +34,12 @@ public class ArduinoRepositoryImplementation implements ArduinoRepository{
 
     @Override
     public Arduino saveArduino(Arduino arduino) {
-//        String saveSql =
-//                String.format("INSERT INTO currentplants (plantname,dateadded,planttype) " +
-//                        "VALUES ('%s',CURRENT_TIMESTAMP,'%s')", plant.getName(), plant.getTypeOfPlant());
-//        jdbcTemplate.execute(saveSql);
+        String saveSql =
+                String.format("INSERT INTO arduino (physicalIdentifier, series, ledSetting, redCode, greenCode, blueCode) " +
+                        "VALUES ('%d', '%s', '%b', '%d', '%d', '%d')",
+                        arduino.getPhysicalIdentifier(), arduino.getSeries(), arduino.getLedSetting(),
+                        arduino.getLedColor().getRed(), arduino.getLedColor().getGreen(), arduino.getLedColor().getBlue());
+        jdbcTemplate.execute(saveSql);
         arduino.setId(arduinoList.stream().mapToInt(Arduino::getId).max().orElse(0) + 1);
         arduinoList.add(arduino);
         return arduino;

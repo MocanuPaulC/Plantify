@@ -28,7 +28,6 @@ public class Arduino {
     }
 
     public Arduino(String series, int physicalIdentifier) {
-
         this.series=series;
         this.physicalIdentifier=physicalIdentifier;
     }
@@ -39,6 +38,8 @@ public class Arduino {
         ledColor.setRed(color.getRed());
 
     }
+
+
     public void setBrightness(short brightness){
         ledColor.setBrightness(brightness);
     }
