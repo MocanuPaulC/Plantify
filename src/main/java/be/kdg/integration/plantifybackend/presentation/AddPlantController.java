@@ -27,10 +27,6 @@ public class AddPlantController {
 
     @PostMapping("addPlant")
     public String addPlant(String name, String plantType, String arduinoSeries, String physicalId) {
-//        System.out.println(name);
-//        System.out.println(plantType);
-//        System.out.println(arduinoSeries);
-//        System.out.println(physicalId);
         Arduino arduino = this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
         this.plantService.addPlant(name, PlantType.valueOf(plantType), arduino);
         return "redirect:/plants";

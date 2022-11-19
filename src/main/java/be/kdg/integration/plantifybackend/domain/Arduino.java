@@ -3,6 +3,16 @@ package be.kdg.integration.plantifybackend.domain;
 
 public class Arduino {
     private final String series;
+
+    // False means base setting and true means color is selected by user
+
+    @Override
+    public String toString() {
+        return "Arduino{" +
+                ", physicalIdentifier=" + physicalIdentifier +
+                '}';
+    }
+
     private boolean ledSetting=false;
     private short pumpInstruction;
     private int physicalIdentifier;

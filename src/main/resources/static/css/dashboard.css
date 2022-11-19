@@ -3,3 +3,8 @@
     font-weight: 500;
     font-style: normal;
 }
+
+.plantFlexContainer{
+ display: flex;
+    justify-content: center;
+}

@@ -25,6 +25,7 @@ public class UserRepositoryImplementation implements UserRepository {
 
     @Override
     public void saveUser(User user) {
+        System.out.println("gets here");
         String insertUser=String.format("INSERT INTO users (email, password) " +
                 "VALUES ('%s', '%s')", user.getEmail(), user.getPassword());
         jdbcTemplate.execute(insertUser);

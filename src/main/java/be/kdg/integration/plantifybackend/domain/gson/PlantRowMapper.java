@@ -21,6 +21,7 @@ public class PlantRowMapper implements RowMapper<Plant> {
 
 
         //hardcoded cuz we only have one arduino
+        // To change
         plant.setArduino(new Arduino("1",101));
 
 
