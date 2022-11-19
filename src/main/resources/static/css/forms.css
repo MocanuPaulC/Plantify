@@ -21,6 +21,9 @@ fieldset{
     border: transparent;
     height: 20em;
     font-weight: bold;
+    position: absolute;
+    top: 10em;
+    left: 40%;
 }
 
 fieldset>input{
