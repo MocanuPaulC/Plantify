@@ -1,6 +1,6 @@
-body{
+/*body{
     text-align: center;
-}
+}*/
 
 #form{
     justify-content: center;
@@ -12,6 +12,7 @@ body{
 }
 
 fieldset{
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;

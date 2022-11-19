@@ -6,32 +6,35 @@
     <title>Add Plant</title>
     <link rel="stylesheet" type="text/css" media="all" href="/css/forms.css" th:href="@{/css/forms.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/fragments.css" th:href="@{/css/fragments.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/main.css" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}">
     </script>
 </head>
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(3)}"></div>
-
-<form class="addPlant inputForms" id="form">
-    <fieldset>
-        <p style="text-align: center">Add plant</p>
-        <label><input type="text" id="name" name="name" placeholder="Name" required></label>
-        <label for="type"></label>
-        <select name="type" id="type">
-            <option value="water">Water</option>
-            <option value="desert">Desert</option>
-            <option value="mountain">Mountain</option>
-            <option value="plain">Plain</option>
-        </select>
-<!--        <label><input type="text" id="typeInTextForm" name="type" placeholder="Type" required></label>-->
-        <label><input type="text" id="arduinoSeries" name="arduinoSeries" placeholder="Enter Arduino Series"></label>
-        <label><input type="text" id="physicalAddress" name="psysicalAddress" placeholder="Enter Physical Adress"></label>
-        <button class="button" id="createPlant" type="submit">Submit</button>
-        <p class="error">Plant already exists!</p>
-    </fieldset>
-</form>
-
+<main>
+    <form class="addPlant inputForms" id="form">
+        <fieldset>
+            <p style="text-align: center">Add plant</p>
+            <label><input type="text" id="name" name="name" placeholder="Name" required></label>
+            <label for="type"></label>
+            <select name="type" id="type">
+                <option value="water">Water</option>
+                <option value="desert">Desert</option>
+                <option value="mountain">Mountain</option>
+                <option value="plain">Plain</option>
+            </select>
+            <!--        <label><input type="text" id="typeInTextForm" name="type" placeholder="Type" required></label>-->
+            <label><input type="text" id="arduinoSeries" name="arduinoSeries"
+                          placeholder="Enter Arduino Series"></label>
+            <label><input type="text" id="physicalAddress" name="psysicalAddress"
+                          placeholder="Enter Physical Adress"></label>
+            <button class="button" id="createPlant" type="submit">Submit</button>
+            <p class="error">Plant already exists!</p>
+        </fieldset>
+    </form>
+</main>
 <!--<div class="container">-->
 <!--  <div class="container-fluid">-->
 <!--    <form method="post" class="was-validated inputForms">-->

@@ -11,25 +11,24 @@
 </div>
 
 <nav class="navbar" th:fragment="navigationbar(index)">
-    <div class="container-fluid">
-        <div class="navBox darkGreen" id="navbarCollapse">
-            <a th:href="@{/index}">
-                <img src="/img/logo.png" alt="logo">
-            </a>
+    <a th:href="@{/index}">
+        <img src="/img/logo.png" alt="logo">
+    </a>
 
-            <div class="links">
-                <a th:href="@{/plantList}"
-                   th:class="${index==1}?'nav-item nav-link active':'nav-item nav-link'">Plant List</a>
-                <a th:href="@{/dashboard}"
-                   th:class="${index==2}?'nav-item nav-link active':'nav-item nav-link'">Dashboard</a>
-                <a th:href="@{/aboutPlantify}"
-                   th:class="${index==3}?'nav-item nav-link active':'nav-item nav-link'">About Plantify</a>
-            </div>
-        </div>
+
+    <div class="links">
+        <a th:href="@{/plantList}"
+           th:class="${index==1}?'nav-item nav-link active':'nav-item nav-link'">Plant List</a>
+        <a th:href="@{/dashboard}"
+           th:class="${index==2}?'nav-item nav-link active':'nav-item nav-link'">Dashboard</a>
+        <a th:href="@{/aboutPlantify}"
+           th:class="${index==3}?'nav-item nav-link active':'nav-item nav-link'">About Plantify</a>
     </div>
+
     <div class="logOut">
         <button id="logOut">Log Out</button>
     </div>
+
 </nav>
 </body>
 </html>
