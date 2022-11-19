@@ -1,8 +1,6 @@
 package be.kdg.integration.plantifybackend.presentation;
 
-import be.kdg.integration.plantifybackend.domain.Arduino;
-import be.kdg.integration.plantifybackend.domain.Plant;
-import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.domain.*;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
@@ -58,8 +56,8 @@ public class PlantController {
 //        System.out.println(plantType);
 //        System.out.println(arduinoSeries);
 //        System.out.println(physicalId);
-      Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
-        this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino);
+        Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
+        this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino, "example@email.com");
         return "redirect:/plants";
     }
 
@@ -82,6 +80,7 @@ public class PlantController {
         String json=list.get(0).substring(4,list.get(0).length()-1);
         if(!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
+            plantService.saveReadingsToDB(details, 1 );// dont know how to retrieve plantId from this, dummy data
             this.plantService.updatePlantData(details, physicalId);
         }
 

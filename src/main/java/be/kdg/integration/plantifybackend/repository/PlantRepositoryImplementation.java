@@ -42,8 +42,8 @@ public class PlantRepositoryImplementation implements PlantRepository {
     @Override
     public Plant savePlant(Plant plant) {
         String saveSql =
-                String.format("INSERT INTO currentplants (plantname,useremail,dateadded,planttype) " +
-                        "VALUES ('%s','fake@email.com',CURRENT_TIMESTAMP,'%s')", plant.getName(), plant.getTypeOfPlant());
+                String.format("INSERT INTO currentplants (plantname,useremail,planttype) " +
+                        "VALUES ('%s','%s','%s')", plant.getName(), "example@email.com", plant.getTypeOfPlant());
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
         plantList.add(plant);
