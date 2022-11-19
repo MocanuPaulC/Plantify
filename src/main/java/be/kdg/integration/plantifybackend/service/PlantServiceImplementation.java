@@ -30,7 +30,12 @@ public class PlantServiceImplementation implements PlantService{
         return plantRepository.getPlants();
     }
 
-//    Refactor
+    @Override
+    public Plant removePlant(String name, PlantType plantType, Arduino arduino) {
+        return plantRepository.deletePlant(new Plant(name, plantType, arduino));
+    }
+
+    //    Refactor
     @Override
     public void updatePlantData(Plant.Details details,int physicalId) {
         plantRepository.updatePlantData(details,physicalId);

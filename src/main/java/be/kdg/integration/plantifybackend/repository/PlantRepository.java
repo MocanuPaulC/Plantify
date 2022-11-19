@@ -16,4 +16,5 @@ public interface PlantRepository {
 
     void updatePlantData(Plant.Details details,int physicalId);
 
+    Plant deletePlant(Plant plant);
 }
