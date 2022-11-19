@@ -6,41 +6,11 @@ body {
 img{
     width: 20em;
 }
-
-nav{
-    display: flex;
-    justify-content: end;
-}
-
-.container-fluid {
-    display: flex;
-    justify-content: space-between;
-    height: 2em;
-    align-items: flex-end;
-    margin: 0;
-}
-
-.navbar-nav {
-    display: flex;
-    margin: 0;
-    height: 4em;
-    /*justify-content: space-between;*/
-    left: 0;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
-}
-
-.bigNavBox{
-    position: absolute;
-    left: 0;
-}
-
-#navbarCollapse{
-    display: flex;
-    position: absolute;
+.navbar{
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
     top: 0;
-    left: 0;
 }
 
 .links a {
