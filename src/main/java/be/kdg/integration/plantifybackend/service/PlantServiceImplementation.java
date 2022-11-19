@@ -21,7 +21,7 @@ public class PlantServiceImplementation implements PlantService{
 
     @Override
     public Plant addPlant(String name, PlantType plantType, Arduino arduino, String emailUser) {
-        return plantRepository.savePlant(new Plant(name,plantType,arduino, emailUser));
+        return plantRepository.savePlant(new Plant(name,plantType,arduino), emailUser);
     }
     public void getPlantFromDB(){
         plantRepository.getPlantsFromDB();
@@ -38,8 +38,8 @@ public class PlantServiceImplementation implements PlantService{
 
 //    Refactor
     @Override
-    public Plant removePlant(String name, PlantType plantType, Arduino arduino) {
-        return plantRepository.deletePlant(new Plant(name, plantType, arduino));
+    public void removePlant(int id) {
+        plantRepository.deletePlant(id);
     }
 
     //    Refactor

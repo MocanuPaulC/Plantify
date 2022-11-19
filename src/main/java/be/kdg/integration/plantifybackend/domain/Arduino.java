@@ -2,15 +2,23 @@ package be.kdg.integration.plantifybackend.domain;
 
 
 public class Arduino {
-    private final String series;
+    private String series;
 
-    // False means base setting and true means color is selected by user
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+// False means base setting and true means color is selected by user
 
     @Override
     public String toString() {
         return "Arduino{" +
                 ", physicalIdentifier=" + physicalIdentifier +
                 '}';
+    }
+
+
+    public Arduino() {
     }
 
     private boolean ledSetting=false;
@@ -75,5 +83,6 @@ public class Arduino {
     public RGBColor getLedColor() {
         return ledColor;
     }
+
 
 }

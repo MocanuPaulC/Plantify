@@ -34,17 +34,22 @@ public class PlantRepositoryImplementation implements PlantRepository {
     public void getPlantsFromDB(){
         // to modify based on UserID//
 
-        String getPlants = "SELECT plantid, plantname,planttype FROM currentplants";
+        // Create plants without arduino
+        //
+        // Here modify the query to get colums from currentplants and from arduino
+        // Use an inner join of the arduino physical Id
+        // Change the plant row mapper to make the arduino first then
+        String getPlants = "SELECT plantid, plantname,planttype, arduinophysicalidentifier, series FROM currentplants JOIN arduino a on a.physicalidentifier = currentplants.arduinophysicalidentifier";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
         System.out.println(plantList);
     }
 
 
     @Override
-    public Plant savePlant(Plant plant) {
+    public Plant savePlant(Plant plant, String userEmail) {
         String saveSql =
-                String.format("INSERT INTO currentplants (plantname,useremail,planttype) " +
-                        "VALUES ('%s','%s','%s')", plant.getName(), "example@email.com", plant.getTypeOfPlant());
+                String.format("INSERT INTO currentplants (plantname,useremail,planttype,arduinophysicalidentifier) " +
+                        "VALUES ('%s','%s','%s',%d)", plant.getName(), userEmail, plant.getTypeOfPlant(),plant.getArduino().getPhysicalIdentifier());
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
         plantList.add(plant);
@@ -52,9 +57,10 @@ public class PlantRepositoryImplementation implements PlantRepository {
     }
 
 
-    public void saveCurrentReadingsToDB(Plant.Details details, int plantId){
-        String sql=String.format("INSERT INTO plantCurrentData (plantid,temperature, humidity,moisture, light, refreshtime)" +
-                "VALUES (%d,%f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
+    public void saveCurrentReadingsToDB(Plant.Details details, int physicalId){
+
+        String sql=String.format("INSERT INTO plantCurrentData (temperature, humidity,moisture, light, refreshtime)" +
+                "VALUES (%f, %f, %f, %f,CURRENT_TIMESTAMP)",details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
         jdbcTemplate.execute(sql);
     }
 
@@ -65,10 +71,12 @@ public class PlantRepositoryImplementation implements PlantRepository {
     }
 
     @Override
-    public Plant deletePlant(Plant plant){
-        String saveSql = "DELETE FROM currentplants WHERE ID = ?";
-        jdbcTemplate.execute(saveSql);plantList.remove(plant);
-        return plant;
+    public void deletePlant(int id){
+
+        String saveSql = "DELETE FROM currentplants WHERE ID ="+id;
+        jdbcTemplate.execute(saveSql);
+        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).findFirst());
+//        return plant;
     }
 }
 

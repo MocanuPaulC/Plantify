@@ -27,8 +27,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public String checkUser(HttpSession httpSession,String username,String email, String password){
-        User userToCheck = new User(username,email, password);
+    public String checkUser(HttpSession httpSession, String email, String password){
+        User userToCheck = new User(email, password);
         if(userService.checkUser(userToCheck)){
             httpSession.setAttribute("user", userToCheck);
             return "redirect:/dashboard";

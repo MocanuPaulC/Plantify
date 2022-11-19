@@ -10,6 +10,7 @@ import java.awt.*;
 public interface ArduinoService {
     Arduino addArduino(String series,int physicalIdentifier);
 
+
     void setLedSetting(int physicalId, boolean base);
     void changeColor(int physicalId, RGBColor color);
 

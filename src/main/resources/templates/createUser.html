@@ -17,11 +17,10 @@
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
 <form class="createUser inputForms" id="createUser"  method="post">
-<!--    Shouldn't this be a form with a POST method so the controller gets triggered?-->
     <fieldset>
         <p>Create Account</p>
-        <label><input type="text" id="newUsername" name="username" placeholder="Username"></label>
-        <p class="error" id="errorUsername">Username can only contain letters and numbers!</p>
+<!--        <label><input type="text" id="newUsername" name="username" placeholder="Username"></label>-->
+<!--        <p class="error" id="errorUsername">Username can only contain letters and numbers!</p>-->
         <label><input type="text" id="email" name="email" placeholder="Email" required></label>
         <p class="error" id="errorEmail">Invalid email format!</p>
         <label><input type="text" id="newPassword" name="password" placeholder="Password" required></label>

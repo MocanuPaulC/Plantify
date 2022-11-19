@@ -1,12 +1,10 @@
 package be.kdg.integration.plantifybackend.domain;
 
 public class User {
-    private String username;
     private String email;
     private String password;
 
-    public User(String username, String email, String password) {
-        this.username = username;
+    public User( String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -27,11 +25,5 @@ public class User {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

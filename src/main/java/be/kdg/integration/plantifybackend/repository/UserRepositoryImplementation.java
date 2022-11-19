@@ -24,18 +24,18 @@ public class UserRepositoryImplementation implements UserRepository {
     }
 
     @Override
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         System.out.println("gets here");
         String insertUser=String.format("INSERT INTO users (email, password) " +
                 "VALUES ('%s', '%s')", user.getEmail(), user.getPassword());
         jdbcTemplate.execute(insertUser);
+        return user;
     }
 
     @Override
     public User searchUser(String email) {
         String searchUser=String.format("SELECT password FROM users WHERE email='%s'", email);
         String password=jdbcTemplate.queryForObject(searchUser, String.class);
-        String username=jdbcTemplate.queryForObject(searchUser, String.class);
-        return new User(email, username, password);
+        return new User(email, password);
     }
 }

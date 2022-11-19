@@ -44,16 +44,16 @@ public class PlantController {
         model.addAttribute("add","chill");
         return "addplant";
     }
-    @PostMapping("plants/addplant")
-    public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
-//        System.out.println(name);
-//        System.out.println(plantType);
-//        System.out.println(arduinoSeries);
-//        System.out.println(physicalId);
-        Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
-        this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino, "example@email.com");
-        return "redirect:/plants";
-    }
+//    @PostMapping("plants/addplant")
+//    public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
+////        System.out.println(name);
+////        System.out.println(plantType);
+////        System.out.println(arduinoSeries);
+////        System.out.println(physicalId);
+//        Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
+//        this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino, "example@email.com");
+//        return "redirect:/plants";
+//    }
 
     @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public String demo(HttpServletRequest httpServletRequest) {
@@ -74,7 +74,7 @@ public class PlantController {
         String json=list.get(0).substring(4,list.get(0).length()-1);
         if(!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
-            plantService.saveReadingsToDB(details, 1 );// dont know how to retrieve plantId from this, dummy data
+//            plantService.saveReadingsToDB(details, physicalId );// dont know how to retrieve plantId from this, dummy data
             this.plantService.updatePlantData(details, physicalId);
         }
 
