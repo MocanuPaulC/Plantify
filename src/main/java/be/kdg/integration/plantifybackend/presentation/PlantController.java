@@ -44,16 +44,6 @@ public class PlantController {
         model.addAttribute("add","chill");
         return "addplant";
     }
-//    @PostMapping("plants/addplant")
-//    public String addPlant(String name, String plantType, String arduinoSeries, String physicalId){
-////        System.out.println(name);
-////        System.out.println(plantType);
-////        System.out.println(arduinoSeries);
-////        System.out.println(physicalId);
-//        Arduino arduino= this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
-//        this.plantService.addPlant(name, PlantType.valueOf(plantType),arduino, "example@email.com");
-//        return "redirect:/plants";
-//    }
 
     @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public String demo(HttpServletRequest httpServletRequest) {
@@ -78,13 +68,10 @@ public class PlantController {
             this.plantService.updatePlantData(details, physicalId);
         }
 
-//        System.out.println(physicalId);
-//        System.out.println(json);
         this.plantService.readPlants().forEach(System.out::println);
         return "postDetailsReturnPage";
     }
 
-//    [[{"humidity":53,"temperature":24.4,"brightness":14.37147,"moisture":1}]]
 
 
 }

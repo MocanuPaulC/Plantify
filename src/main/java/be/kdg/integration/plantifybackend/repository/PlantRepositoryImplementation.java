@@ -32,13 +32,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public void getPlantsFromDB(){
-        // to modify based on UserID//
 
-        // Create plants without arduino
-        //
-        // Here modify the query to get colums from currentplants and from arduino
-        // Use an inner join of the arduino physical Id
-        // Change the plant row mapper to make the arduino first then
         String getPlants = "SELECT plantid, plantname,planttype, arduinophysicalidentifier, series FROM currentplants JOIN arduino a on a.physicalidentifier = currentplants.arduinophysicalidentifier";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
         System.out.println(plantList);
@@ -73,9 +67,9 @@ public class PlantRepositoryImplementation implements PlantRepository {
     @Override
     public void deletePlant(int id){
 
-        String saveSql = "DELETE FROM currentplants WHERE ID ="+id;
-        jdbcTemplate.execute(saveSql);
-        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).findFirst());
+//        String saveSql = "DELETE FROM currentplants WHERE ID ="+id;
+//        jdbcTemplate.execute(saveSql);
+//        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).findFirst());
 //        return plant;
     }
 }
