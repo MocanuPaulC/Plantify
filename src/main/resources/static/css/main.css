@@ -11,7 +11,7 @@ body {
   resize: none;
 }
 
-main{
+main:not(#tableContainer table tbody td){
   margin-top: 10em;
   text-align: center;
 }

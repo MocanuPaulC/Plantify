@@ -84,6 +84,11 @@ body #mainContainer{
     height: 20em;
     margin-top: 10px;
     margin-bottom: 5px;
+    background-image: url("../img/background.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .plant h3{
@@ -92,4 +97,8 @@ body #mainContainer{
 
 .plant p{
     padding-left: 15px;
+}
+
+.plant article{
+    text-align: center;
 }

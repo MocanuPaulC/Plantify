@@ -35,8 +35,8 @@
         </menu>
         <main id="plantContainter">
             <div class="plant" th:each="plant: ${plants}">
-                <article >
-                    <h3>Plant name: <span th:text="${plant.name}"></span></h3>
+                <article>
+                    <h2>Plant name: <span th:text="${plant.name}"></span></h2>
                     <p>
                         Air Humidity: <span th:text="${plant.details.humidity}"></span> %
                     </p>
