@@ -40,13 +40,6 @@ public class PlantController {
     }
 
 
-    @PostMapping("/plants")
-    public String refreshData() {
-//        plantService.updatePageData();
-//        plantService.refreshPlantData();-------------------------------------------
-        return "redirect:/plants";
-    }
-
     @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public String demo(HttpServletRequest httpServletRequest) {
 
@@ -66,13 +59,14 @@ public class PlantController {
         String json = list.get(0).substring(4, list.get(0).length() - 1);
         if (!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
+            plantService.saveReadingsToDB(details, physicalId );// dont know how to retrieve plantId from this, dummy data
             this.plantService.updatePlantData(details, physicalId);
         }
 
 //        System.out.println(physicalId);
 //        System.out.println(json);
         this.plantService.readPlants().forEach(System.out::println);
-        return "addetails";
+        return "postDetailsReturnPage";
     }
 
 //    [[{"humidity":53,"temperature":24.4,"brightness":14.37147,"moisture":1}]]

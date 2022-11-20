@@ -18,6 +18,7 @@ public class PlantifybackendApplication{
 		context.getBean(PlantService.class).getPlantFromDB();
 
 
+
 		/*
 		|||| THIS WORKS BUT NEEDS SpringJdbcConfig.class TO FUNCTION,
 		AUTOWIRING DOES NOT WORK ON A CLASS THAT IS NOT PART OF THE MVP MODEL

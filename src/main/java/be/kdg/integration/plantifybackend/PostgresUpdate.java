@@ -24,6 +24,7 @@ public class PostgresUpdate {
         List<PlantData> plantDataList = jdbcTemplate.query(pullData, new PlantDataRowMapper());
         List<Integer> plantIDList = new ArrayList<>();
 
+
         for (PlantData plantData : plantDataList) {
             if(!plantIDList.contains(plantData.getPlantID())){
                 plantIDList.add(plantData.getPlantID());
