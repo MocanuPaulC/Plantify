@@ -8,7 +8,7 @@ import java.util.List;
 public interface PlantRepository {
 
     void saveCurrentReadingsToDB(Plant.Details details, int plantId);
-    Plant savePlant(Plant plant);
+    Plant savePlant(Plant plant, String userEmail);
 
     void getPlantsFromDB();
 
@@ -16,5 +16,5 @@ public interface PlantRepository {
 
     void updatePlantData(Plant.Details details,int physicalId);
 
-    Plant deletePlant(Plant plant);
+    void deletePlant(int id);
 }

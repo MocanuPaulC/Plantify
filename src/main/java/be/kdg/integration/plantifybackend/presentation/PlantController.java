@@ -42,7 +42,7 @@ public class PlantController {
 
     @PostMapping("/plants")
     public String refreshData() {
-  //      plantService.updatePageData();
+//        plantService.updatePageData();
 //        plantService.refreshPlantData();-------------------------------------------
         return "redirect:/plants";
     }

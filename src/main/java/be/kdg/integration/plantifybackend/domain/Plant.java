@@ -64,6 +64,7 @@ public class Plant implements Serializable {
     private PlantType typeOfPlant;
     private Arduino arduino;
     private int id;
+    private String emailUser;
 
     public Arduino getArduino() {
         return arduino;
@@ -95,6 +96,11 @@ public class Plant implements Serializable {
         this.name = name;
         this.typeOfPlant = typeOfPlant;
         this.arduino = arduino;
+//        this.emailUser= emailUser;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
     }
 
     public String getName() {

@@ -4,6 +4,7 @@ import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ public class DeletePlantController {
 
     ArduinoService arduinoService;
 
+    @Autowired
     public DeletePlantController(PlantService plantService) {
         this.plantService = plantService;
     }
@@ -26,9 +28,9 @@ public class DeletePlantController {
     }
 
     @PostMapping("removePlant")
-    public String addPlant(String name, String plantType, String arduinoSeries, String physicalId) {
-        Arduino arduino = this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
-        this.plantService.removePlant(name, PlantType.valueOf(plantType), arduino);
+    public String removePlant(Integer plantId) {
+//        Arduino arduino = this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
+        this.plantService.removePlant(plantId);
         return "redirect:/plants";
     }
 }
