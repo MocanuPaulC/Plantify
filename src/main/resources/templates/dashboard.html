@@ -14,7 +14,7 @@
     <script defer type="module" src="/js/jsfile.js"></script>
     <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
 </head>
-<body>
+<body id="dashboardBody">
 <div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
 
 <main>
@@ -34,9 +34,9 @@
             </form>
         </menu>
         <main id="plantContainter">
-            <div class="plant">
-                <article th:each="plant: ${plants}">
-                    <h3>Plant name: <span th:text="${plant.name}"></span></h3>
+            <div class="plant" th:each="plant: ${plants}">
+                <article>
+                    <h2>Plant name: <span th:text="${plant.name}"></span></h2>
                     <p>
                         Air Humidity: <span th:text="${plant.details.humidity}"></span> %
                     </p>

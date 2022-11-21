@@ -14,12 +14,12 @@
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(3)}"></div>
 <main>
-    <form class="addPlant inputForms" id="form">
+    <form class="addPlant inputForms" method="post" id="form">
         <fieldset>
             <p style="text-align: center">Add plant</p>
             <label><input type="text" id="name" name="name" placeholder="Name" required></label>
             <label for="type"></label>
-            <select name="type" id="type">
+            <select name="plantType" id="type">
                 <option value="water">Water</option>
                 <option value="desert">Desert</option>
                 <option value="mountain">Mountain</option>

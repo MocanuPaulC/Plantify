@@ -1,4 +1,4 @@
-section{
+section {
     position: absolute;
     top: 10em;
     left: 1em;
@@ -8,9 +8,11 @@ section{
     align-items: center;
     margin-bottom: 0;
 }
-#listForm{
+
+#listForm {
     height: 100%;
 }
+
 :root {
     --width: 20px;
 }
@@ -20,7 +22,7 @@ body {
 }
 
 
-section a{
+section a {
     padding-right: 10px;
 }
 
@@ -49,6 +51,22 @@ section a{
 .arrow-box:active .arrow-round {
     transform: rotate(1turn) scale(1.2);
 }
-.arrow-round input{
+
+.arrow-round input {
     opacity: 0;
+}
+
+.table {
+    width: 80% !important;
+}
+
+#tableContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center
+}
+#tableContainer table tbody tr td,
+#tableContainer table tbody tr th,
+#tableContainer table thead tr th{
+    padding: 20px;
 }

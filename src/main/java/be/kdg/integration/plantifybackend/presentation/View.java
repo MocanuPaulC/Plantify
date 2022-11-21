@@ -2,6 +2,7 @@ package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.domain.User;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -59,7 +60,8 @@ public class View {
         String type = scanner.next();
         System.out.println("What series of our product do you own? (1,2,3,4)");
         String series = scanner.next();
-        plantService.addPlant(name, PlantType.valueOf(type.toUpperCase(Locale.ROOT)), new Arduino(series,101));
+        plantService.addPlant(name, PlantType.valueOf(type.toUpperCase(Locale.ROOT)), new Arduino(series,101),
+                "example@email.com");
 
     }
 
