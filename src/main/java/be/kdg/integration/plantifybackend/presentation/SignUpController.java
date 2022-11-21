@@ -28,7 +28,7 @@ public class SignUpController {
 
     // Make this method using ViewModels
     @PostMapping
-    public String signUp(HttpSession httpSession, String email, String username, String password) {
+    public String signUp(HttpSession httpSession, String email, String password) {
         User user=userService.addUser(email, password);
         httpSession.setAttribute("user", user);
         return "redirect:/dashboard";
