@@ -79,6 +79,8 @@ public class Plant implements Serializable {
         this.details.setBrightness(details.getBrightness());
     }
 
+
+
     @Override
     public String toString() {
         return "Plant{" +

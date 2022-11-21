@@ -1,23 +1,29 @@
 package be.kdg.integration.plantifybackend.presentation;
 
-import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.presentation.viewModel.PlantViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -36,20 +42,14 @@ public class PlantController {
     @GetMapping("/plants")
     public String showPlantsView(Model model) {
         model.addAttribute("plants", plantService.readPlants());
+
         return "dashboard";
     }
 
 
-    @PostMapping("/plants")
-    public String refreshData() {
-//        plantService.updatePageData();
-//        plantService.refreshPlantData();-------------------------------------------
-        return "redirect:/plants";
-    }
-
     @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public String demo(HttpServletRequest httpServletRequest) {
-
+    public String demo(HttpServletRequest httpServletRequest,Model model) {
+//        model.addAttribute("arduinoSettings","P0L0C000,000,000");
         ServletInputStream inputStream;
 
         try {
@@ -66,13 +66,14 @@ public class PlantController {
         String json = list.get(0).substring(4, list.get(0).length() - 1);
         if (!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
+            plantService.saveReadingsToDB(details, physicalId );// dont know how to retrieve plantId from this, dummy data
             this.plantService.updatePlantData(details, physicalId);
         }
 
 //        System.out.println(physicalId);
 //        System.out.println(json);
         this.plantService.readPlants().forEach(System.out::println);
-        return "addetails";
+        return "postDetailsReturnPage";
     }
 
 //    [[{"humidity":53,"temperature":24.4,"brightness":14.37147,"moisture":1}]]

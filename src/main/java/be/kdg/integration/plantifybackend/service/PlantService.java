@@ -15,6 +15,7 @@ public interface PlantService {
     void updatePlantData(Plant.Details details,int physicalId);
 
     void saveReadingsToDB(Plant.Details details, int plantId);
+    void updateDBArchive();
 
     List<Plant> readPlants();
 

@@ -1,15 +1,15 @@
 package be.kdg.integration.plantifybackend.repository;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
+import be.kdg.integration.plantifybackend.domain.PlantData;
+import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
 import be.kdg.integration.plantifybackend.domain.gson.PlantRowMapper;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -52,9 +52,12 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
 
     public void saveCurrentReadingsToDB(Plant.Details details, int physicalId){
+//        int plantId=plantList.stream().filter(plant -> plant.getArduino().getPhysicalIdentifier()==physicalId).findFirst().get().
 
-        String sql=String.format("INSERT INTO plantCurrentData (temperature, humidity,moisture, light, refreshtime)" +
-                "VALUES (%f, %f, %f, %f,CURRENT_TIMESTAMP)",details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
+        String getPlantId = String.format("Select plantid FROM currentplants WHERE arduinophysicalidentifier = %d",physicalId);
+        int plantId=jdbcTemplate.queryForObject(getPlantId, Integer.class);
+        String sql=String.format("INSERT INTO plantCurrentData (plantid, temperature, humidity,moisture, light, refreshtime)" +
+                "VALUES (%d, %f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
         jdbcTemplate.execute(sql);
     }
 
@@ -71,6 +74,57 @@ public class PlantRepositoryImplementation implements PlantRepository {
 //        jdbcTemplate.execute(saveSql);
 //        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).findFirst());
 //        return plant;
+    }
+
+    @Override
+    public void updateDBArchive() {
+        String pullData = "SELECT * FROM plantCurrentData";
+        List<Plant> plantList = jdbcTemplate.query(pullData, new PlantDetailsRowMapper());
+        String pullplantID = "SELECT DISTINCT plantID FROM plantCurrentData";
+        List<Integer> plantIDList = jdbcTemplate.queryForList(pullplantID, Integer.class);
+
+        for (Integer plantID : plantIDList) {
+            int temperatureAvg=0;
+            int humidityAvg=0;
+            int moistureAvg=0;
+            int lightAvg=0;
+            int counter=0;
+            for (Plant plant : plantList ) {
+                if(plant.getId()==plantID){
+                    temperatureAvg+=plant.getDetails().getTemperature();
+                    humidityAvg+=plant.getDetails().getHumidity();
+                    moistureAvg+=plant.getDetails().getMoisture();
+                    lightAvg+=plant.getDetails().getBrightness();
+                    counter++;
+                }
+            }
+            temperatureAvg=temperatureAvg/counter;
+            humidityAvg=humidityAvg/counter;
+            moistureAvg=moistureAvg/counter;
+            lightAvg=lightAvg/counter;
+
+            // in the database INSERT the average gets rounded down
+            String postData=String.format("INSERT INTO plantDataArchive " +
+                    "(plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg) " +
+                    "VALUES(%d, %d, %d, %d, %d)", plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg);
+            jdbcTemplate.execute(postData);
+        }
+        String clearTable="DROP TABLE IF EXISTS plantCurrentData; " +
+            "CREATE TABLE plantCurrentData( " +
+            "ID INT NOT NULL " +
+            "   GENERATED ALWAYS AS IDENTITY " +
+            "   PRIMARY KEY, " +
+            "plantID INT NOT NULL " +
+            "   CONSTRAINT fk_plantID REFERENCES currentPlants (plantID) " +
+            "       ON DELETE CASCADE, " +
+            "temperature NUMERIC(10) NOT NULL, " +
+            "humidity NUMERIC(10) NOT NULL, " +
+            "moisture NUMERIC(10) NOT NULL, " +
+            "light NUMERIC(10) NOT NULL, " +
+            "refreshTime TIMESTAMP NOT NULL " +
+            "   DEFAULT CURRENT_TIMESTAMP " +
+            "); ";
+        jdbcTemplate.execute(clearTable);
     }
 }
 

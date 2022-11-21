@@ -1,21 +1,24 @@
 package be.kdg.integration.plantifybackend.presentation.viewModel;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class LoginViewModel {
-    @NotEmpty(message = "Cannot be empty!")
-    @Size(min=5, max=10)
-    private String username;
-    @Size(min=6, message = "Password cannot be shorten then 6 characters!")
+    @NotEmpty(message = "Email can't be empty!")
+    @Email(regexp = "^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$",
+            message = "Not a valid Email!")
+    private String email;
+    @NotEmpty(message = "Password can't be empty!")
+    @Size(min=5, message = "Password must at least be 5 characters long")
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -29,7 +32,7 @@ public class LoginViewModel {
     @Override
     public String toString() {
         return "LoginViewModel{" +
-                "username='" + username + '\'' +
+                "username='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
