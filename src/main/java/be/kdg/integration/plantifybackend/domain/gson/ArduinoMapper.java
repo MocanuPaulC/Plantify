@@ -1,7 +1,6 @@
 package be.kdg.integration.plantifybackend.domain.gson;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
-import be.kdg.integration.plantifybackend.domain.PlantData;
 
 import be.kdg.integration.plantifybackend.domain.RGBColor;
 import org.springframework.jdbc.core.RowMapper;

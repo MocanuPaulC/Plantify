@@ -41,8 +41,8 @@ public class PlantController {
 
 
     @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public String demo(HttpServletRequest httpServletRequest) {
-
+    public String demo(HttpServletRequest httpServletRequest,Model model) {
+//        model.addAttribute("arduinoSettings","P0L0C000,000,000");
         ServletInputStream inputStream;
 
         try {
