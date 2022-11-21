@@ -19,6 +19,13 @@ public class ArduinoRepositoryImplementation implements ArduinoRepository{
         arduinoList=new ArrayList<>();
     }
 
+    @Override
+    public void getArduinoList(List<Plant> plantList) {
+        for (Plant plant : plantList) {
+            arduinoList.add(plant.getArduino());
+        }
+    }
+
     JdbcTemplate jdbcTemplate;
     List<Arduino> arduinoList;
 
