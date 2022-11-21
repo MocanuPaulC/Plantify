@@ -76,7 +76,8 @@ public class PlantRepositoryImplementation implements PlantRepository {
 //        return plant;
     }
 
-    public void update() {
+    @Override
+    public void updateDBArchive() {
         String pullData = "SELECT * FROM plantCurrentData";
         List<Plant> plantList = jdbcTemplate.query(pullData, new PlantDetailsRowMapper());
         String pullplantID = "SELECT DISTINCT plantID FROM plantCurrentData";

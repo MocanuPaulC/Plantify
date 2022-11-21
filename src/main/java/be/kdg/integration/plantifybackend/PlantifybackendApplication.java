@@ -2,11 +2,10 @@ package be.kdg.integration.plantifybackend;
 
 import be.kdg.integration.plantifybackend.repository.PlantRepositoryImplementation;
 import be.kdg.integration.plantifybackend.service.PlantService;
+import be.kdg.integration.plantifybackend.service.PlantServiceImplementation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,19 +16,15 @@ public class PlantifybackendApplication{
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(PlantifybackendApplication.class,args);
- ;
+
+		// prints current plants in DB
 		context.getBean(PlantService.class).getPlantFromDB();
 
-
-
-		/*
-		|||| THIS WORKS BUT NEEDS SpringJdbcConfig.class TO FUNCTION,
-		AUTOWIRING DOES NOT WORK ON A CLASS THAT IS NOT PART OF THE MVP MODEL
-		CHANGE THE VALUES IN SpringJdbcConfig.class TO MAKE IT WORK LOCALLY||||*/
-		PlantRepositoryImplementation plantRepositoryImplementation = context.getBean(PlantRepositoryImplementation.class);
-
+		// archiving functionality
+		PlantService plantRepositoryImplementation =
+				context.getBean(PlantService.class);
 		ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-		ses.scheduleAtFixedRate(plantRepositoryImplementation::update, 0, 15, TimeUnit.SECONDS);
+		ses.scheduleAtFixedRate(context.getBean(PlantService.class)::updateDBArchive, 0, 15, TimeUnit.SECONDS);
 
 
 //
