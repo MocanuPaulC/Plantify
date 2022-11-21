@@ -52,9 +52,12 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
 
     public void saveCurrentReadingsToDB(Plant.Details details, int physicalId){
+//        int plantId=plantList.stream().filter(plant -> plant.getArduino().getPhysicalIdentifier()==physicalId).findFirst().get().
 
-        String sql=String.format("INSERT INTO plantCurrentData (temperature, humidity,moisture, light, refreshtime)" +
-                "VALUES (%f, %f, %f, %f,CURRENT_TIMESTAMP)",details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
+        String getPlantId = String.format("Select plantid FROM currentplants WHERE arduinophysicalidentifier = %d",physicalId);
+        int plantId=jdbcTemplate.queryForObject(getPlantId, Integer.class);
+        String sql=String.format("INSERT INTO plantCurrentData (plantid, temperature, humidity,moisture, light, refreshtime)" +
+                "VALUES (%d, %f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
         jdbcTemplate.execute(sql);
     }
 
