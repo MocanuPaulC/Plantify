@@ -34,4 +34,11 @@ public class ArduinoServiceImplementation implements ArduinoService{
     public void changeColor(int arduinoId, RGBColor color) {
         arduinoRepository.changeColor(arduinoId, color);
     }
+
+    @Override
+    public String postMapping(int physicalID) {
+        Arduino arduino = arduinoRepository.arduinoList().stream().filter(ar -> ar.getPhysicalIdentifier() == physicalID).findAny().get();
+        return String.format("P%dL%dC%03d,%03d,%03d",arduino.getPumpInstruction(),arduino.getLedSetting() ? 1 : 0
+                ,arduino.getLedColor().getRed(),arduino.getLedColor().getGreen(),arduino.getLedColor().getBlue());
+    }
 }

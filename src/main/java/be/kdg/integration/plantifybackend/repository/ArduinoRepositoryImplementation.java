@@ -44,5 +44,12 @@ public class ArduinoRepositoryImplementation implements ArduinoRepository{
         arduinoList.add(arduino);
         return arduino;
     }
+
+    @Override
+    public List<Arduino> arduinoList() {
+        return arduinoList;
+    }
+
+
 }
 
