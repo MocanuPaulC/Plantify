@@ -19,10 +19,13 @@ public class LoginController {
     @Autowired
     public LoginController(UserService userService) {
         this.userService = userService;
+
     }
 
     @GetMapping
-    public String showUserView(Model model){
+    public String showUserView(HttpSession httpSession,Model model){
+        User user = (User) httpSession.getAttribute("user");
+        model.addAttribute("loggedInOrNot",false);
         return "login";
     }
 

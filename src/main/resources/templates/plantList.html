@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<div th:replace="~{fragments/fragments::navigationbar(3)}"></div>
+<div th:replace="~{fragments/fragments::navigationbar(3, ${loggedInOrNot})}"></div>
 
 <main>
     <!--<section class="arrow-box">

@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<div th:replace="~{fragments/fragments::navigationbar(1)}"></div>
+<div th:replace="~{fragments/fragments::navigationbar(1,${loggedInOrNot})}"></div>
 
 <main>
     <h1>Plantify
@@ -25,7 +25,7 @@
         The first digital self watering system <br> to improve your life!
     </section>
     </h1>
-    <a class="buttonClass" id="redirect" type="button" th:href="@{/login}">Sign In</a>
+    <a th:if="${loggedInOrNot == false}" class="buttonClass" id="redirect" type="button" th:href="@{/login}">Sign In</a>
 </main>
 
 <div th:insert="~{fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
