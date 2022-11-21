@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
 </head>
 <body>
-<div th:replace="~{fragments/fragments::navigationbar(3,loggedInOrNot)}"></div>
+<div th:replace="~{fragments/fragments::navigationbar(3,${loggedInOrNot})}"></div>
 
 <main>
     <h1>About Plantify</h1>

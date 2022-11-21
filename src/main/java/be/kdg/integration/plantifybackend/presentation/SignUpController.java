@@ -37,10 +37,7 @@ public class SignUpController {
 
     // Make this method using ViewModels
     @PostMapping
-    public String signUp(HttpSession httpSession, String email, String password) {
-        User user=userService.addUser(email, password);
-    public String signUp(HttpSession httpSession, @Valid @ModelAttribute("signUpViewModel") SignUpViewModel
-            signUpViewModel, BindingResult errors) {
+    public String signUp(HttpSession httpSession, @Valid @ModelAttribute("signUpViewModel") SignUpViewModel signUpViewModel, BindingResult errors) {
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> {
                 logger.error(error.toString());
