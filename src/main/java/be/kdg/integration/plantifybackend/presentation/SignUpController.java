@@ -30,6 +30,7 @@ public class SignUpController {
 
     @GetMapping
     public String showSignUpView(Model model) {
+        model.addAttribute("loggedInOrNot",false);
         model.addAttribute("signUpViewModel", new SignUpViewModel());
         return "createUser";
     }
