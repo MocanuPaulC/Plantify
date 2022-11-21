@@ -7,9 +7,8 @@ import java.util.Locale;
 
 
 public class StringToPlantTypeConverter implements Converter<String, PlantType> {
-
     @Override
     public PlantType convert(String source) {
-        return PlantType.valueOf(source.toUpperCase(Locale.ROOT));
+        return PlantType.valueOf(source);
     }
 }

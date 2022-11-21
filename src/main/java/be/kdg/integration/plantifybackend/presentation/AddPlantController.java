@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
@@ -35,8 +37,11 @@ public class AddPlantController {
 
     @GetMapping("addPlant")
     public String showAddPlant(Model model) {
+        List<PlantType> plantTypes = Arrays.stream(PlantType.values()).toList();
+        model.addAttribute("plantTypes", plantTypes);
         model.addAttribute("add", "chill");
         model.addAttribute("plantViewModel", new PlantViewModel());
+
         return "addPlant";
     }
 

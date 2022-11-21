@@ -1,6 +1,7 @@
 package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
+import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.presentation.viewModel.PlantViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -40,6 +42,7 @@ public class PlantController {
     @GetMapping("/plants")
     public String showPlantsView(Model model) {
         model.addAttribute("plants", plantService.readPlants());
+
         return "dashboard";
     }
 

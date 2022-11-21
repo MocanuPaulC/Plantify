@@ -23,10 +23,12 @@
             <label><input type="text" id="name" name="name" placeholder="Name" required></label>
             <label for="type"></label>
             <select name="plantType" id="type">
-                <option value="water">Water</option>
+                <!--easier to add new plantTypes-->
+                <option th:each="plantType : ${plantTypes}" th:value="${plantType}" th:text="${plantType}"></option>
+                <!-- <option value="water">Water</option>
                 <option value="desert">Desert</option>
                 <option value="mountain">Mountain</option>
-                <option value="plain">Plain</option>
+                <option value="plain">Plain</option>-->
             </select>
             <!--        <label><input type="text" id="typeInTextForm" name="type" placeholder="Type" required></label>-->
             <label><input type="text" id="arduinoSeries" name="arduinoSeries"
