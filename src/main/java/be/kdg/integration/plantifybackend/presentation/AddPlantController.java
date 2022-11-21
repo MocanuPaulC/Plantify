@@ -37,12 +37,13 @@ public class AddPlantController {
 
     @GetMapping("addPlant")
     public String showAddPlant(Model model) {
+        model.addAttribute("loggedInOrNot",true);
         List<PlantType> plantTypes = Arrays.stream(PlantType.values()).toList();
         model.addAttribute("plantTypes", plantTypes);
         model.addAttribute("add", "chill");
         model.addAttribute("plantViewModel", new PlantViewModel());
 
-        return "addPlant";
+        return "addplant";
     }
 
 
@@ -54,6 +55,8 @@ public class AddPlantController {
             errors.getAllErrors().forEach(error -> {
                 logger.error(error.toString());
             });
+            List<PlantType> plantTypes = Arrays.stream(PlantType.values()).toList();
+            model.addAttribute("plantTypes", plantTypes);
             model.addAttribute("plants", plantService.readPlants());
             return "addPlant";
         }

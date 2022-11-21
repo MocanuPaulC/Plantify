@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
 </head>
 <body>
-<div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
+<div th:replace="~{fragments/fragments::navigationbar(2,${loggedInOrNot})}"></div>
 
 <form class="createUser inputForms" id="createUser"  method="post" th:object="${signUpViewModel}">
     <fieldset>

@@ -3,7 +3,6 @@ package be.kdg.integration.plantifybackend.presentation;
 import  be.kdg.integration.plantifybackend.domain.User;
 import be.kdg.integration.plantifybackend.presentation.viewModel.LoginViewModel;
 import be.kdg.integration.plantifybackend.service.UserService;
-import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +29,15 @@ public class LoginController {
     }
 
     @GetMapping
-    public String showUserView(Model model){
+    public String showUserView(HttpSession httpSession,Model model){
+        User user = (User) httpSession.getAttribute("user");
+        model.addAttribute("loggedInOrNot",false);
         model.addAttribute("loginViewModel", new LoginViewModel());
         return "login";
     }
 
     @PostMapping
-    public String checkUser(HttpSession httpSession, @Valid @ModelAttribute("loginViewModel")LoginViewModel
+    public String checkUser(HttpSession httpSession, @Valid @ModelAttribute("loginViewModel") LoginViewModel
             loginViewModel, BindingResult errors){
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> {
@@ -53,5 +54,6 @@ public class LoginController {
         else{
             return "redirect:/login?error";
         }
+
     }
 }

@@ -13,10 +13,10 @@
     <script defer th:src="@{js/formvalidation.js}"></script>
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script defer type="module" th:src="@{/js/jsfile.js}"></script>
-    <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
+    <link rel="stylesheet" th:href="@{https://use.typekit.net/dqy2dee.css}">
 </head>
 <body>
-<div th:replace="~{fragments/fragments::navigationbar(2)}"></div>
+<div th:replace="~{fragments/fragments::navigationbar(2,${loggedInOrNot})}"></div>
 <main>
     <form class="createUser inputForms" method="post" id="createUser" >
         <fieldset>

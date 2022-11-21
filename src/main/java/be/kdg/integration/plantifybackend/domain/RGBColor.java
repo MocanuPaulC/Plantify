@@ -1,5 +1,8 @@
 package be.kdg.integration.plantifybackend.domain;
 
+/**
+ * RGBColor class for colors and brightness of led strip
+ */
 public class RGBColor {
     private short red;
     private short blue;

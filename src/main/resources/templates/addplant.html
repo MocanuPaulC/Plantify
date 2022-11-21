@@ -12,7 +12,7 @@
     </script>
 </head>
 <body>
-<div th:replace="~{fragments/fragments::navigationbar(3)}"></div>
+<div th:replace="~{fragments/fragments::navigationbar(3,${loggedInOrNot})}"></div>
 <main>
     <form class="addPlant inputForms" method="post" id="form" th:object="${plantViewModel}">
         <fieldset>
@@ -22,7 +22,7 @@
             </div>
             <label><input type="text" id="name" name="name" placeholder="Name" required></label>
             <label for="type"></label>
-            <select name="plantType" id="type">
+            <select name="type" id="type">
                 <!--easier to add new plantTypes-->
                 <option th:each="plantType : ${plantTypes}" th:value="${plantType}" th:text="${plantType}"></option>
                 <!-- <option value="water">Water</option>
