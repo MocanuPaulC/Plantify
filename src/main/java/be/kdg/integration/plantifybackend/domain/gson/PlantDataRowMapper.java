@@ -1,6 +1,5 @@
 package be.kdg.integration.plantifybackend.domain.gson;
 
-import be.kdg.integration.plantifybackend.domain.PlantData;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,8 +1,6 @@
 package be.kdg.integration.plantifybackend;
 
-import be.kdg.integration.plantifybackend.domain.PlantData;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDataRowMapper;
-import be.kdg.integration.plantifybackend.repository.PlantRepositoryImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

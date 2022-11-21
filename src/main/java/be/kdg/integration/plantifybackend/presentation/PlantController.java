@@ -48,8 +48,7 @@ public class PlantController {
     }
 
     @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public String demo(HttpServletRequest httpServletRequest) {
-
+    public String demo(HttpServletRequest httpServletRequest,Model model) {
         ServletInputStream inputStream;
 
         try {
@@ -68,6 +67,9 @@ public class PlantController {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
             this.plantService.updatePlantData(details, physicalId);
         }
+
+        model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId));
+
 
 //        System.out.println(physicalId);
 //        System.out.println(json);
