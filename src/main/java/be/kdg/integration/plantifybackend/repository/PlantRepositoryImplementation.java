@@ -45,6 +45,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
                         "VALUES ('%s','%s','%s',%d)", plant.getName(), userEmail, plant.getTypeOfPlant(),plant.getArduino().getPhysicalIdentifier());
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
+
         plantList.add(plant);
         return plant;
     }

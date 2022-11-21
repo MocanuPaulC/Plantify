@@ -22,7 +22,7 @@
             </div>
             <label><input type="text" id="name" name="name" placeholder="Name" required></label>
             <label for="type"></label>
-            <select name="plantType" id="type">
+            <select name="type" id="type">
                 <!--easier to add new plantTypes-->
                 <option th:each="plantType : ${plantTypes}" th:value="${plantType}" th:text="${plantType}"></option>
                 <!-- <option value="water">Water</option>
