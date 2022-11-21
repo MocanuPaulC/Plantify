@@ -55,6 +55,8 @@ public class AddPlantController {
             errors.getAllErrors().forEach(error -> {
                 logger.error(error.toString());
             });
+            List<PlantType> plantTypes = Arrays.stream(PlantType.values()).toList();
+            model.addAttribute("plantTypes", plantTypes);
             model.addAttribute("plants", plantService.readPlants());
             return "addPlant";
         }
