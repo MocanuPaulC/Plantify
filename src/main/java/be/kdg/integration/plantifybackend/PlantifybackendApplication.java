@@ -1,9 +1,12 @@
 package be.kdg.integration.plantifybackend;
 
+import be.kdg.integration.plantifybackend.repository.PlantRepositoryImplementation;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,10 +25,11 @@ public class PlantifybackendApplication{
 		/*
 		|||| THIS WORKS BUT NEEDS SpringJdbcConfig.class TO FUNCTION,
 		AUTOWIRING DOES NOT WORK ON A CLASS THAT IS NOT PART OF THE MVP MODEL
-		CHANGE THE VALUES IN SpringJdbcConfig.class TO MAKE IT WORK LOCALLY||||
-		PostgresUpdate postgresUpdate = new PostgresUpdate();
+		CHANGE THE VALUES IN SpringJdbcConfig.class TO MAKE IT WORK LOCALLY||||*/
+		PlantRepositoryImplementation plantRepositoryImplementation = context.getBean(PlantRepositoryImplementation.class);
+
 		ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-		ses.scheduleAtFixedRate(postgresUpdate::update, 0, 6, TimeUnit.HOURS);*/
+		ses.scheduleAtFixedRate(plantRepositoryImplementation::update, 0, 15, TimeUnit.SECONDS);
 
 
 //
