@@ -25,18 +25,14 @@ nav{
 .navbar-nav {
     display: flex;
     margin: 0;
-    height: 4em;
-    /*justify-content: space-between;*/
+    background-color: white;
+    justify-content: space-between;
     left: 0;
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
 }
 
-.bigNavBox{
-    position: absolute;
-    left: 0;
-}
 
 #navbarCollapse{
     display: flex;
@@ -75,9 +71,12 @@ nav{
     color: white;
     height: 3em;
     position: absolute;
-    top: 100%;
     width: 100%;
     left: 0;
+}
+.footer:not(#dashboardBody .footer){
+    top: 100%;
+
 }
 
 .footer>p{

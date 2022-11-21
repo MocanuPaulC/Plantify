@@ -33,6 +33,7 @@ menu a{
 
 .arrow-box .arrow-round {
     position: absolute;
+    z-index: -1;
     width: var(--width);
     height: var(--width);
     border: calc(var(--width) / 4) solid #4C7F2E;
