@@ -3,6 +3,7 @@ package be.kdg.integration.plantifybackend.presentation;
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.domain.User;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,7 +36,7 @@ public class PlantController {
     }
 
     @GetMapping("/plants")
-    public String showPlantsView(HttpSession httpSession,Model model) {
+    public String showPlantsView(HttpSession httpSession, Model model) {
         System.out.println("in show plants view");
         User user = (User) httpSession.getAttribute("user");
         if (user != null) {
