@@ -32,6 +32,7 @@ public class SignUpController {
     public String showSignUpView(Model model) {
         model.addAttribute("loggedInOrNot",false);
         model.addAttribute("signUpViewModel", new SignUpViewModel());
+        model.addAttribute("loggedInOrNot",false);
         return "createUser";
     }
 

@@ -24,6 +24,7 @@ public class DeletePlantController {
     @GetMapping("removePlant")
     public String showAddPlant(Model model) {
         model.addAttribute("remove");
+        model.addAttribute("loggedInOrNot",true);
         return "removePlant";
     }
 
