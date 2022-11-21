@@ -1,12 +1,17 @@
 package be.kdg.integration.plantifybackend.presentation.viewModel;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class SignUpViewModel {
-    @NotEmpty(message = "Cannot be empty!")
-    public String email;
-    public String newUsername;
-    public String newPassword;
+    @NotEmpty(message = "Email can't be empty!")
+    @Email(regexp = "^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$",
+            message = "Not a valid Email!")
+    private String email;
+    @NotEmpty(message = "Password can't be empty!")
+    @Size(min=5, message = "Password must at least be 5 characters long")
+    private String password;
 
     public String getEmail() {
         return email;
@@ -16,28 +21,19 @@ public class SignUpViewModel {
         this.email = email;
     }
 
-    public String getNewUsername() {
-        return newUsername;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNewUsername(String newUsername) {
-        this.newUsername = newUsername;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "SignUpViewModel{" +
                 "email='" + email + '\'' +
-                ", newUsername='" + newUsername + '\'' +
-                ", newPassword='" + newPassword + '\'' +
+                ", newPassword='" + password + '\'' +
                 '}';
     }
 }
