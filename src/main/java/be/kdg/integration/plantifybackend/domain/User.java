@@ -1,5 +1,8 @@
 package be.kdg.integration.plantifybackend.domain;
 
+/**
+ * Class for User
+ */
 public class User {
     private String email;
     private String password;

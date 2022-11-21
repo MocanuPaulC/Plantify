@@ -1,7 +1,6 @@
 package be.kdg.integration.plantifybackend.repository;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
-import be.kdg.integration.plantifybackend.domain.PlantData;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
 import be.kdg.integration.plantifybackend.domain.gson.PlantRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;

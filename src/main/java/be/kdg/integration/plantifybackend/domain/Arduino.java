@@ -1,31 +1,66 @@
 package be.kdg.integration.plantifybackend.domain;
 
-
+/**
+ * Arduino class
+ */
 public class Arduino {
+    /**
+     * Shows which type the arduino is (for future implementation of different types of pots)
+     */
     private String series;
+
+    /**
+     * False means base color setting and true means color is selected by user
+     */
+    private boolean ledSetting=false;
+
+    /**
+     * Instruction for the pump (future implementation and currently out of scope)
+     */
+    private short pumpInstruction;
+
+    /**
+     * Used to identify between different arduinos, unique per arduino
+     */
+    private int physicalIdentifier;
+
+    /**
+     * intializes class for led colors of the led strip
+     */
+    private RGBColor ledColor= new RGBColor();
+
+    /**
+     * Initializer for RowMapper
+     */
+    public Arduino() {
+    }
+
+    /**
+     * Standard initializer
+     * @param series
+     * @param physicalIdentifier
+     */
+    public Arduino(String series, int physicalIdentifier) {
+        this.series=series;
+        this.physicalIdentifier=physicalIdentifier;
+    }
+
+
+    /**
+     * Sets the colors of the led strip
+     * @param color RGBColor class with 3 parameters blue, green and red
+     */
+    public void setColors(RGBColor color){
+        // to change values with parameter
+        ledColor.setBlue(color.getBlue());
+        ledColor.setGreen(color.getGreen());
+        ledColor.setRed(color.getRed());
+
+    }
 
     public void setSeries(String series) {
         this.series = series;
     }
-
-// False means base setting and true means color is selected by user
-
-    @Override
-    public String toString() {
-        return "Arduino{" +
-                ", physicalIdentifier=" + physicalIdentifier +
-                '}';
-    }
-
-
-    public Arduino() {
-    }
-
-    private boolean ledSetting=false;
-    private short pumpInstruction;
-    private int physicalIdentifier;
-    private RGBColor ledColor= new RGBColor();
-    private int id;
 
     public int getPhysicalIdentifier() {
         return physicalIdentifier;
@@ -35,29 +70,8 @@ public class Arduino {
         this.physicalIdentifier = physicalIdentifier;
     }
 
-    public Arduino(String series, int physicalIdentifier) {
-        this.series=series;
-        this.physicalIdentifier=physicalIdentifier;
-    }
-    public void setColors(RGBColor color){
-        // to change values with parameter
-        ledColor.setBlue(color.getBlue());
-        ledColor.setGreen(color.getGreen());
-        ledColor.setRed(color.getRed());
-
-    }
-
-
     public void setBrightness(short brightness){
         ledColor.setBrightness(brightness);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setLedSetting(boolean setting){
@@ -82,6 +96,13 @@ public class Arduino {
 
     public RGBColor getLedColor() {
         return ledColor;
+    }
+
+    @Override
+    public String toString() {
+        return "Arduino{" +
+                ", physicalIdentifier=" + physicalIdentifier +
+                '}';
     }
 
 

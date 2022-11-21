@@ -8,8 +8,14 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 
+/**
+ * Plant class with .Details for details of the current state of the plant
+ */
 public class Plant implements Serializable {
 
+    /**
+     * Details of the current state of the plant, replacement for plantData
+     */
     public class Details{
         private double temperature;
         private double brightness;
@@ -60,16 +66,34 @@ public class Plant implements Serializable {
         }
     }
 
+    /**
+     * Name of the plant
+     */
     private String name;
+
+    /**
+     * Type of the plant, PlantType.class
+     */
     private PlantType typeOfPlant;
+
+    /**
+     * Arduino which is monitoring this plant
+     */
     private Arduino arduino;
+
+    /**
+     * Unique ID of the plant
+     */
     private int id;
+
+    /**
+     * Email of the owner of the plant
+     */
     private String emailUser;
 
-    public Arduino getArduino() {
-        return arduino;
-    }
-
+    /**
+     * Initializer of Details of the plant
+     */
     private Details details=new Details();
 
     public void setDetails(Details details){
@@ -79,26 +103,27 @@ public class Plant implements Serializable {
         this.details.setBrightness(details.getBrightness());
     }
 
-
-
-    @Override
-    public String toString() {
-        return "Plant{" +
-                "name='" + name + '\'' +
-                ", typeOfPlant=" + typeOfPlant +
-                ", id=" + id +
-                ", details=" + details +
-                '}';
-    }
-
+    /**
+     * Initializer for RowMappers
+     */
     public Plant() {
     }
 
+    /**
+     * Standard initializer
+     * @param name
+     * @param typeOfPlant
+     * @param arduino
+     */
     public Plant(String name, PlantType typeOfPlant, Arduino arduino) {
         this.name = name;
         this.typeOfPlant = typeOfPlant;
         this.arduino = arduino;
 //        this.emailUser= emailUser;
+    }
+
+    public Arduino getArduino() {
+        return arduino;
     }
 
     public String getEmailUser() {
@@ -139,7 +164,15 @@ public class Plant implements Serializable {
         this.id = id;
     }
 
-
+    @Override
+    public String toString() {
+        return "Plant{" +
+                "name='" + name + '\'' +
+                ", typeOfPlant=" + typeOfPlant +
+                ", id=" + id +
+                ", details=" + details +
+                '}';
+    }
 }
 
 

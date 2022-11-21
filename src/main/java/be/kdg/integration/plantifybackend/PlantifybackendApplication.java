@@ -21,10 +21,9 @@ public class PlantifybackendApplication{
 		context.getBean(PlantService.class).getPlantFromDB();
 
 		// archiving functionality
-		PlantService plantRepositoryImplementation =
-				context.getBean(PlantService.class);
 		ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-		ses.scheduleAtFixedRate(context.getBean(PlantService.class)::updateDBArchive, 0, 15, TimeUnit.SECONDS);
+		ses.scheduleAtFixedRate(context.getBean(PlantService.class)::updateDBArchive,
+				0, 15, TimeUnit.SECONDS);
 
 
 //

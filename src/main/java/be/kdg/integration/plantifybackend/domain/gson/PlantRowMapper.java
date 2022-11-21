@@ -9,8 +9,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 
+/**
+ * Mapper for formatting database queries of the plant table
+ */
 public class PlantRowMapper implements RowMapper<Plant> {
 
+    /**
+     *
+     * @param rs the ResultSet to map (pre-initialized for the current row)
+     * @param rowNum the number of the current row
+     * @return a Plant object with plantID, plantname, planttype and arduino
+     */
     @Override
     public Plant mapRow(ResultSet rs, int rowNum) throws SQLException {
 
