@@ -14,9 +14,12 @@
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(3)}"></div>
 <main>
-    <form class="addPlant inputForms" method="post" id="form">
+    <form class="addPlant inputForms" method="post" id="form" th:object="${plantViewModel}">
         <fieldset>
             <p style="text-align: center">Add plant</p>
+            <div th:if="${#fields.hasAnyErrors()}" th:text="${#fields.allErrors()}" class="alert alert-danger">
+                <p>The form contained errors!</p>
+            </div>
             <label><input type="text" id="name" name="name" placeholder="Name" required></label>
             <label for="type"></label>
             <select name="plantType" id="type">
@@ -27,9 +30,9 @@
             </select>
             <!--        <label><input type="text" id="typeInTextForm" name="type" placeholder="Type" required></label>-->
             <label><input type="text" id="arduinoSeries" name="arduinoSeries"
-                          placeholder="Enter Arduino Series"></label>
-            <label><input type="text" id="physicalAddress" name="psysicalAddress"
-                          placeholder="Enter Physical Adress"></label>
+                          placeholder="Enter Arduino Series" required ></label>
+            <label><input type="text" id="physicalAddress" name="physicalAddress"
+                          placeholder="Enter Physical Address" min="0" required></label>
             <button class="button" id="createPlant" type="submit">Submit</button>
             <p class="error">Plant already exists!</p>
         </fieldset>
