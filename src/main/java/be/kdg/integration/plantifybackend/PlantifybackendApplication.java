@@ -26,7 +26,7 @@ public class PlantifybackendApplication{
 		// archiving functionality
 		ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
 		ses.scheduleAtFixedRate(context.getBean(PlantService.class)::updateDBArchive,
-				0, 15, TimeUnit.SECONDS);
+				30, 30, TimeUnit.MINUTES);
 
 
 //
