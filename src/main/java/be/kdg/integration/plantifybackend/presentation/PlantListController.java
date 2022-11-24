@@ -31,8 +31,15 @@ public class PlantListController {
     public String showIndexView(HttpSession httpSession, Model model) {
         User user = (User) httpSession.getAttribute("user");
         if (user != null) {
-            model.addAttribute("loggedInOrNot", true);
-            model.addAttribute("plants", plantService.readPlants());
+            String email= ((User)httpSession.getAttribute("user")).getEmail();
+            model.addAttribute("loggedInOrNot",true);
+//            System.out.println(email);
+//            System.out.println(plantService.readPlants().stream()
+//                    .filter(plant -> plant.getEmailUser()
+//                            .equals(email)).toList());
+            model.addAttribute("plants", plantService.readPlants().stream()
+                    .filter(plant -> plant.getEmailUser()
+                            .equals(email)).toList());
             return "plantList";
         } else {
             return "login";

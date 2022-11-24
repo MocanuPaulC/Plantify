@@ -122,6 +122,10 @@ public class Plant implements Serializable {
 //        this.emailUser= emailUser;
     }
 
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
+    }
+
     public Arduino getArduino() {
         return arduino;
     }
@@ -169,7 +173,9 @@ public class Plant implements Serializable {
         return "Plant{" +
                 "name='" + name + '\'' +
                 ", typeOfPlant=" + typeOfPlant +
+                ", arduino=" + arduino +
                 ", id=" + id +
+                ", emailUser='" + emailUser + '\'' +
                 ", details=" + details +
                 '}';
     }

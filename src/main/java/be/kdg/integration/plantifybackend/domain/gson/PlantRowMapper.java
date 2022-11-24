@@ -26,9 +26,9 @@ public class PlantRowMapper implements RowMapper<Plant> {
         Arduino arduino = new Arduino();
         arduino.setPhysicalIdentifier(rs.getInt("arduinophysicalidentifier"));
         arduino.setSeries(rs.getString("series"));
-
         Plant plant = new Plant();
         plant.setId(rs.getInt("plantid"));
+        plant.setEmailUser(rs.getString("useremail"));
         plant.setName(rs.getString("plantname"));
         plant.setTypeOfPlant(PlantType.valueOf(rs.getString("planttype").toUpperCase(Locale.ROOT)));
         plant.setArduino(arduino);
