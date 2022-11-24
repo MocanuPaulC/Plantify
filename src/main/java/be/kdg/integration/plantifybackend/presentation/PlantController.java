@@ -38,11 +38,19 @@ public class PlantController {
     @GetMapping("/plants")
     public String showPlantsView(HttpSession httpSession, Model model) {
         System.out.println("in show plants view");
+
         User user = (User) httpSession.getAttribute("user");
         if (user != null) {
+            String email= ((User)httpSession.getAttribute("user")).getEmail();
             model.addAttribute("loggedInOrNot",true);
-            model.addAttribute("plants", plantService.readPlants());
-            System.out.println("logged in");
+//            System.out.println(email);
+//            System.out.println(plantService.readPlants().stream()
+//                    .filter(plant -> plant.getEmailUser()
+//                            .equals(email)).toList());
+            model.addAttribute("plants", plantService.readPlants().stream()
+                    .filter(plant -> plant.getEmailUser()
+                            .equals(email)).toList());
+//            System.out.println("logged in");
             return "dashboard";
         }else {
             System.out.println("logged in");

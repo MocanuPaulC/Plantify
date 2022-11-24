@@ -27,8 +27,11 @@ public class DashboardController {
     public String showIndexView(HttpSession httpSession, Model model) {
         User user = (User) httpSession.getAttribute("user");
         if (user != null) {
-            model.addAttribute("plants", plantService.readPlants());
-            model.addAttribute("loggedInOrNot", true);
+            String email= ((User)httpSession.getAttribute("user")).getEmail();
+            model.addAttribute("loggedInOrNot",true);
+            model.addAttribute("plants", plantService.readPlants().stream()
+                    .filter(plant -> plant.getEmailUser()
+                            .equals(email)).toList());
             return "dashboard";
         }else {
             return "error";

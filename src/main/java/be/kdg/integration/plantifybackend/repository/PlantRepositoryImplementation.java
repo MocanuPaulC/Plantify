@@ -4,6 +4,7 @@ import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
 import be.kdg.integration.plantifybackend.domain.gson.PlantRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -31,9 +32,27 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public void getPlantsFromDB(){
-
-        String getPlants = "SELECT plantid, plantname,planttype, arduinophysicalidentifier, series FROM currentplants JOIN arduino a on a.physicalidentifier = currentplants.arduinophysicalidentifier";
+        //harro, I'm smol Asian man
+        String getPlants = "SELECT plantid,useremail, plantname,planttype, arduinophysicalidentifier, series " +
+                "FROM currentplants " +
+                "JOIN arduino a on a.physicalidentifier = currentplants.arduinophysicalidentifier";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
+        String getDetails = """
+                SELECT p.plantid, p.temperature,p.humidity,p.moisture,p.light,p.refreshtime
+                FROM plantcurrentdata AS p
+                INNER JOIN (
+                  SELECT plantid, MAX(refreshtime) AS date
+                  FROM plantcurrentdata
+                  GROUP BY plantid
+                ) tm ON p.plantid = tm.plantid AND p.refreshtime = tm.date;""" ;
+        List<Plant> tempPlantList = jdbcTemplate.query(getDetails,new PlantDetailsRowMapper());
+        for (Plant value : tempPlantList) {
+            for (Plant plant : plantList) {
+                if (plant.getId() == value.getId()) {
+                    plant.setDetails(value.getDetails());
+                }
+            }
+        }
         System.out.println(plantList);
     }
 
@@ -45,7 +64,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
                         "VALUES ('%s','%s','%s',%d)", plant.getName(), userEmail, plant.getTypeOfPlant(),plant.getArduino().getPhysicalIdentifier());
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
-
+        plant.setEmailUser(userEmail);
         plantList.add(plant);
         return plant;
     }
