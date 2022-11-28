@@ -2,6 +2,7 @@ package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.User;
+import be.kdg.integration.plantifybackend.presentation.viewModel.PlantspecificViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
@@ -9,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class PlantListController {
@@ -70,4 +74,14 @@ public class PlantListController {
             return "login";
         }
     }
+/*
+    @PostMapping("plantList/{id}")
+    public String processColorForm(@PathVariable String id, @Valid @ModelAttribute("PlantspecificViewModel")
+    PlantspecificViewModel plantspecificViewModel, Model model) {
+        model.addAttribute("id", id);
+        plantspecificViewModel.hex2Rgb();
+        System.out.println(plantspecificViewModel.toString());
+        return "specificPlant";
+    }
+*/
 }
