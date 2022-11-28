@@ -2,6 +2,7 @@ package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.User;
+import be.kdg.integration.plantifybackend.presentation.viewModel.PlantspecificViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
@@ -9,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 /**
  * Controller for plantlist.html
@@ -40,8 +44,15 @@ public class PlantListController {
     public String showIndexView(HttpSession httpSession, Model model) {
         User user = (User) httpSession.getAttribute("user");
         if (user != null) {
-            model.addAttribute("loggedInOrNot", true);
-            model.addAttribute("plants", plantService.readPlants());
+            String email= ((User)httpSession.getAttribute("user")).getEmail();
+            model.addAttribute("loggedInOrNot",true);
+//            System.out.println(email);
+//            System.out.println(plantService.readPlants().stream()
+//                    .filter(plant -> plant.getEmailUser()
+//                            .equals(email)).toList());
+            model.addAttribute("plants", plantService.readPlants().stream()
+                    .filter(plant -> plant.getEmailUser()
+                            .equals(email)).toList());
             return "plantList";
         } else {
             return "login";
@@ -79,4 +90,14 @@ public class PlantListController {
             return "login";
         }
     }
+/*
+    @PostMapping("plantList/{id}")
+    public String processColorForm(@PathVariable String id, @Valid @ModelAttribute("PlantspecificViewModel")
+    PlantspecificViewModel plantspecificViewModel, Model model) {
+        model.addAttribute("id", id);
+        plantspecificViewModel.hex2Rgb();
+        System.out.println(plantspecificViewModel.toString());
+        return "specificPlant";
+    }
+*/
 }
