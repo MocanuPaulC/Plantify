@@ -22,6 +22,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * controller for addPlant.html, functionality for adding a plant
+ */
 @Controller
 public class AddPlantController {
     PlantService plantService;
@@ -35,6 +38,13 @@ public class AddPlantController {
         this.arduinoService = arduinoService;
     }
 
+    /**
+     * shows the addPlant.html page
+     * @param model attributes added:
+     *              - plantTypes: list of the types of plant for the select input
+     *              - plantViewModel: passes on the ViewModel for collecting data and validation
+     * @return addplant.html
+     */
     @GetMapping("addPlant")
     public String showAddPlant(Model model) {
         model.addAttribute("loggedInOrNot",true);
@@ -47,7 +57,14 @@ public class AddPlantController {
     }
 
 
-    // add viewModel here as well
+    /**
+     * handles the form input
+     * @param httpSession used to retrieve the User
+     * @param plantViewModel used to retrieve the data from the form
+     * @param errors used to detect and retrieve any errors
+     * @param model used to
+     * @return returns addPlant.html when an error is detected server-side, otherwise returns plants
+     */
     @PostMapping("addPlant")
     public String addPlant(HttpSession httpSession, @Valid @ModelAttribute("plantViewModel") PlantViewModel
                                        plantViewModel, BindingResult errors, Model model) {

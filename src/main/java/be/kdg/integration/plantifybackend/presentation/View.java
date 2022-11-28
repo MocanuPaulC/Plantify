@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * redundant testing class
+ */
 @Component
 public class View {
 

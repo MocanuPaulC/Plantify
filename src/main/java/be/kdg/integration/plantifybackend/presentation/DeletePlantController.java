@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+/**
+ * controller for removePlant.html
+ */
 @Controller
 public class DeletePlantController {
     PlantService plantService;
@@ -21,6 +24,11 @@ public class DeletePlantController {
         this.plantService = plantService;
     }
 
+    /**
+     *
+     * @param model used to pass remove and loggedInOrNot attributes
+     * @return removePlant.html
+     */
     @GetMapping("removePlant")
     public String showAddPlant(Model model) {
         model.addAttribute("remove");
@@ -28,6 +36,11 @@ public class DeletePlantController {
         return "removePlant";
     }
 
+    /**
+     * removes the plant from the database
+     * @param plantId id of the plant that was selected to be removed
+     * @return dashboard.html
+     */
     @PostMapping("removePlant")
     public String removePlant(Integer plantId) {
 //        Arduino arduino = this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));

@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+/**
+ * controller for createUser.html
+ */
 @Controller
 @RequestMapping("/createUser")
 public class SignUpController {
@@ -28,6 +31,11 @@ public class SignUpController {
         this.userService = userService;
     }
 
+    /**
+     * shows createUser.html
+     * @param model used to pass on loggedInOrNot, signUpViewModel and loggedInOrNot
+     * @return createuser.html
+     */
     @GetMapping
     public String showSignUpView(Model model) {
         model.addAttribute("loggedInOrNot",false);
@@ -37,7 +45,13 @@ public class SignUpController {
     }
 
 
-    // Make this method using ViewModels
+    /**
+     * handles form input
+     * @param httpSession used to set the current user
+     * @param signUpViewModel used to check the form input for basic errors
+     * @param errors used to return createuser.html with errors if anything is invalidated in the viewmodel
+     * @return createuser.html if any errors in viewmodel, otherwise dashboard.html
+     */
     @PostMapping
     public String signUp(HttpSession httpSession, @Valid @ModelAttribute("signUpViewModel") SignUpViewModel signUpViewModel, BindingResult errors) {
         if (errors.hasErrors()) {

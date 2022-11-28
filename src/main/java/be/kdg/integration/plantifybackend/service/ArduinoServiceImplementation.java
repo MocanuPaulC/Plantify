@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.awt.*;
 
+/**
+ * service class for handling arduino information
+ */
 @Component
 public class ArduinoServiceImplementation implements ArduinoService{
 
@@ -23,6 +26,12 @@ public class ArduinoServiceImplementation implements ArduinoService{
         arduinoRepository.setLedSetting(physicalId, base);
     }
 
+    /**
+     * adds an arduino to teh database
+     * @param series type of the arduino
+     * @param physicalIdentifier unique ID of the arduino
+     * @return function from repository
+     */
     @Override
     public Arduino addArduino(String series, int physicalIdentifier) {
         return this.arduinoRepository.saveArduino(new Arduino(series,physicalIdentifier));
@@ -35,6 +44,11 @@ public class ArduinoServiceImplementation implements ArduinoService{
         arduinoRepository.changeColor(arduinoId, color);
     }
 
+    /**
+     * interacts with the arduino to retrieve information being red
+     * @param physicalID unique ID of the arduino to listen to a specific arduino
+     * @return all information retrieved from the arduino in a formatted string
+     */
     @Override
     public String postMapping(int physicalID) {
         Arduino arduino = arduinoRepository.arduinoList().stream().filter(ar -> ar.getPhysicalIdentifier() == physicalID).findAny().get();

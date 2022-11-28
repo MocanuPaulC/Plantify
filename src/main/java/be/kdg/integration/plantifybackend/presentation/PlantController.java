@@ -22,7 +22,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-
+/**
+ * controller for dashboard.html and adddetails.html
+ */
 @Controller
 public class PlantController {
     PlantService plantService;
@@ -35,6 +37,12 @@ public class PlantController {
         this.arduinoService = arduinoService;
     }
 
+    /**
+     * returns dashboard if user is logged in
+     * @param httpSession used to retrieve the user
+     * @param model used to parse on loggedInOrNot and plants
+     * @return dashbaord.html and login.html
+     */
     @GetMapping("/plants")
     public String showPlantsView(HttpSession httpSession, Model model) {
         System.out.println("in show plants view");
@@ -45,13 +53,19 @@ public class PlantController {
             System.out.println("logged in");
             return "dashboard";
         }else {
-            System.out.println("logged in");
+            System.out.println("not logged in");
             return "login";
         }
 
 
     }
 
+    /**
+     * used to refresh the current data on the plant in the dashboard
+     * @param httpServletRequest takes the current data from the arduino and checks for errors
+     * @param model used to pass on arduinoconfiguration
+     * @return addetails.html
+     */
     @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public String demo(HttpServletRequest httpServletRequest,Model model) {
         ServletInputStream inputStream;

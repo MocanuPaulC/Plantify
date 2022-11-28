@@ -56,7 +56,8 @@ public class PlantRepositoryImplementation implements PlantRepository {
         String getPlantId = String.format("Select plantid FROM currentplants WHERE arduinophysicalidentifier = %d",physicalId);
         int plantId=jdbcTemplate.queryForObject(getPlantId, Integer.class);
         String sql=String.format("INSERT INTO plantCurrentData (plantid, temperature, humidity,moisture, light, refreshtime)" +
-                "VALUES (%d, %f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
+                "VALUES (%d, %f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),
+                details.getMoisture(),details.getBrightness());
         jdbcTemplate.execute(sql);
     }
 

@@ -4,11 +4,22 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+/**
+ * ViewModel for storing and BeanValidating input from the login.html form
+ */
 public class LoginViewModel {
+
+    /**
+     * Email of user, input needs to be in a email format and not empty
+     */
     @NotEmpty(message = "Email can't be empty!")
     @Email(regexp = "^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$",
             message = "Not a valid Email!")
     private String email;
+
+    /**
+     * Password of a user, input needs to be at least 5 characters long and not empty
+     */
     @NotEmpty(message = "Password can't be empty!")
     @Size(min=5, message = "Password must at least be 5 characters long")
     private String password;

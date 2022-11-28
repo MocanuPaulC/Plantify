@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * Controller for plantlist.html
+ */
 @Controller
 public class PlantListController {
 
@@ -27,6 +30,12 @@ public class PlantListController {
         this.arduinoService = arduinoService;
     }
 
+    /**
+     * shows the details of all plants
+     * @param httpSession used to get the user
+     * @param model used to pass on loggedInOrNot and plants
+     * @return plantlist.html if logged in
+     */
     @GetMapping("/plantList")
     public String showIndexView(HttpSession httpSession, Model model) {
         User user = (User) httpSession.getAttribute("user");
@@ -40,6 +49,13 @@ public class PlantListController {
 
     }
 
+    /**
+     * shows details of a singular plant
+     * @param id id of the plant selected
+     * @param httpSession used to get the user
+     * @param model used to pass on loggedInOrNot, the correct plant and plantid
+     * @return specificplant.html if logged in
+     */
     @GetMapping("plantList/{id}")
     public String showPlantSpecific(@PathVariable String id, HttpSession httpSession, Model model) {
         model.addAttribute("loggedInOrNot", true);

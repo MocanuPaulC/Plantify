@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+/**
+ * controller for login.html
+ */
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -28,6 +31,12 @@ public class LoginController {
         this.userService = userService;
     }
 
+    /**
+     * user is not used right now, future implementation
+     * @param httpSession redundant
+     * @param model redundant
+     * @return login.html
+     */
     @GetMapping
     public String showUserView(HttpSession httpSession,Model model){
         User user = (User) httpSession.getAttribute("user");
@@ -36,6 +45,13 @@ public class LoginController {
         return "login";
     }
 
+    /**
+     * handles the login form
+     * @param httpSession used to pass on the logged-in user
+     * @param loginViewModel used to check the validity of the form data
+     * @param errors used to return login.html with errors if anything is invalidated in the viewmodel
+     * @return depends on errors and if the user exists
+     */
     @PostMapping
     public String checkUser(HttpSession httpSession, @Valid @ModelAttribute("loginViewModel") LoginViewModel
             loginViewModel, BindingResult errors){

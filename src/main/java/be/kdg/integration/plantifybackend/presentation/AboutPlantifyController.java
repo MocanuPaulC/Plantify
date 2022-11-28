@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * shows aboutPlantify.html, no special functionality since it is a simple hardcoded page
+ */
 @Controller
 public class AboutPlantifyController {
     @GetMapping("/aboutPlantify")
