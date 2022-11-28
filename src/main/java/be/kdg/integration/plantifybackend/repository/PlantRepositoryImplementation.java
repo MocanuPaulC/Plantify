@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class PlantRepositoryImplementation implements PlantRepository {
@@ -104,17 +105,62 @@ public class PlantRepositoryImplementation implements PlantRepository {
         List<Integer> plantIDList = jdbcTemplate.queryForList(pullplantID, Integer.class);
 
         for (Integer plantID : plantIDList) {
-            int temperatureAvg=0;
-            int humidityAvg=0;
-            int moistureAvg=0;
-            int lightAvg=0;
+            double temperatureAvg=0;
+            double humidityAvg=0;
+            double moistureAvg=0;
+            double lightAvg=0;
             int counter=0;
+            double minimumTemp=0;
+            double maximumTemp=0;
+            double minimumHumidity=0;
+            double maximumHumidity=0;
+            double minimumMoisture=0;
+            double maximumMoisture=0;
+            double minimumLight=0;
+            double maximumLight=0;
             for (Plant plant : plantList ) {
                 if(plant.getId()==plantID){
                     temperatureAvg+=plant.getDetails().getTemperature();
                     humidityAvg+=plant.getDetails().getHumidity();
                     moistureAvg+=plant.getDetails().getMoisture();
                     lightAvg+=plant.getDetails().getBrightness();
+
+                    if(counter==0){
+                        minimumTemp=plant.getDetails().getTemperature();
+                        maximumTemp=plant.getDetails().getTemperature();
+                        minimumHumidity=plant.getDetails().getHumidity();
+                        maximumHumidity=plant.getDetails().getHumidity();
+                        minimumMoisture=plant.getDetails().getMoisture();
+                        maximumMoisture=plant.getDetails().getMoisture();
+                        minimumLight=plant.getDetails().getBrightness();
+                        maximumLight=plant.getDetails().getBrightness();
+                    }
+                    else{
+                        if(minimumTemp>plant.getDetails().getTemperature()){
+                            minimumTemp=plant.getDetails().getTemperature();
+                        }
+                        if(maximumTemp<plant.getDetails().getTemperature()){
+                            maximumTemp=plant.getDetails().getTemperature();
+                        }
+                        if(minimumHumidity>plant.getDetails().getHumidity()){
+                            minimumHumidity=plant.getDetails().getHumidity();
+                        }
+                        if(maximumHumidity<plant.getDetails().getHumidity()){
+                            maximumHumidity=plant.getDetails().getHumidity();
+                        }
+                        if(minimumMoisture>plant.getDetails().getMoisture()){
+                            minimumMoisture=plant.getDetails().getMoisture();
+                        }
+                        if(maximumMoisture<plant.getDetails().getMoisture()){
+                            maximumMoisture=plant.getDetails().getMoisture();
+                        }
+                        if(minimumLight>plant.getDetails().getBrightness()){
+                            minimumLight=plant.getDetails().getBrightness();
+                        }
+                        if(maximumLight<plant.getDetails().getBrightness()){
+                            maximumLight=plant.getDetails().getBrightness();
+                        }
+                    }
                     counter++;
                 }
             }
@@ -124,26 +170,32 @@ public class PlantRepositoryImplementation implements PlantRepository {
             lightAvg=lightAvg/counter;
 
             // in the database INSERT the average gets rounded down
-            String postData=String.format("INSERT INTO plantDataArchive " +
-                    "(plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg) " +
-                    "VALUES(%d, %d, %d, %d, %d)", plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg);
+            String postData=String.format(Locale.US ,"INSERT INTO plantDataArchive " +
+                    "(plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg, " +
+                    "minimumTemperature, maximumTemperature, minimumHumidity, maximumHumidity, " +
+                    "minimumMoisture, maximumMoisture, minimumLight, maximumLight, totalRowsArchived) " +
+                    "VALUES(%d, %f, %f, %f, %f, " +
+                    "%f, %f, %f, %f, %f, %f, %f, %f, %d)",
+                    plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg,
+                    minimumTemp, maximumTemp, minimumHumidity, maximumHumidity, minimumMoisture,
+                    maximumMoisture, minimumLight, maximumLight, counter);
             jdbcTemplate.execute(postData);
         }
         String clearTable="DROP TABLE IF EXISTS plantCurrentData; " +
-            "CREATE TABLE plantCurrentData( " +
-            "ID INT NOT NULL " +
-            "   GENERATED ALWAYS AS IDENTITY " +
-            "   PRIMARY KEY, " +
-            "plantID INT NOT NULL " +
-            "   CONSTRAINT fk_plantID REFERENCES currentPlants (plantID) " +
-            "       ON DELETE CASCADE, " +
-            "temperature NUMERIC(10) NOT NULL, " +
-            "humidity NUMERIC(10) NOT NULL, " +
-            "moisture NUMERIC(10) NOT NULL, " +
-            "light NUMERIC(10) NOT NULL, " +
-            "refreshTime TIMESTAMP NOT NULL " +
-            "   DEFAULT CURRENT_TIMESTAMP " +
-            "); ";
+                "CREATE TABLE plantCurrentData( " +
+                "    ID INT NOT NULL " +
+                "        GENERATED ALWAYS AS IDENTITY " +
+                "        PRIMARY KEY, " +
+                "    plantID INT NOT NULL " +
+                "        CONSTRAINT fk_plantID REFERENCES currentPlants (plantID) " +
+                "            ON DELETE CASCADE, " +
+                "    temperature NUMERIC(10) NOT NULL, " +
+                "    humidity NUMERIC(10) NOT NULL, " +
+                "    moisture NUMERIC(10) NOT NULL, " +
+                "    light NUMERIC(10) NOT NULL, " +
+                "    refreshTime TIMESTAMP NOT NULL " +
+                "        DEFAULT CURRENT_TIMESTAMP " +
+                "); ";
         jdbcTemplate.execute(clearTable);
     }
 }
