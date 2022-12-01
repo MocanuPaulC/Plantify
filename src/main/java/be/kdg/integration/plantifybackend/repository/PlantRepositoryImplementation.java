@@ -35,15 +35,15 @@ public class PlantRepositoryImplementation implements PlantRepository {
     public void getPlantsFromDB(){
         //harro, I'm smol Asian man
         String getPlants = "SELECT plantid,useremail, plantname,planttype, arduinophysicalidentifier, series " +
-                "FROM currentplants " +
+                "FROM plant " +
                 "JOIN arduino a on a.physicalidentifier = currentplants.arduinophysicalidentifier";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
         String getDetails = """
                 SELECT p.plantid, p.temperature,p.humidity,p.moisture,p.light,p.refreshtime
-                FROM plantcurrentdata AS p
+                FROM details AS p
                 INNER JOIN (
                   SELECT plantid, MAX(refreshtime) AS date
-                  FROM plantcurrentdata
+                  FROM details
                   GROUP BY plantid
                 ) tm ON p.plantid = tm.plantid AND p.refreshtime = tm.date;""" ;
         List<Plant> tempPlantList = jdbcTemplate.query(getDetails,new PlantDetailsRowMapper());
@@ -61,7 +61,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
     @Override
     public Plant savePlant(Plant plant, String userEmail) {
         String saveSql =
-                String.format("INSERT INTO currentplants (plantname,useremail,planttype,arduinophysicalidentifier) " +
+                String.format("INSERT INTO plant (plantname,useremail,planttype,arduinophysicalidentifier) " +
                         "VALUES ('%s','%s','%s',%d)", plant.getName(), userEmail, plant.getTypeOfPlant(),plant.getArduino().getPhysicalIdentifier());
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
@@ -74,9 +74,9 @@ public class PlantRepositoryImplementation implements PlantRepository {
     public void saveCurrentReadingsToDB(Plant.Details details, int physicalId){
 //        int plantId=plantList.stream().filter(plant -> plant.getArduino().getPhysicalIdentifier()==physicalId).findFirst().get().
 
-        String getPlantId = String.format("Select plantid FROM currentplants WHERE arduinophysicalidentifier = %d",physicalId);
+        String getPlantId = String.format("Select plantid FROM plant WHERE arduinophysicalidentifier = %d",physicalId);
         int plantId=jdbcTemplate.queryForObject(getPlantId, Integer.class);
-        String sql=String.format("INSERT INTO plantCurrentData (plantid, temperature, humidity,moisture, light, refreshtime)" +
+        String sql=String.format("INSERT INTO details (plantid, temperature, humidity,moisture, light, refreshtime)" +
                 "VALUES (%d, %f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),
                 details.getMoisture(),details.getBrightness());
         jdbcTemplate.execute(sql);
@@ -99,9 +99,9 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public void updateDBArchive() {
-        String pullData = "SELECT * FROM plantCurrentData";
+        String pullData = "SELECT * FROM details";
         List<Plant> plantList = jdbcTemplate.query(pullData, new PlantDetailsRowMapper());
-        String pullplantID = "SELECT DISTINCT plantID FROM plantCurrentData";
+        String pullplantID = "SELECT DISTINCT plantID FROM details";
         List<Integer> plantIDList = jdbcTemplate.queryForList(pullplantID, Integer.class);
 
         for (Integer plantID : plantIDList) {
@@ -170,7 +170,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
             lightAvg=lightAvg/counter;
 
             // in the database INSERT the average gets rounded down
-            String postData=String.format(Locale.US ,"INSERT INTO plantDataArchive " +
+            String postData=String.format(Locale.US ,"INSERT INTO detailsarchive " +
                     "(plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg, " +
                     "minimumTemperature, maximumTemperature, minimumHumidity, maximumHumidity, " +
                     "minimumMoisture, maximumMoisture, minimumLight, maximumLight, totalRowsArchived) " +
@@ -181,13 +181,13 @@ public class PlantRepositoryImplementation implements PlantRepository {
                     maximumMoisture, minimumLight, maximumLight, counter);
             jdbcTemplate.execute(postData);
         }
-        String clearTable="DROP TABLE IF EXISTS plantCurrentData; " +
-                "CREATE TABLE plantCurrentData( " +
+        String clearTable="DROP TABLE IF EXISTS details; " +
+                "CREATE TABLE details( " +
                 "    ID INT NOT NULL " +
                 "        GENERATED ALWAYS AS IDENTITY " +
                 "        PRIMARY KEY, " +
                 "    plantID INT NOT NULL " +
-                "        CONSTRAINT fk_plantID REFERENCES currentPlants (plantID) " +
+                "        CONSTRAINT fk_plantID REFERENCES plant (plantID) " +
                 "            ON DELETE CASCADE, " +
                 "    temperature NUMERIC(10) NOT NULL, " +
                 "    humidity NUMERIC(10) NOT NULL, " +
