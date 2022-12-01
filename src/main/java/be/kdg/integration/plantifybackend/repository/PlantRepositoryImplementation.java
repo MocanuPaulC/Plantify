@@ -3,6 +3,8 @@ package be.kdg.integration.plantifybackend.repository;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
 import be.kdg.integration.plantifybackend.domain.gson.PlantRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +21,8 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     List<Plant> plantList;
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     public PlantRepositoryImplementation(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -34,6 +38,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
     @Override
     public void getPlantsFromDB(){
         //harro, I'm smol Asian man
+        logger.debug("getting plants from database");
         String getPlants = "SELECT plantid,useremail, plantname,planttype, arduinophysicalidentifier, series " +
                 "FROM plant " +
                 "JOIN arduino a on a.physicalidentifier = plant.arduinophysicalidentifier";
@@ -54,12 +59,13 @@ public class PlantRepositoryImplementation implements PlantRepository {
                 }
             }
         }
-        System.out.println(plantList);
+        logger.debug(plantList.toString());
     }
 
 
     @Override
     public Plant savePlant(Plant plant, String userEmail) {
+        logger.debug("saving plant to database");
         String saveSql =
                 String.format("INSERT INTO plant (plantname,useremail,planttype,arduinophysicalidentifier) " +
                         "VALUES ('%s','%s','%s',%d)", plant.getName(), userEmail, plant.getTypeOfPlant(),plant.getArduino().getPhysicalIdentifier());
@@ -72,8 +78,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
 
     public void saveCurrentReadingsToDB(Plant.Details details, int physicalId){
-//        int plantId=plantList.stream().filter(plant -> plant.getArduino().getPhysicalIdentifier()==physicalId).findFirst().get().
-
+        logger.debug("saving readings to db");
         String getPlantId = String.format("Select plantid FROM plant WHERE arduinophysicalidentifier = %d",physicalId);
         int plantId=jdbcTemplate.queryForObject(getPlantId, Integer.class);
         String sql=String.format("INSERT INTO details (plantid, temperature, humidity,moisture, light, refreshtime)" +
@@ -84,29 +89,24 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public void updatePlantData(Plant.Details details, int physicalId) {
+        logger.debug("getting plant data from database");
         plantList.stream().filter(plant-> plant.getArduino().getPhysicalIdentifier()==physicalId)
                 .forEach(plant -> plant.setDetails(details));
     }
 
     @Override
     public void deletePlant(int id){
-//        String getPhysicalIdentifier = "SELECT arduinophysicalIdentifier FROM plant WHERE plantid="+id+"; ";
-//        int physicalIdentifier = jdbcTemplate.queryForObject(getPhysicalIdentifier, Integer.class);
-//        String deleteArduino= "DELETE FROM arduino WHERE physicalIdentifier="+physicalIdentifier+"; ";
-//        jdbcTemplate.execute(deleteArduino);
-        /*
-        ---> deleting an arduino also deletes the plant related, executing the following code would
-             cause an error
-             // It did, it did cause an error
-             */
+        logger.debug("deleting plant ");
         String saveSql = "DELETE FROM plant WHERE plantid ="+id+"; ";
         jdbcTemplate.execute(saveSql);
-//         */
         plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).toList().get(0));
+
     }
 
     @Override
     public void updateDBArchive() {
+        logger.debug("Archiving plant details");
+
         String pullData = "SELECT * FROM details";
         List<Plant> plantList = jdbcTemplate.query(pullData, new PlantDetailsRowMapper());
         String pullplantID = "SELECT DISTINCT plantID FROM details";
@@ -205,6 +205,8 @@ public class PlantRepositoryImplementation implements PlantRepository {
                 "        DEFAULT CURRENT_TIMESTAMP " +
                 "); ";
         jdbcTemplate.execute(clearTable);
+
+        logger.debug("archive successful");
     }
 }
 

@@ -5,6 +5,8 @@ import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.ClientService;
 import be.kdg.integration.plantifybackend.service.PlantService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.relational.core.sql.In;
@@ -18,6 +20,7 @@ public class ClientController {
     PlantService plantService;
     ClientService clientService;
     ArduinoService arduinoService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public ClientController(PlantService plantService, ClientService clientService, ArduinoService arduinoService) {
@@ -37,7 +40,7 @@ public class ClientController {
 
         String email="fake@email.com";
         String pass ="12345";
-
+        logger.debug("delete client request received");
         // TO del arduino, we need its phys id
         // TO del plant, we need its id
         List<Plant> clientPlants = plantService.readPlants().stream()

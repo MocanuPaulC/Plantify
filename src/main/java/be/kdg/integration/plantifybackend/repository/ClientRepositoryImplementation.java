@@ -1,6 +1,8 @@
 package be.kdg.integration.plantifybackend.repository;
 
 import be.kdg.integration.plantifybackend.domain.Client;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -11,17 +13,18 @@ public class ClientRepositoryImplementation implements ClientRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public ClientRepositoryImplementation() {
-    //    jdbcTemplate= new JdbcTemplate(springJdbcConfig.mysqlDataSource());
     }
 
     @Override
     public Client saveClient(Client client) {
-        System.out.println("gets here");
+        logger.debug("saving client to database");
         String insertUser=String.format("INSERT INTO client (email, password) " +
                 "VALUES ('%s', '%s')", client.getEmail(), client.getPassword());
         jdbcTemplate.execute(insertUser);
+
         return client;
     }
 
@@ -34,20 +37,9 @@ public class ClientRepositoryImplementation implements ClientRepository {
 
     @Override
     public void deleteClient(Client client){
-        String getphysicalIdentifiers="SELECT arduinophysicalidentifier FROM plant " +
-                "WHERE useremail='"+ client.getEmail()+"'; ";
-//        SqlRowSet rowSet= jdbcTemplate.queryForRowSet(getphysicalIdentifiers);
-        // This shouldn't be here
-        // This should only delete the client. The deletion of all the arduinos will be made in the arduino class
-
-//        while(rowSet.next()){
-//            // this deletes the arduinos of every plant user has, loops over results of the rowset
-//            // this might not work, needs to be tested
-//            String deleteArduino= "DELETE FROM arduino WHERE physicalIdentifier="+rowSet.getInt(1)+"; ";
-//            jdbcTemplate.execute(deleteArduino);
-//        }
+        logger.debug("deleting client");
         String deleteUserSql="DELETE FROM client WHERE email='"+ client.getEmail()+"'; ";
         jdbcTemplate.execute(deleteUserSql);
-        //!!!!!!!!! does not remove plant from plantrepositoryimplementation.plantlist
+        logger.debug("deletion successful");
     }
 }

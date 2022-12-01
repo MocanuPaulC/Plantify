@@ -5,6 +5,8 @@ import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ public class PlantListController {
     PlantService plantService;
     Gson gson = new Gson();
     ArduinoService arduinoService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     @Autowired

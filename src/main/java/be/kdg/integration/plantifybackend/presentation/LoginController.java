@@ -55,6 +55,7 @@ public class LoginController {
     @PostMapping
     public String checkUser(HttpSession httpSession, @Valid @ModelAttribute("loginViewModel") LoginViewModel
             loginViewModel, BindingResult errors){
+        logger.debug("Checking user");
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(error -> {
                 logger.error(error.toString());

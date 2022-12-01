@@ -79,6 +79,7 @@ public class PlantController {
     @PostMapping(value = "/plants/adddetails", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public String demo(HttpServletRequest httpServletRequest,Model model) {
         ServletInputStream inputStream;
+        logger.debug("post request received");
 
         try {
             inputStream = httpServletRequest.getInputStream();
@@ -96,20 +97,14 @@ public class PlantController {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
             plantService.saveReadingsToDB(details, physicalId );// dont know how to retrieve plantId from this, dummy data
             this.plantService.updatePlantData(details, physicalId);
+            logger.debug("post request saved");
         }
 
         model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId));
 
-
-//        System.out.println(physicalId);
-//        System.out.println(json);
-        this.plantService.readPlants().forEach(System.out::println);
         return "addetails";
     }
 
-//    [[{"humidity":53,"temperature":24.4,"brightness":14.37147,"moisture":1}]]
-
-    //-----add plant controller
 
     /**
      * shows the addPlant.html page
@@ -125,7 +120,6 @@ public class PlantController {
         model.addAttribute("plantTypes", plantTypes);
         model.addAttribute("add", "chill");
         model.addAttribute("plantViewModel", new PlantViewModel());
-
         return "addplant";
     }
 
@@ -151,6 +145,7 @@ public class PlantController {
             return "addPlant";
         }
 
+        logger.debug("add plant request received");
         Client client = (Client) httpSession.getAttribute("user");
         Arduino arduino = this.arduinoService.addArduino(plantViewModel.getArduinoSeries(), plantViewModel.getPhysicalAddress());
 //        this.arduinoService.addArduino(arduinoSeries,Integer.parseInt(psysicalAddress));
@@ -178,7 +173,8 @@ public class PlantController {
      */
     @PostMapping("removePlant")
     public String removePlant(Integer plantId) {
-//        Arduino arduino = this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
+
+        logger.debug("Remove plant request received");
         this.arduinoService.removeArduino(plantService.readPlants().stream()
                 .filter(plant -> plant.getId()==plantId).toList().get(0).getArduino().getPhysicalIdentifier());
         this.plantService.removePlant(plantId);

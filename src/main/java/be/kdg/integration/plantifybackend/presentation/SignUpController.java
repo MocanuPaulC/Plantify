@@ -60,6 +60,7 @@ public class SignUpController {
             });
             return "createUser";
         }
+        logger.debug("Creating new user");
         Client client = clientService.addClient(signUpViewModel.getEmail(), signUpViewModel.getPassword());
         httpSession.setAttribute("user", client);
         return "redirect:/dashboard";
