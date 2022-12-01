@@ -15,8 +15,8 @@
         <img src="/img/logo.png" alt="logo">
     </a>
     <div class="links">
-            <a th:href="@{/plantList}" th:if="${loggedInOrNot == true}"
-        th:class="${index==1}?'nav-item nav-link active':'nav-item nav-link'" >Plant List</a>
+        <a th:href="@{/plantList}" th:if="${loggedInOrNot == true}"
+        th:class="${index==1}?'nav-item nav-link active':'nav-item nav-link'">Plant List</a>
         <a  th:if="${loggedInOrNot == true}" th:href="@{/dashboard}"
            th:class="${index==2}?'nav-item nav-link active':'nav-item nav-link'">Dashboard</a>
         <a th:href="@{/aboutPlantify}"
