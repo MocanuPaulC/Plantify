@@ -1,8 +1,8 @@
 package be.kdg.integration.plantifybackend.presentation;
 
-import be.kdg.integration.plantifybackend.domain.User;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.presentation.viewModel.SignUpViewModel;
-import be.kdg.integration.plantifybackend.service.UserService;
+import be.kdg.integration.plantifybackend.service.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/createUser")
 public class SignUpController {
-    UserService userService;
+    ClientService clientService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public SignUpController(UserService userService) {
-        this.userService = userService;
+    public SignUpController(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     /**
@@ -60,8 +60,8 @@ public class SignUpController {
             });
             return "createUser";
         }
-        User user=userService.addUser(signUpViewModel.getEmail(), signUpViewModel.getPassword());
-        httpSession.setAttribute("user", user);
+        Client client = clientService.addClient(signUpViewModel.getEmail(), signUpViewModel.getPassword());
+        httpSession.setAttribute("user", client);
         return "redirect:/dashboard";
     }
 }

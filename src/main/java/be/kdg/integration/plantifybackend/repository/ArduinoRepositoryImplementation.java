@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Repository
@@ -21,7 +22,7 @@ public class ArduinoRepositoryImplementation implements ArduinoRepository{
     }
 
     @Override
-    public void getArduinoList(List<Plant> plantList) {
+    public void setArduinoList(List<Plant> plantList) {
         for (Plant plant : plantList) {
             arduinoList.add(plant.getArduino());
         }
@@ -61,6 +62,10 @@ public class ArduinoRepositoryImplementation implements ArduinoRepository{
     @Override
     public void deleteArduino(int physicalId){
         String deleteArduino= "DELETE FROM arduino WHERE physicalIdentifier="+physicalId+"; ";
+
+//        System.out.println(deleteArduino);
+        arduinoList.remove(arduinoList.stream()
+                .filter(arduino -> arduino.getPhysicalIdentifier() == physicalId).toList().get(0));
         jdbcTemplate.execute(deleteArduino);
         // !!!!!!!!!!!!!! doesnt delete plant from plantrepositoryimplementation.plantlist
     }

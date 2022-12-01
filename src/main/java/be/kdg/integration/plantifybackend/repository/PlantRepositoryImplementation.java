@@ -36,7 +36,7 @@ public class PlantRepositoryImplementation implements PlantRepository {
         //harro, I'm smol Asian man
         String getPlants = "SELECT plantid,useremail, plantname,planttype, arduinophysicalidentifier, series " +
                 "FROM plant " +
-                "JOIN arduino a on a.physicalidentifier = currentplants.arduinophysicalidentifier";
+                "JOIN arduino a on a.physicalidentifier = plant.arduinophysicalidentifier";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
         String getDetails = """
                 SELECT p.plantid, p.temperature,p.humidity,p.moisture,p.light,p.refreshtime
@@ -90,17 +90,19 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public void deletePlant(int id){
-        String getPhysicalIdentifier = "SELECT arduinophysicalIdentifier FROM plant WHERE plantid="+id+"; ";
-        int physicalIdentifier = jdbcTemplate.queryForObject(getPhysicalIdentifier, Integer.class);
-        String deleteArduino= "DELETE FROM arduino WHERE physicalIdentifier="+physicalIdentifier+"; ";
-        jdbcTemplate.execute(deleteArduino);
+//        String getPhysicalIdentifier = "SELECT arduinophysicalIdentifier FROM plant WHERE plantid="+id+"; ";
+//        int physicalIdentifier = jdbcTemplate.queryForObject(getPhysicalIdentifier, Integer.class);
+//        String deleteArduino= "DELETE FROM arduino WHERE physicalIdentifier="+physicalIdentifier+"; ";
+//        jdbcTemplate.execute(deleteArduino);
         /*
         ---> deleting an arduino also deletes the plant related, executing the following code would
              cause an error
-        String saveSql = "DELETE FROM plant WHERE ID ="+id+"; ";
+             // It did, it did cause an error
+             */
+        String saveSql = "DELETE FROM plant WHERE plantid ="+id+"; ";
         jdbcTemplate.execute(saveSql);
-         */
-        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).findFirst());
+//         */
+        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).toList().get(0));
     }
 
     @Override

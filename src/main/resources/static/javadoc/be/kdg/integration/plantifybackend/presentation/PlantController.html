@@ -139,7 +139,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showPlantsView(javax.servlet.http.HttpSession,org.springframework.ui.Model)" class="member-name-link">showPlantsView</a><wbr>(javax.servlet.http.HttpSession&nbsp;httpSession,
  org.springframework.ui.Model&nbsp;model)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">returns dashboard if user is logged in</div>
+<div class="block">returns dashboard if client is logged in</div>
 </div>
 </div>
 </div>
@@ -206,10 +206,10 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@GetMapping("/plants")
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">showPlantsView</span><wbr><span class="parameters">(javax.servlet.http.HttpSession&nbsp;httpSession,
  org.springframework.ui.Model&nbsp;model)</span></div>
-<div class="block">returns dashboard if user is logged in</div>
+<div class="block">returns dashboard if client is logged in</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>httpSession</code> - used to retrieve the user</dd>
+<dd><code>httpSession</code> - used to retrieve the client</dd>
 <dd><code>model</code> - used to parse on loggedInOrNot and plants</dd>
 <dt>Returns:</dt>
 <dd>dashbaord.html and login.html</dd>

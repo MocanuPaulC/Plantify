@@ -7,9 +7,7 @@ import be.kdg.integration.plantifybackend.repository.ArduinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.awt.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * service class for handling arduino information
@@ -22,6 +20,11 @@ public class ArduinoServiceImplementation implements ArduinoService{
     @Autowired
     public ArduinoServiceImplementation(ArduinoRepository arduinoRepository) {
         this.arduinoRepository=arduinoRepository;
+    }
+
+    @Override
+    public List<Arduino> getArduinoList() {
+        return arduinoRepository.arduinoList();
     }
 
     @Override
@@ -41,8 +44,8 @@ public class ArduinoServiceImplementation implements ArduinoService{
     }
 
     @Override
-    public void getArduinoList(List<Plant> plantList) {
-        this.arduinoRepository.getArduinoList(plantList);
+    public void setArduinoList(List<Plant> plantList) {
+        this.arduinoRepository.setArduinoList(plantList);
 
     }
 

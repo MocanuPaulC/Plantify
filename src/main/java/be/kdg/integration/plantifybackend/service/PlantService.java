@@ -3,7 +3,6 @@ package be.kdg.integration.plantifybackend.service;
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
-import be.kdg.integration.plantifybackend.domain.User;
 
 import java.util.List;
 

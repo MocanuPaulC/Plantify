@@ -72,7 +72,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class UserServiceImplementation" class="title">Class UserServiceImplementation</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">be.kdg.integration.plantifybackend.service.UserServiceImplementation</div>
+<div class="inheritance">be.kdg.integration.plantifybackend.service.ClientServiceImplementation</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -84,7 +84,7 @@ loadScripts(document, 'script');</script>
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">UserServiceImplementation</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></span></div>
-<div class="block">service class for handling user data</div>
+<div class="block">service class for handling client data</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,7 +98,7 @@ implements <a href="UserService.html" title="interface in be.kdg.integration.pla
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>private <a href="../repository/UserRepository.html" title="interface in be.kdg.integration.plantifybackend.repository">UserRepository</a></code></div>
-<div class="col-second even-row-color"><code><a href="#userRepository" class="member-name-link">userRepository</a></code></div>
+<div class="col-second even-row-color"><code><a href="#clientRepository" class="member-name-link">clientRepository</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -111,7 +111,7 @@ implements <a href="UserService.html" title="interface in be.kdg.integration.pla
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(be.kdg.integration.plantifybackend.repository.UserRepository)" class="member-name-link">UserServiceImplementation</a><wbr>(<a href="../repository/UserRepository.html" title="interface in be.kdg.integration.plantifybackend.repository">UserRepository</a>&nbsp;userRepository)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(be.kdg.integration.plantifybackend.repository.UserRepository)" class="member-name-link">UserServiceImplementation</a><wbr>(<a href="../repository/UserRepository.html" title="interface in be.kdg.integration.plantifybackend.repository">UserRepository</a>&nbsp;clientRepository)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -131,12 +131,12 @@ implements <a href="UserService.html" title="interface in be.kdg.integration.pla
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addUser(java.lang.String,java.lang.String)" class="member-name-link">addUser</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;email,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;password)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">adds a user to the database, used on signups</div>
+<div class="block">adds a client to the database, used on signups</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkUser(be.kdg.integration.plantifybackend.domain.User)" class="member-name-link">checkUser</a><wbr>(<a href="../domain/User.html" title="class in be.kdg.integration.plantifybackend.domain">User</a>&nbsp;user)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkUser(be.kdg.integration.plantifybackend.domain.User)" class="member-name-link">checkUser</a><wbr>(<a href="../domain/User.html" title="class in be.kdg.integration.plantifybackend.domain">User</a>&nbsp;client)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">checks if a user exists</div>
+<div class="block">checks if a client exists</div>
 </div>
 </div>
 </div>
@@ -156,9 +156,9 @@ implements <a href="UserService.html" title="interface in be.kdg.integration.pla
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="userRepository">
-<h3>userRepository</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../repository/UserRepository.html" title="interface in be.kdg.integration.plantifybackend.repository">UserRepository</a></span>&nbsp;<span class="element-name">userRepository</span></div>
+<section class="detail" id="clientRepository">
+<h3>clientRepository</h3>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../repository/UserRepository.html" title="interface in be.kdg.integration.plantifybackend.repository">UserRepository</a></span>&nbsp;<span class="element-name">clientRepository</span></div>
 </section>
 </li>
 </ul>
@@ -173,7 +173,7 @@ implements <a href="UserService.html" title="interface in be.kdg.integration.pla
 <section class="detail" id="&lt;init&gt;(be.kdg.integration.plantifybackend.repository.UserRepository)">
 <h3>UserServiceImplementation</h3>
 <div class="member-signature"><span class="annotations">@Autowired
-</span><span class="modifiers">public</span>&nbsp;<span class="element-name">UserServiceImplementation</span><wbr><span class="parameters">(<a href="../repository/UserRepository.html" title="interface in be.kdg.integration.plantifybackend.repository">UserRepository</a>&nbsp;userRepository)</span></div>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name">UserServiceImplementation</span><wbr><span class="parameters">(<a href="../repository/UserRepository.html" title="interface in be.kdg.integration.plantifybackend.repository">UserRepository</a>&nbsp;clientRepository)</span></div>
 </section>
 </li>
 </ul>
@@ -189,13 +189,13 @@ implements <a href="UserService.html" title="interface in be.kdg.integration.pla
 <h3>addUser</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../domain/User.html" title="class in be.kdg.integration.plantifybackend.domain">User</a></span>&nbsp;<span class="element-name">addUser</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;email,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;password)</span></div>
-<div class="block">adds a user to the database, used on signups</div>
+<div class="block">adds a client to the database, used on signups</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="UserService.html#addUser(java.lang.String,java.lang.String)">addUser</a></code>&nbsp;in interface&nbsp;<code><a href="UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>email</code> - email of the user</dd>
-<dd><code>password</code> - password of the user</dd>
+<dd><code>email</code> - email of the client</dd>
+<dd><code>password</code> - password of the client</dd>
 <dt>Returns:</dt>
 <dd>function from the repository</dd>
 </dl>
@@ -204,15 +204,15 @@ implements <a href="UserService.html" title="interface in be.kdg.integration.pla
 <li>
 <section class="detail" id="checkUser(be.kdg.integration.plantifybackend.domain.User)">
 <h3>checkUser</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">checkUser</span><wbr><span class="parameters">(<a href="../domain/User.html" title="class in be.kdg.integration.plantifybackend.domain">User</a>&nbsp;user)</span></div>
-<div class="block">checks if a user exists</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">checkUser</span><wbr><span class="parameters">(<a href="../domain/User.html" title="class in be.kdg.integration.plantifybackend.domain">User</a>&nbsp;client)</span></div>
+<div class="block">checks if a client exists</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="UserService.html#checkUser(be.kdg.integration.plantifybackend.domain.User)">checkUser</a></code>&nbsp;in interface&nbsp;<code><a href="UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>user</code> - user that needs to be checked</dd>
+<dd><code>client</code> - client that needs to be checked</dd>
 <dt>Returns:</dt>
-<dd>boolean if password of the user is correct</dd>
+<dd>boolean if password of the client is correct</dd>
 </dl>
 </section>
 </li>

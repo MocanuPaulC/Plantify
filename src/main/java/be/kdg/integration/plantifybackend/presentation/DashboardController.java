@@ -1,6 +1,6 @@
 package be.kdg.integration.plantifybackend.presentation;
 
-import be.kdg.integration.plantifybackend.domain.User;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
@@ -34,9 +34,9 @@ public class DashboardController {
      */
     @GetMapping("/dashboard")
     public String showIndexView(HttpSession httpSession, Model model) {
-        User user = (User) httpSession.getAttribute("user");
-        if (user != null) {
-            String email= ((User)httpSession.getAttribute("user")).getEmail();
+        Client client = (Client) httpSession.getAttribute("user");
+        if (client != null) {
+            String email= ((Client)httpSession.getAttribute("user")).getEmail();
             model.addAttribute("loggedInOrNot",true);
             model.addAttribute("plants", plantService.readPlants().stream()
                     .filter(plant -> plant.getEmailUser()

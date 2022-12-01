@@ -97,7 +97,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color"><code><a href="#logger" class="member-name-link">logger</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>(package private) <a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#userService" class="member-name-link">userService</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#clientService" class="member-name-link">clientService</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
@@ -110,7 +110,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(be.kdg.integration.plantifybackend.service.UserService)" class="member-name-link">LoginController</a><wbr>(<a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a>&nbsp;userService)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(be.kdg.integration.plantifybackend.service.UserService)" class="member-name-link">LoginController</a><wbr>(<a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a>&nbsp;clientService)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -137,7 +137,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showUserView(javax.servlet.http.HttpSession,org.springframework.ui.Model)" class="member-name-link">showUserView</a><wbr>(javax.servlet.http.HttpSession&nbsp;httpSession,
  org.springframework.ui.Model&nbsp;model)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">user is not used right now, future implementation</div>
+<div class="block">client is not used right now, future implementation</div>
 </div>
 </div>
 </div>
@@ -157,9 +157,9 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="userService">
-<h3>userService</h3>
-<div class="member-signature"><span class="return-type"><a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></span>&nbsp;<span class="element-name">userService</span></div>
+<section class="detail" id="clientService">
+<h3>clientService</h3>
+<div class="member-signature"><span class="return-type"><a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></span>&nbsp;<span class="element-name">clientService</span></div>
 </section>
 </li>
 <li>
@@ -180,7 +180,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(be.kdg.integration.plantifybackend.service.UserService)">
 <h3>LoginController</h3>
 <div class="member-signature"><span class="annotations">@Autowired
-</span><span class="modifiers">public</span>&nbsp;<span class="element-name">LoginController</span><wbr><span class="parameters">(<a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a>&nbsp;userService)</span></div>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name">LoginController</span><wbr><span class="parameters">(<a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a>&nbsp;clientService)</span></div>
 </section>
 </li>
 </ul>
@@ -197,7 +197,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@GetMapping
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">showUserView</span><wbr><span class="parameters">(javax.servlet.http.HttpSession&nbsp;httpSession,
  org.springframework.ui.Model&nbsp;model)</span></div>
-<div class="block">user is not used right now, future implementation</div>
+<div class="block">client is not used right now, future implementation</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>httpSession</code> - redundant</dd>
@@ -218,11 +218,11 @@ loadScripts(document, 'script');</script>
 <div class="block">handles the login form</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>httpSession</code> - used to pass on the logged-in user</dd>
+<dd><code>httpSession</code> - used to pass on the logged-in client</dd>
 <dd><code>loginViewModel</code> - used to check the validity of the form data</dd>
 <dd><code>errors</code> - used to return login.html with errors if anything is invalidated in the viewmodel</dd>
 <dt>Returns:</dt>
-<dd>depends on errors and if the user exists</dd>
+<dd>depends on errors and if the client exists</dd>
 </dl>
 </section>
 </li>

@@ -133,7 +133,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showIndexView(javax.servlet.http.HttpSession,org.springframework.ui.Model)" class="member-name-link">showIndexView</a><wbr>(javax.servlet.http.HttpSession&nbsp;httpSession,
  org.springframework.ui.Model&nbsp;model)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">checks if the user is logged in. if this is true, the user's plant are shown</div>
+<div class="block">checks if the client is logged in. if this is true, the client's plant are shown</div>
 </div>
 </div>
 </div>
@@ -200,13 +200,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@GetMapping("/dashboard")
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">showIndexView</span><wbr><span class="parameters">(javax.servlet.http.HttpSession&nbsp;httpSession,
  org.springframework.ui.Model&nbsp;model)</span></div>
-<div class="block">checks if the user is logged in. if this is true, the user's plant are shown</div>
+<div class="block">checks if the client is logged in. if this is true, the client's plant are shown</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>httpSession</code> - used to get the user attribute</dd>
-<dd><code>model</code> - used to add the plants and set loggedInOrNot to true if user is logged in</dd>
+<dd><code>httpSession</code> - used to get the client attribute</dd>
+<dd><code>model</code> - used to add the plants and set loggedInOrNot to true if client is logged in</dd>
 <dt>Returns:</dt>
-<dd>returns dashboard.html if user is logged in, otherwise error.html is returned</dd>
+<dd>returns dashboard.html if client is logged in, otherwise error.html is returned</dd>
 </dl>
 </section>
 </li>

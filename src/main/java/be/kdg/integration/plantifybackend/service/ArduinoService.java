@@ -14,7 +14,9 @@ public interface ArduinoService {
 
     void setLedSetting(int physicalId, boolean base);
     void changeColor(int physicalId, RGBColor color);
-    void getArduinoList(List<Plant> plantList);
+    void setArduinoList(List<Plant> plantList);
+
+    List<Arduino> getArduinoList();
 
     String postMapping(int PhysicalId);
 

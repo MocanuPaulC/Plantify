@@ -1,9 +1,9 @@
 package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
-import be.kdg.integration.plantifybackend.domain.User;
 import be.kdg.integration.plantifybackend.presentation.viewModel.PlantViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
@@ -53,20 +53,14 @@ public class PlantController {
      */
     @GetMapping("/plants")
     public String showPlantsView(HttpSession httpSession, Model model) {
-        System.out.println("in show plants view");
 
-        User user = (User) httpSession.getAttribute("user");
-        if (user != null) {
-            String email= ((User)httpSession.getAttribute("user")).getEmail();
+        Client client = (Client) httpSession.getAttribute("user");
+        if (client != null) {
+            String email= ((Client)httpSession.getAttribute("user")).getEmail();
             model.addAttribute("loggedInOrNot",true);
-//            System.out.println(email);
-//            System.out.println(plantService.readPlants().stream()
-//                    .filter(plant -> plant.getEmailUser()
-//                            .equals(email)).toList());
             model.addAttribute("plants", plantService.readPlants().stream()
                     .filter(plant -> plant.getEmailUser()
                             .equals(email)).toList());
-//            System.out.println("logged in");
             return "dashboard";
         }else {
             System.out.println("not logged in");
@@ -157,10 +151,10 @@ public class PlantController {
             return "addPlant";
         }
 
-        User user = (User) httpSession.getAttribute("user");
+        Client client = (Client) httpSession.getAttribute("user");
         Arduino arduino = this.arduinoService.addArduino(plantViewModel.getArduinoSeries(), plantViewModel.getPhysicalAddress());
 //        this.arduinoService.addArduino(arduinoSeries,Integer.parseInt(psysicalAddress));
-        this.plantService.addPlant(plantViewModel.getName(), plantViewModel.getType(), arduino,user.getEmail());
+        this.plantService.addPlant(plantViewModel.getName(), plantViewModel.getType(), arduino, client.getEmail());
         return "redirect:/plants";
     }
 
@@ -185,6 +179,8 @@ public class PlantController {
     @PostMapping("removePlant")
     public String removePlant(Integer plantId) {
 //        Arduino arduino = this.arduinoService.addArduino(arduinoSeries, Integer.parseInt(physicalId));
+        this.arduinoService.removeArduino(plantService.readPlants().stream()
+                .filter(plant -> plant.getId()==plantId).toList().get(0).getArduino().getPhysicalIdentifier());
         this.plantService.removePlant(plantId);
         return "redirect:/plants";
     }

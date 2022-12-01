@@ -1,8 +1,7 @@
 package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
-import be.kdg.integration.plantifybackend.domain.User;
-import be.kdg.integration.plantifybackend.presentation.viewModel.PlantspecificViewModel;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
@@ -10,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 /**
  * Controller for plantlist.html
@@ -42,9 +38,9 @@ public class PlantListController {
      */
     @GetMapping("/plantList")
     public String showIndexView(HttpSession httpSession, Model model) {
-        User user = (User) httpSession.getAttribute("user");
-        if (user != null) {
-            String email= ((User)httpSession.getAttribute("user")).getEmail();
+        Client client = (Client) httpSession.getAttribute("user");
+        if (client != null) {
+            String email= ((Client)httpSession.getAttribute("user")).getEmail();
             model.addAttribute("loggedInOrNot",true);
 //            System.out.println(email);
 //            System.out.println(plantService.readPlants().stream()
@@ -79,8 +75,8 @@ public class PlantListController {
                 break;
             }
         }
-        User user = (User) httpSession.getAttribute("user");
-        if (user != null) {
+        Client client = (Client) httpSession.getAttribute("user");
+        if (client != null) {
             //--------------------------------------------------------------------------
             model.addAttribute("specPlant", plant);
             model.addAttribute("loggedInOrNot", true);

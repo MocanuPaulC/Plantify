@@ -1,8 +1,8 @@
 package be.kdg.integration.plantifybackend.presentation;
 
-import  be.kdg.integration.plantifybackend.domain.User;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.presentation.viewModel.LoginViewModel;
-import be.kdg.integration.plantifybackend.service.UserService;
+import be.kdg.integration.plantifybackend.service.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-    UserService userService;
+    ClientService clientService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    public LoginController(UserService userService) {
-        this.userService = userService;
+    public LoginController(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     /**
@@ -39,7 +39,7 @@ public class LoginController {
      */
     @GetMapping
     public String showUserView(HttpSession httpSession,Model model){
-        User user = (User) httpSession.getAttribute("user");
+        Client client = (Client) httpSession.getAttribute("user");
         model.addAttribute("loggedInOrNot",false);
         model.addAttribute("loginViewModel", new LoginViewModel());
         return "login";
@@ -62,9 +62,9 @@ public class LoginController {
             return "login";
         }
 
-        User userToCheck = new User(loginViewModel.getEmail(), loginViewModel.getPassword());
-        if(userService.checkUser(userToCheck)){
-            httpSession.setAttribute("user", userToCheck);
+        Client clientToCheck = new Client(loginViewModel.getEmail(), loginViewModel.getPassword());
+        if(clientService.checkClient(clientToCheck)){
+            httpSession.setAttribute("user", clientToCheck);
             return "redirect:/dashboard";
         }
         else{

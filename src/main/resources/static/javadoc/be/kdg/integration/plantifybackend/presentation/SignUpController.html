@@ -97,7 +97,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color"><code><a href="#logger" class="member-name-link">logger</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>(package private) <a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#userService" class="member-name-link">userService</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#clientService" class="member-name-link">clientService</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
@@ -110,7 +110,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(be.kdg.integration.plantifybackend.service.UserService)" class="member-name-link">SignUpController</a><wbr>(<a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a>&nbsp;userService)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(be.kdg.integration.plantifybackend.service.UserService)" class="member-name-link">SignUpController</a><wbr>(<a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a>&nbsp;clientService)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -156,9 +156,9 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="userService">
-<h3>userService</h3>
-<div class="member-signature"><span class="return-type"><a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></span>&nbsp;<span class="element-name">userService</span></div>
+<section class="detail" id="clientService">
+<h3>clientService</h3>
+<div class="member-signature"><span class="return-type"><a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a></span>&nbsp;<span class="element-name">clientService</span></div>
 </section>
 </li>
 <li>
@@ -179,7 +179,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(be.kdg.integration.plantifybackend.service.UserService)">
 <h3>SignUpController</h3>
 <div class="member-signature"><span class="annotations">@Autowired
-</span><span class="modifiers">public</span>&nbsp;<span class="element-name">SignUpController</span><wbr><span class="parameters">(<a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a>&nbsp;userService)</span></div>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name">SignUpController</span><wbr><span class="parameters">(<a href="../service/UserService.html" title="interface in be.kdg.integration.plantifybackend.service">UserService</a>&nbsp;clientService)</span></div>
 </section>
 </li>
 </ul>
@@ -215,7 +215,7 @@ loadScripts(document, 'script');</script>
 <div class="block">handles form input</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>httpSession</code> - used to set the current user</dd>
+<dd><code>httpSession</code> - used to set the current client</dd>
 <dd><code>signUpViewModel</code> - used to check the form input for basic errors</dd>
 <dd><code>errors</code> - used to return createuser.html with errors if anything is invalidated in the viewmodel</dd>
 <dt>Returns:</dt>
