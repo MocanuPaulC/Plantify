@@ -39,4 +39,9 @@ public class UserServiceImplementation implements UserService {
         User userChecked = userRepository.searchUser(user.getEmail());
         return user.getPassword().equals(userChecked.getPassword());
     }
+
+    @Override
+    public void removeUser(User user){
+        userRepository.deleteUser(user);
+    }
 }

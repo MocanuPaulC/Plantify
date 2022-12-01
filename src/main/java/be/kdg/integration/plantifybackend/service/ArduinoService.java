@@ -18,4 +18,6 @@ public interface ArduinoService {
 
     String postMapping(int PhysicalId);
 
+    void removeArduino(int physicalIdentifier);
+
 }

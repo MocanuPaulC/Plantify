@@ -58,6 +58,13 @@ public class ArduinoRepositoryImplementation implements ArduinoRepository{
         return arduinoList;
     }
 
+    @Override
+    public void deleteArduino(int physicalId){
+        String deleteArduino= "DELETE FROM arduino WHERE physicalIdentifier="+physicalId+"; ";
+        jdbcTemplate.execute(deleteArduino);
+        // !!!!!!!!!!!!!! doesnt delete plant from plantrepositoryimplementation.plantlist
+    }
+
 
 }
 

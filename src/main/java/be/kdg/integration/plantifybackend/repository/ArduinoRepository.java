@@ -15,7 +15,6 @@ public interface ArduinoRepository {
 
     void setLedSetting(int physicalId, boolean base);
     void changeColor(int physicalId, RGBColor color);
-
-
     void getArduinoList(List<Plant> plantList);
+    void deleteArduino(int physicalId);
 }

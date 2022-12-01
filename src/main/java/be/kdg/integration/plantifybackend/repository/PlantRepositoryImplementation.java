@@ -90,11 +90,17 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
     @Override
     public void deletePlant(int id){
-
-//        String saveSql = "DELETE FROM currentplants WHERE ID ="+id;
-//        jdbcTemplate.execute(saveSql);
-//        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).findFirst());
-//        return plant;
+        String getPhysicalIdentifier = "SELECT arduinophysicalIdentifier FROM plant WHERE plantid="+id+"; ";
+        int physicalIdentifier = jdbcTemplate.queryForObject(getPhysicalIdentifier, Integer.class);
+        String deleteArduino= "DELETE FROM arduino WHERE physicalIdentifier="+physicalIdentifier+"; ";
+        jdbcTemplate.execute(deleteArduino);
+        /*
+        ---> deleting an arduino also deletes the plant related, executing the following code would
+             cause an error
+        String saveSql = "DELETE FROM plant WHERE ID ="+id+"; ";
+        jdbcTemplate.execute(saveSql);
+         */
+        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).findFirst());
     }
 
     @Override

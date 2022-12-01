@@ -34,7 +34,7 @@ CREATE TABLE Plant(
     plantType VARCHAR(30) NOT NULL,
     dateAdded TIMESTAMP NOT NULL
         DEFAULT CURRENT_TIMESTAMP,
-    arduinoPhysicalIdentifier INT
+    arduinoPhysicalIdentifier INT UNIQUE
         CONSTRAINT fk_arduinoPhysicalIdentifier REFERENCES arduino (physicalIdentifier)
             ON DELETE CASCADE
 

@@ -7,4 +7,6 @@ public interface UserRepository {
 
     User searchUser(String email);
 
+    void deleteUser(User user);
+
 }

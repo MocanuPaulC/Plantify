@@ -64,4 +64,9 @@ public class ArduinoServiceImplementation implements ArduinoService{
         return String.format("P%dL%dC%03d,%03d,%03d",arduino.getPumpInstruction(),arduino.getLedSetting() ? 1 : 0
                 ,arduino.getLedColor().getRed(),arduino.getLedColor().getGreen(),arduino.getLedColor().getBlue());
     }
+
+    @Override
+    public void removeArduino(int physicalIdentifier){
+        arduinoRepository.deleteArduino(physicalIdentifier);
+    }
 }

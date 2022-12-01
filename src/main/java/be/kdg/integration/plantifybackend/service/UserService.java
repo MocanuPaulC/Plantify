@@ -7,4 +7,6 @@ public interface UserService {
 
     boolean checkUser(User user);
 
+    void removeUser(User user);
+
 }
