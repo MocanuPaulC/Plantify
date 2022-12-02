@@ -9,6 +9,15 @@ public class RGBColor {
     private short green;
     private short brightness;
 
+    public RGBColor() {
+    }
+
+    public RGBColor(short red, short blue, short green) {
+        this.red = red;
+        this.blue = blue;
+        this.green = green;
+    }
+
     public short getRed() {
         return red;
     }

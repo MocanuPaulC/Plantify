@@ -51,8 +51,10 @@ public class ArduinoServiceImplementation implements ArduinoService{
 
 
     @Override
-    public void changeColor(int arduinoId, RGBColor color) {
-        arduinoRepository.changeColor(arduinoId, color);
+    public void changeColor(int arduinoId, short red, short green, short blue) {
+
+
+        arduinoRepository.changeColor(arduinoId, new RGBColor(red,green,blue));
     }
 
     /**

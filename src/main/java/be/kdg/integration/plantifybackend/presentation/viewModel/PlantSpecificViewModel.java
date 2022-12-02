@@ -2,7 +2,7 @@ package be.kdg.integration.plantifybackend.presentation.viewModel;
 
 import javax.validation.constraints.*;
 
-public class plantSpecificViewModel {
+public class PlantSpecificViewModel {
     private String hexadecimal;
     @Min(0)
     @Max(255)

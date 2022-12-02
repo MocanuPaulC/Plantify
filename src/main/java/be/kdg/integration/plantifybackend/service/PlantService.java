@@ -18,5 +18,7 @@ public interface PlantService {
 
     List<Plant> readPlants();
 
+    Arduino getPlantArduino(int plantId);
+
     void removePlant(int id);
 }
