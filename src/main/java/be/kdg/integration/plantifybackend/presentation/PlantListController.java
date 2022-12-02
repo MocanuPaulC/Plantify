@@ -101,7 +101,7 @@ public class PlantListController {
         model.addAttribute("id", id);
         plantSpecificViewModel.hex2Rgb();
         System.out.println(plantSpecificViewModel.toString());
-        return "specificPlant";
+        return "redirect:/plantList/{id}";
     }
 
 }
