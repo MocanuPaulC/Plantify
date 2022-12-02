@@ -3,7 +3,7 @@ package be.kdg.integration.plantifybackend.presentation.viewModel;
 import javax.validation.constraints.*;
 
 public class plantSpecificViewModel {
-
+    private String hexadecimal;
     @Min(0)
     @Max(255)
     private int red;
@@ -13,19 +13,18 @@ public class plantSpecificViewModel {
     @Min(0)
     @Max(255)
     private int blue;
-    private String hexaDecimal;
     public void hex2Rgb() {
-       setRed(Integer.valueOf(this.hexaDecimal.substring(1, 3), 16));
-       setGreen(Integer.valueOf(this.hexaDecimal.substring(3, 5), 16));
-       setBlue(Integer.valueOf(this.hexaDecimal.substring(5, 7), 16));
+       setRed(Integer.valueOf(this.hexadecimal.substring(1, 3), 16));
+       setGreen(Integer.valueOf(this.hexadecimal.substring(3, 5), 16));
+       setBlue(Integer.valueOf(this.hexadecimal.substring(5, 7), 16));
     }
 
-    public String getHexaDecimal() {
-        return hexaDecimal;
+    public String getHexadecimal() {
+        return hexadecimal;
     }
 
-    public void setHexaDecimal(String hexaDecimal) {
-        this.hexaDecimal = hexaDecimal;
+    public void setHexadecimal(String hexadecimal) {
+        this.hexadecimal = hexadecimal;
     }
 
     public int getRed() {
