@@ -40,4 +40,13 @@ public class RGBColor {
     public void setBrightness(short brightness) {
         this.brightness = brightness;
     }
+
+    @Override
+    public String toString() {
+        return "RGBColor{" +
+                "red=" + red +
+                ", blue=" + blue +
+                ", green=" + green +
+                '}';
+    }
 }

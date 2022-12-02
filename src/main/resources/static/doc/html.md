@@ -220,7 +220,7 @@ plugins](https://github.com/philipwalton/analyticsjs-boilerplate/issues/19#issue
 
 Starting with version 8.0.0 we, by default, [anonymize IP
 addresses](https://support.google.com/analytics/answer/2763052). By
-default Google Analytics records the full IP address of a user visiting the
+default Google Analytics records the full IP address of a client visiting the
 site, but that full IP address is never available to the Google Analytics
 property admin. By anonymizing the IP address you can make your site more
 GDPR-compliant as a full IP address can be defined as PII (personally

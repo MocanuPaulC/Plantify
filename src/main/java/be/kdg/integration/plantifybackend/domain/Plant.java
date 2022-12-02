@@ -1,12 +1,6 @@
 package be.kdg.integration.plantifybackend.domain;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.TypeAdapter;
-import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Type;
 
 /**
  * Plant class with .Details for details of the current state of the plant

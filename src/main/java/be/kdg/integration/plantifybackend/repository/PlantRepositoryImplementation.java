@@ -3,6 +3,8 @@ package be.kdg.integration.plantifybackend.repository;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
 import be.kdg.integration.plantifybackend.domain.gson.PlantRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,12 +13,15 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class PlantRepositoryImplementation implements PlantRepository {
     JdbcTemplate jdbcTemplate;
 
     List<Plant> plantList;
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public PlantRepositoryImplementation(JdbcTemplate jdbcTemplate) {
@@ -33,16 +38,17 @@ public class PlantRepositoryImplementation implements PlantRepository {
     @Override
     public void getPlantsFromDB(){
         //harro, I'm smol Asian man
+        logger.debug("getting plants from database");
         String getPlants = "SELECT plantid,useremail, plantname,planttype, arduinophysicalidentifier, series " +
-                "FROM currentplants " +
-                "JOIN arduino a on a.physicalidentifier = currentplants.arduinophysicalidentifier";
+                "FROM plant " +
+                "JOIN arduino a on a.physicalidentifier = plant.arduinophysicalidentifier";
         plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
         String getDetails = """
                 SELECT p.plantid, p.temperature,p.humidity,p.moisture,p.light,p.refreshtime
-                FROM plantcurrentdata AS p
+                FROM details AS p
                 INNER JOIN (
                   SELECT plantid, MAX(refreshtime) AS date
-                  FROM plantcurrentdata
+                  FROM details
                   GROUP BY plantid
                 ) tm ON p.plantid = tm.plantid AND p.refreshtime = tm.date;""" ;
         List<Plant> tempPlantList = jdbcTemplate.query(getDetails,new PlantDetailsRowMapper());
@@ -53,14 +59,15 @@ public class PlantRepositoryImplementation implements PlantRepository {
                 }
             }
         }
-        System.out.println(plantList);
+        logger.debug(plantList.toString());
     }
 
 
     @Override
     public Plant savePlant(Plant plant, String userEmail) {
+        logger.debug("saving plant to database");
         String saveSql =
-                String.format("INSERT INTO currentplants (plantname,useremail,planttype,arduinophysicalidentifier) " +
+                String.format("INSERT INTO plant (plantname,useremail,planttype,arduinophysicalidentifier) " +
                         "VALUES ('%s','%s','%s',%d)", plant.getName(), userEmail, plant.getTypeOfPlant(),plant.getArduino().getPhysicalIdentifier());
         jdbcTemplate.execute(saveSql);
         plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
@@ -71,49 +78,97 @@ public class PlantRepositoryImplementation implements PlantRepository {
 
 
     public void saveCurrentReadingsToDB(Plant.Details details, int physicalId){
-//        int plantId=plantList.stream().filter(plant -> plant.getArduino().getPhysicalIdentifier()==physicalId).findFirst().get().
-
-        String getPlantId = String.format("Select plantid FROM currentplants WHERE arduinophysicalidentifier = %d",physicalId);
+        logger.debug("saving readings to db");
+        String getPlantId = String.format("Select plantid FROM plant WHERE arduinophysicalidentifier = %d",physicalId);
         int plantId=jdbcTemplate.queryForObject(getPlantId, Integer.class);
-        String sql=String.format("INSERT INTO plantCurrentData (plantid, temperature, humidity,moisture, light, refreshtime)" +
-                "VALUES (%d, %f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),details.getMoisture(),details.getBrightness());
+        String sql=String.format("INSERT INTO details (plantid, temperature, humidity,moisture, light, refreshtime)" +
+                "VALUES (%d, %f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),
+                details.getMoisture(),details.getBrightness());
         jdbcTemplate.execute(sql);
     }
 
     @Override
     public void updatePlantData(Plant.Details details, int physicalId) {
+        logger.debug("getting plant data from database");
         plantList.stream().filter(plant-> plant.getArduino().getPhysicalIdentifier()==physicalId)
                 .forEach(plant -> plant.setDetails(details));
     }
 
     @Override
     public void deletePlant(int id){
+        logger.debug("deleting plant ");
+        String saveSql = "DELETE FROM plant WHERE plantid ="+id+"; ";
+        jdbcTemplate.execute(saveSql);
+        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).toList().get(0));
 
-//        String saveSql = "DELETE FROM currentplants WHERE ID ="+id;
-//        jdbcTemplate.execute(saveSql);
-//        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).findFirst());
-//        return plant;
     }
 
     @Override
     public void updateDBArchive() {
-        String pullData = "SELECT * FROM plantCurrentData";
+        logger.debug("Archiving plant details");
+
+        String pullData = "SELECT * FROM details";
         List<Plant> plantList = jdbcTemplate.query(pullData, new PlantDetailsRowMapper());
-        String pullplantID = "SELECT DISTINCT plantID FROM plantCurrentData";
+        String pullplantID = "SELECT DISTINCT plantID FROM details";
         List<Integer> plantIDList = jdbcTemplate.queryForList(pullplantID, Integer.class);
 
         for (Integer plantID : plantIDList) {
-            int temperatureAvg=0;
-            int humidityAvg=0;
-            int moistureAvg=0;
-            int lightAvg=0;
+            double temperatureAvg=0;
+            double humidityAvg=0;
+            double moistureAvg=0;
+            double lightAvg=0;
             int counter=0;
+            double minimumTemp=0;
+            double maximumTemp=0;
+            double minimumHumidity=0;
+            double maximumHumidity=0;
+            double minimumMoisture=0;
+            double maximumMoisture=0;
+            double minimumLight=0;
+            double maximumLight=0;
             for (Plant plant : plantList ) {
                 if(plant.getId()==plantID){
                     temperatureAvg+=plant.getDetails().getTemperature();
                     humidityAvg+=plant.getDetails().getHumidity();
                     moistureAvg+=plant.getDetails().getMoisture();
                     lightAvg+=plant.getDetails().getBrightness();
+
+                    if(counter==0){
+                        minimumTemp=plant.getDetails().getTemperature();
+                        maximumTemp=plant.getDetails().getTemperature();
+                        minimumHumidity=plant.getDetails().getHumidity();
+                        maximumHumidity=plant.getDetails().getHumidity();
+                        minimumMoisture=plant.getDetails().getMoisture();
+                        maximumMoisture=plant.getDetails().getMoisture();
+                        minimumLight=plant.getDetails().getBrightness();
+                        maximumLight=plant.getDetails().getBrightness();
+                    }
+                    else{
+                        if(minimumTemp>plant.getDetails().getTemperature()){
+                            minimumTemp=plant.getDetails().getTemperature();
+                        }
+                        if(maximumTemp<plant.getDetails().getTemperature()){
+                            maximumTemp=plant.getDetails().getTemperature();
+                        }
+                        if(minimumHumidity>plant.getDetails().getHumidity()){
+                            minimumHumidity=plant.getDetails().getHumidity();
+                        }
+                        if(maximumHumidity<plant.getDetails().getHumidity()){
+                            maximumHumidity=plant.getDetails().getHumidity();
+                        }
+                        if(minimumMoisture>plant.getDetails().getMoisture()){
+                            minimumMoisture=plant.getDetails().getMoisture();
+                        }
+                        if(maximumMoisture<plant.getDetails().getMoisture()){
+                            maximumMoisture=plant.getDetails().getMoisture();
+                        }
+                        if(minimumLight>plant.getDetails().getBrightness()){
+                            minimumLight=plant.getDetails().getBrightness();
+                        }
+                        if(maximumLight<plant.getDetails().getBrightness()){
+                            maximumLight=plant.getDetails().getBrightness();
+                        }
+                    }
                     counter++;
                 }
             }
@@ -123,27 +178,35 @@ public class PlantRepositoryImplementation implements PlantRepository {
             lightAvg=lightAvg/counter;
 
             // in the database INSERT the average gets rounded down
-            String postData=String.format("INSERT INTO plantDataArchive " +
-                    "(plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg) " +
-                    "VALUES(%d, %d, %d, %d, %d)", plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg);
+            String postData=String.format(Locale.US ,"INSERT INTO detailsarchive " +
+                    "(plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg, " +
+                    "minimumTemperature, maximumTemperature, minimumHumidity, maximumHumidity, " +
+                    "minimumMoisture, maximumMoisture, minimumLight, maximumLight, totalRowsArchived) " +
+                    "VALUES(%d, %f, %f, %f, %f, " +
+                    "%f, %f, %f, %f, %f, %f, %f, %f, %d)",
+                    plantID, temperatureAvg, humidityAvg, moistureAvg, lightAvg,
+                    minimumTemp, maximumTemp, minimumHumidity, maximumHumidity, minimumMoisture,
+                    maximumMoisture, minimumLight, maximumLight, counter);
             jdbcTemplate.execute(postData);
         }
-        String clearTable="DROP TABLE IF EXISTS plantCurrentData; " +
-            "CREATE TABLE plantCurrentData( " +
-            "ID INT NOT NULL " +
-            "   GENERATED ALWAYS AS IDENTITY " +
-            "   PRIMARY KEY, " +
-            "plantID INT NOT NULL " +
-            "   CONSTRAINT fk_plantID REFERENCES currentPlants (plantID) " +
-            "       ON DELETE CASCADE, " +
-            "temperature NUMERIC(10) NOT NULL, " +
-            "humidity NUMERIC(10) NOT NULL, " +
-            "moisture NUMERIC(10) NOT NULL, " +
-            "light NUMERIC(10) NOT NULL, " +
-            "refreshTime TIMESTAMP NOT NULL " +
-            "   DEFAULT CURRENT_TIMESTAMP " +
-            "); ";
+        String clearTable="DROP TABLE IF EXISTS details; " +
+                "CREATE TABLE details( " +
+                "    ID INT NOT NULL " +
+                "        GENERATED ALWAYS AS IDENTITY " +
+                "        PRIMARY KEY, " +
+                "    plantID INT NOT NULL " +
+                "        CONSTRAINT fk_plantID REFERENCES plant (plantID) " +
+                "            ON DELETE CASCADE, " +
+                "    temperature NUMERIC(10) NOT NULL, " +
+                "    humidity NUMERIC(10) NOT NULL, " +
+                "    moisture NUMERIC(10) NOT NULL, " +
+                "    light NUMERIC(10) NOT NULL, " +
+                "    refreshTime TIMESTAMP NOT NULL " +
+                "        DEFAULT CURRENT_TIMESTAMP " +
+                "); ";
         jdbcTemplate.execute(clearTable);
+
+        logger.debug("archive successful");
     }
 }
 

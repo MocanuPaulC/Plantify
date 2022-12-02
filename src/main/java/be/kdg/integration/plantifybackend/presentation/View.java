@@ -2,7 +2,6 @@ package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.PlantType;
-import be.kdg.integration.plantifybackend.domain.User;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * redundant testing class
+ */
 @Component
 public class View {
 

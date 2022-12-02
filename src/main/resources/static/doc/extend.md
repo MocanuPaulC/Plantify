@@ -26,8 +26,8 @@ everything fits with everyone's needs.
 Stop bothering everyone with gross modals advertising your entry in the App
 Store. Including the following [meta
 tag](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/PromotingAppswithAppBanners/PromotingAppswithAppBanners.html)
-will unobtrusively give the user the option to download your iOS app, or open it
-with some data about the user's current state on the website.
+will unobtrusively give the client the option to download your iOS app, or open it
+with some data about the client's current state on the website.
 
 ```html
 <meta name="apple-itunes-app" content="app-id=APP_ID,app-argument=SOME_TEXT">
@@ -207,7 +207,7 @@ application.
 
 ### Give your Pinned Site a tooltip
 
-You know — a tooltip. A little textbox that appears when the user holds their
+You know — a tooltip. A little textbox that appears when the client holds their
 mouse over your Pinned Site's icon.
 
 ```html
@@ -229,7 +229,7 @@ track the number of pinned users, like so:
 
 IE will automatically use the overall color of your Pinned Site's favicon to
 shade its browser buttons. UNLESS you give it another color here. Only use named
-colors (`red`) or hex colors (`#ff0000`).
+colors (`red`) or hexaDecimal colors (`#ff0000`).
 
 ```html
 <meta name="msapplication-navbutton-color" content="#ff0000">
@@ -271,7 +271,7 @@ blog](https://docs.microsoft.com/en-us/archive/blogs/ie/high-quality-visuals-for
 ### (Windows 8) Badges for Pinned Sites
 
 IE will poll an XML document for badge information to display on your app's tile
-in the Start screen. The user will be able to receive these badge updates even
+in the Start screen. The client will be able to receive these badge updates even
 when your app isn't actively running. The badge's value can be a number, or one
 of a predefined list of glyphs.
 
@@ -529,7 +529,7 @@ on Apple's site.
 
 ### Apple Touch Icons
 
-Apple touch icons are used as icons when a user adds your webapp to the home
+Apple touch icons are used as icons when a client adds your webapp to the home
 screen of an iOS devices.
 
 Though the dimensions of the icon can vary between iOS devices and versions one
