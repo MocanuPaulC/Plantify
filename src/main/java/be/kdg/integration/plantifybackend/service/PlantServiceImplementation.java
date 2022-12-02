@@ -55,6 +55,11 @@ public class PlantServiceImplementation implements PlantService{
         plantRepository.saveCurrentReadingsToDB(details, plantId);
     }
 
+    @Override
+    public Arduino getPlantArduino(int plantId) {
+        return plantRepository.getArduino(plantId);
+    }
+
     /**
      * calls function from the repository to update the archive
      */

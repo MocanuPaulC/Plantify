@@ -2,7 +2,7 @@ package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.Client;
-import be.kdg.integration.plantifybackend.presentation.viewModel.plantSpecificViewModel;
+import be.kdg.integration.plantifybackend.presentation.viewModel.PlantSpecificViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
@@ -73,7 +73,7 @@ public class PlantListController {
     @GetMapping("plantList/{id}")
     public String showPlantSpecific(@PathVariable String id, HttpSession httpSession, Model model) {
         model.addAttribute("loggedInOrNot", true);
-        model.addAttribute("plantSpecificViewModel",new plantSpecificViewModel());
+        model.addAttribute("plantSpecificViewModel",new PlantSpecificViewModel());
         Plant plant = new Plant();
         //------------DONT DELETE THIS -- IF DELETED THE PAGE WILL NOT RECEIVE CORRECT DATA---------
         for (Plant readplant :
@@ -97,10 +97,17 @@ public class PlantListController {
 
     @PostMapping("plantList/{id}")
     public String processColorForm(@PathVariable String id, @Valid @ModelAttribute("plantSpecificViewModel")
-    plantSpecificViewModel plantSpecificViewModel, Model model) {
+    PlantSpecificViewModel plantSpecificViewModel, Model model) {
         model.addAttribute("id", id);
         plantSpecificViewModel.hex2Rgb();
-        System.out.println(plantSpecificViewModel.toString());
+
+        logger.debug(plantSpecificViewModel.getHexadecimal());
+
+        arduinoService.setLedSetting(plantService.getPlantArduino(Integer.parseInt(id)).getPhysicalIdentifier(),true);
+        arduinoService.changeColor(plantService.getPlantArduino(Integer.parseInt(id)).getPhysicalIdentifier(),
+                (short) plantSpecificViewModel.getRed(),
+                (short) plantSpecificViewModel.getGreen(),
+                (short) plantSpecificViewModel.getBlue());
         return "redirect:/plantList/{id}";
     }
 

@@ -1,5 +1,6 @@
 package be.kdg.integration.plantifybackend.repository;
 
+import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public interface PlantRepository {
     void updateDBArchive();
 
     List<Plant> getPlants();
+
+    Arduino getArduino(int plantId);
 
     void updatePlantData(Plant.Details details,int physicalId);
 

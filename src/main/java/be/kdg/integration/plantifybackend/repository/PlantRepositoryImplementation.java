@@ -1,5 +1,6 @@
 package be.kdg.integration.plantifybackend.repository;
 
+import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
 import be.kdg.integration.plantifybackend.domain.gson.PlantRowMapper;
@@ -92,6 +93,11 @@ public class PlantRepositoryImplementation implements PlantRepository {
         logger.debug("getting plant data from database");
         plantList.stream().filter(plant-> plant.getArduino().getPhysicalIdentifier()==physicalId)
                 .forEach(plant -> plant.setDetails(details));
+    }
+
+    @Override
+    public Arduino getArduino(int plantId) {
+        return plantList.stream().filter(plant -> plant.getId()==plantId).toList().get(0).getArduino();
     }
 
     @Override
