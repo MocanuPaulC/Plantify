@@ -229,7 +229,7 @@ track the number of pinned users, like so:
 
 IE will automatically use the overall color of your Pinned Site's favicon to
 shade its browser buttons. UNLESS you give it another color here. Only use named
-colors (`red`) or hex colors (`#ff0000`).
+colors (`red`) or hexaDecimal colors (`#ff0000`).
 
 ```html
 <meta name="msapplication-navbutton-color" content="#ff0000">

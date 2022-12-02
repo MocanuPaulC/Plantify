@@ -1,9 +1,8 @@
 package be.kdg.integration.plantifybackend.presentation.viewModel;
 
 import javax.validation.constraints.*;
-import java.awt.Color;
 
-public class PlantspecificViewModel {
+public class plantSpecificViewModel {
 
     @Min(0)
     @Max(255)
@@ -14,19 +13,19 @@ public class PlantspecificViewModel {
     @Min(0)
     @Max(255)
     private int blue;
-    private String hex;
+    private String hexaDecimal;
     public void hex2Rgb() {
-       setRed(Integer.valueOf(this.hex.substring(1, 3), 16));
-       setGreen(Integer.valueOf(this.hex.substring(3, 5), 16));
-       setBlue(Integer.valueOf(this.hex.substring(5, 7), 16));
+       setRed(Integer.valueOf(this.hexaDecimal.substring(1, 3), 16));
+       setGreen(Integer.valueOf(this.hexaDecimal.substring(3, 5), 16));
+       setBlue(Integer.valueOf(this.hexaDecimal.substring(5, 7), 16));
     }
 
-    public String getHex() {
-        return hex;
+    public String getHexaDecimal() {
+        return hexaDecimal;
     }
 
-    public void setHex(String hex) {
-        this.hex = hex;
+    public void setHexaDecimal(String hexaDecimal) {
+        this.hexaDecimal = hexaDecimal;
     }
 
     public int getRed() {

@@ -2,6 +2,7 @@ package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.Client;
+import be.kdg.integration.plantifybackend.presentation.viewModel.plantSpecificViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import com.google.gson.Gson;
@@ -11,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 /**
  * Controller for plantlist.html
@@ -69,6 +73,7 @@ public class PlantListController {
     @GetMapping("plantList/{id}")
     public String showPlantSpecific(@PathVariable String id, HttpSession httpSession, Model model) {
         model.addAttribute("loggedInOrNot", true);
+        model.addAttribute("plantSpecificViewModel",new plantSpecificViewModel());
         Plant plant = new Plant();
         //------------DONT DELETE THIS -- IF DELETED THE PAGE WILL NOT RECEIVE CORRECT DATA---------
         for (Plant readplant :
@@ -89,14 +94,14 @@ public class PlantListController {
             return "login";
         }
     }
-/*
+
     @PostMapping("plantList/{id}")
-    public String processColorForm(@PathVariable String id, @Valid @ModelAttribute("PlantspecificViewModel")
-    PlantspecificViewModel plantspecificViewModel, Model model) {
+    public String processColorForm(@PathVariable String id, @Valid @ModelAttribute("plantSpecificViewModel")
+    plantSpecificViewModel plantSpecificViewModel, Model model) {
         model.addAttribute("id", id);
-        plantspecificViewModel.hex2Rgb();
-        System.out.println(plantspecificViewModel.toString());
+        plantSpecificViewModel.hex2Rgb();
+        System.out.println(plantSpecificViewModel.toString());
         return "specificPlant";
     }
-*/
+
 }

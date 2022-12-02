@@ -41,11 +41,11 @@
             </tbody>
         </table>
     </div>
-  <!--  <form method="post" th:object="${PlantspecificViewModel}">
-        <label th:for="*{hex}">Select your favorite color:</label>
-        <input type="color" id="favcolor" th:field="*{hex}" value="#ff0000"><br><br>
+    <form method="post" th:object="${plantSpecificViewModel}">
+        <label th:for="hexaDecimal">Select your favorite color:</label>
+        <input type="color" id="hexaDecimal" th:field="*{hexaDecimal}" value="#ff0000"><br><br>
         <input type="submit">
-    </form>-->
+    </form>
 </main>
 <div th:insert="~{/fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
 

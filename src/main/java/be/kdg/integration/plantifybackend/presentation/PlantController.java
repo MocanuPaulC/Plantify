@@ -70,6 +70,7 @@ public class PlantController {
 
     }
 
+    //this method needs to be ran to do JS for refresh of data automatically
     /**
      * used to refresh the current data on the plant in the dashboard
      * @param httpServletRequest takes the current data from the arduino and checks for errors
