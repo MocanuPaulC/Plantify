@@ -3,6 +3,7 @@ package be.kdg.integration.plantifybackend.repository;
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.RGBColor;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -78,7 +80,5 @@ public class ArduinoRepositoryImplementation implements ArduinoRepository{
         jdbcTemplate.execute(deleteArduino);
         logger.debug("deletion successful");
     }
-
-
 }
 

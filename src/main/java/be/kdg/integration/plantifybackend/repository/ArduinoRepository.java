@@ -3,6 +3,8 @@ package be.kdg.integration.plantifybackend.repository;
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.RGBColor;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package be.kdg.integration.plantifybackend.domain;
 
+import javax.persistence.*;
+
 /**
  * Arduino class
  */
@@ -45,6 +47,13 @@ public class Arduino {
         this.physicalIdentifier=physicalIdentifier;
     }
 
+    public Arduino(String series, boolean ledSetting, int physicalIdentifier, RGBColor ledColor, int id) {
+        this.series = series;
+        this.ledSetting = ledSetting;
+        this.physicalIdentifier = physicalIdentifier;
+        this.ledColor = ledColor;
+        this.id = id;
+    }
 
     /**
      * Sets the colors of the led strip
@@ -106,6 +115,16 @@ public class Arduino {
 
     public RGBColor getLedColor() {
         return ledColor;
+    }
+
+    public short getBlue(){
+        return ledColor.getBlue();
+    }
+    public short getRed(){
+        return ledColor.getRed();
+    }
+    public short getGreen(){
+        return ledColor.getGreen();
     }
 
     @Override
