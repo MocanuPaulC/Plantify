@@ -103,3 +103,11 @@ body #mainContainer{
 .plant article{
     text-align: center;
 }
+
+.button{
+    text-decoration:none;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: quincy-cf, serif;
+}

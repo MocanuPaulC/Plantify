@@ -86,14 +86,27 @@ fieldset>select{
     text-decoration: underline;
 }
 
-.error{
-    display: none;
-    color: red;
-}
-
 select{
     background-color: rgba(128, 128, 128, 0.54);
     border-radius: 1em;
     border: transparent;
     width: 12em;
+}
+
+.alert {
+    color: red;
+    font-family: Arial, serif;
+    font-size: 12px;
+}
+
+.message {
+   font-weight: normal;
+}
+
+.message>a{
+    color: black;
+}
+
+.signintitle{
+    text-align: center;
 }

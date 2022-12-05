@@ -10,18 +10,18 @@ import javax.validation.constraints.Size;
 public class LoginViewModel {
 
     /**
-     * Email of user, input needs to be in a email format and not empty
+     * Email of user, input needs to be in an email format and not empty
      */
     @NotEmpty(message = "Email can't be empty!")
     @Email(regexp = "^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*$",
-            message = "Not a valid Email!")
+            message = "Not a valid email or password!")
     private String email;
 
     /**
      * Password of a user, input needs to be at least 5 characters long and not empty
      */
     @NotEmpty(message = "Password can't be empty!")
-    @Size(min=5, message = "Password must at least be 5 characters long")
+    @Size(min=5, message = "and must be at least 5 characters long!")
     private String password;
 
     public String getEmail() {
@@ -43,7 +43,7 @@ public class LoginViewModel {
     @Override
     public String toString() {
         return "LoginViewModel{" +
-                "username='" + email + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

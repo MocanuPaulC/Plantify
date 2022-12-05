@@ -20,8 +20,8 @@ public class SignUpViewModel {
     /**
      * Password of a user, input needs to be at least 5 characters long and not empty
      */
-    @NotEmpty(message = "Password can't be empty!")
-    @Size(min=5, message = "Password must at least be 5 characters long")
+    @NotEmpty(message = "Password can't be empty")
+    @Size(min=5, message = "and must at least be 5 characters long!")
     private String password;
 
     public String getEmail() {
@@ -44,7 +44,7 @@ public class SignUpViewModel {
     public String toString() {
         return "SignUpViewModel{" +
                 "email='" + email + '\'' +
-                ", newPassword='" + password + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

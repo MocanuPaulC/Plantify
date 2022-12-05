@@ -149,7 +149,6 @@ public class PlantController {
         logger.debug("add plant request received");
         Client client = (Client) httpSession.getAttribute("user");
         Arduino arduino = this.arduinoService.addArduino(plantViewModel.getArduinoSeries(), plantViewModel.getPhysicalAddress());
-//        this.arduinoService.addArduino(arduinoSeries,Integer.parseInt(psysicalAddress));
         this.plantService.addPlant(plantViewModel.getName(), plantViewModel.getType(), arduino, client.getEmail());
         return "redirect:/plants";
     }
