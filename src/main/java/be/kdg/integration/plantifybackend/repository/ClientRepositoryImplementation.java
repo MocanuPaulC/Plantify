@@ -8,8 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class ClientRepositoryImplementation implements ClientRepository {
+
+public class ClientRepositoryImplementation {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -18,7 +18,7 @@ public class ClientRepositoryImplementation implements ClientRepository {
     public ClientRepositoryImplementation() {
     }
 
-    @Override
+
     public Client saveClient(Client client) {
         logger.debug("saving client to database");
         String insertUser=String.format("INSERT INTO client (email, password) " +
@@ -28,14 +28,14 @@ public class ClientRepositoryImplementation implements ClientRepository {
         return client;
     }
 
-    @Override
+
     public Client searchClient(String email) {
         String searchUser=String.format("SELECT password FROM client WHERE email='%s'", email);
         String password=jdbcTemplate.queryForObject(searchUser, String.class);
         return new Client(email, password);
     }
 
-    @Override
+
     public void deleteClient(Client client){
         logger.debug("deleting client");
         String deleteUserSql="DELETE FROM client WHERE email='"+ client.getEmail()+"'; ";

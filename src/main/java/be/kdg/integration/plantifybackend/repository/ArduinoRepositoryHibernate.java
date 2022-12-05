@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class ArduinoDaoRepositoryHibernate implements ArduinoDaoRepository{
+public class ArduinoRepositoryHibernate implements ArduinoRepository {
 
     @Override
     public <S extends ArduinoDao> S save(S entity) {

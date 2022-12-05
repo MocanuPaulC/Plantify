@@ -1,12 +1,5 @@
 package be.kdg.integration.plantifybackend;
 
-import be.kdg.integration.plantifybackend.domain.Arduino;
-import be.kdg.integration.plantifybackend.domain.Plant;
-import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
-import be.kdg.integration.plantifybackend.presentation.ClientController;
-import be.kdg.integration.plantifybackend.presentation.PlantController;
-import be.kdg.integration.plantifybackend.repository.ArduinoDaoRepository;
-import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,10 +18,6 @@ public class PlantifybackendApplication{
 		// prints current plants in DB
 		//context.getBean(PlantService.class).getPlantFromDB();
 		//context.getBean(ArduinoService.class).setArduinoList(context.getBean(PlantService.class).readPlants());
-
-		ArduinoDaoRepository arduinoRepository = context.getBean(ArduinoDaoRepository.class);
-		arduinoRepository.save(new ArduinoDao(101, "hehexd", true,
-				(short)3, (short)4, (short)5));
 
 
 
