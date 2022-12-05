@@ -53,6 +53,7 @@
                 <td class="bg-primary" th:text="${plant.details.temperature}"></td>
                 <td class="bg-primary" th:text="${plant.details.brightness}"></td>
                 <td class="bg-primary" th:text="${plant.details.moisture}"></td>
+                <td class="bg-primary"><a th:href="@{/plantList/remove/{plant}(plant=${plant.getId()})}">Remove</a></td>
             </tr>
             </tbody>
         </table>

@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -109,6 +110,24 @@ public class PlantListController {
                 (short) plantSpecificViewModel.getGreen(),
                 (short) plantSpecificViewModel.getBlue());
         return "redirect:/plantList/{id}";
+    }
+
+    @GetMapping("/plantList/remove/{id}")
+    public String removePlant(@PathVariable String id, Model model, HttpSession httpSession){
+        Client client = (Client) httpSession.getAttribute("user");
+        model.addAttribute("loggedInOrNot", true);
+        if (client != null) {
+            //--------------------------------------------------------------------------
+            model.addAttribute("loggedInOrNot", true);
+//            model.addAttribute("id", id);
+            logger.debug("Remove plant request received");
+            this.arduinoService.removeArduino(plantService.readPlants().stream()
+                    .filter(plant -> plant.getId()== Integer.parseInt(id)).toList().get(0).getArduino().getPhysicalIdentifier());
+            this.plantService.removePlant(Integer.parseInt(id));
+            return "redirect:/plantList";
+        }else {
+            return "login";
+        }
     }
 
 }
