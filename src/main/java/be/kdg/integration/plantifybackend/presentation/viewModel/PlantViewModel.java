@@ -10,7 +10,6 @@ import javax.validation.constraints.*;
  * ViewModel for storing and BeanValidating input from the addplant.html form
  */
 public class PlantViewModel {
-
     /**
      * Name of the plant, can't be empty
      */

@@ -16,23 +16,24 @@
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(2,${loggedInOrNot})}"></div>
 
-<form class="createUser inputForms" id="createUser"  method="post" th:object="${signUpViewModel}">
+<form class="createUser inputForms" id="createUser"  method="post" th:object="${signUpViewModel}" novalidate>
     <fieldset>
         <p>Create Account</p>
-<!--        <label><input type="text" id="newUsername" name="username" placeholder="Username"></label>-->
-<!--        <p class="error" id="errorUsername">Username can only contain letters and numbers!</p>-->
-        <div th:if="${#fields.hasAnyErrors()}" th:text="${#fields.allErrors()}" class="alert alert-danger">
-            <p>The form contained errors!</p>
-        </div>
+<!--        <div th:if="${#fields.hasAnyErrors()}" th:text="${#fields.allErrors()}" class="alert alert-danger">-->
+<!--            <p>The form contained errors!</p>-->
+<!--        </div>-->
         <label><input type="text" id="email" name="email" placeholder="Email" required></label>
-        <p class="error" id="errorEmail">Invalid email format!</p>
+        <div class="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
         <label><input type="password" id="newPassword" name="password" placeholder="Password" required></label>
-        <p class="error" id="passwordError"> </p>
+        <div class="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+
         <label><input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required></label>
-        <p class="error" id="confirmPasswordError"></p>
+        <div class="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+
         <button class="button" id="createAccount" type="submit">Sign In</button>
-        <p class="message" style="font-weight: normal">Already have an account?
-            <a th:href="@{/login}" style="color: black">Log in</a>
+        <p class="message">Already have an account?
+            <a th:href="@{/login}">Log in</a>
         </p>
     </fieldset>
 </form>
