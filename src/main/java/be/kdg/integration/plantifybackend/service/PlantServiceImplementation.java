@@ -28,7 +28,7 @@ public class PlantServiceImplementation implements PlantService{
      * @param plantType enum type of the plant
      * @param arduino arduino connected to the plant
      * @param client the owner of the plant
-     * @return function from the repository
+     * @return function from the repositor y
      */
     @Override
     public Plant addPlant(String name, PlantType plantType, Arduino arduino, Client client) {
