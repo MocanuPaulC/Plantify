@@ -5,10 +5,8 @@
     <title>About Plantify</title>
     <link rel="icon" href="/img/icon.png">
     <link rel="stylesheet" type="text/css" media="all" href="/css/forms.css" th:href="@{/css/forms.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" href="/css/aboutPlantify.css"
-          th:href="@{/css/aboutPlantify.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/aboutPlantify.css" th:href="@{/css/aboutPlantify.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/fragments.css" th:href="@{/css/fragments.css}"/>
-
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
     <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
@@ -29,6 +27,41 @@
     <p>The watering system was created using Arduino components and C programming,<br> while the self-watering
         pot is made using 3D printing and connected via Wi-Fi to make Plantify
     </p>
+
+    <div>
+        <img th:src="~{/static/img/team_picture.jpeg}" alt="picture of the team" src="/static/img/team_picture.jpeg">
+        <ol>
+            <li>Paul Mocanu</li>
+            <ul>
+                <li>Project Manager</li>
+            </ul>
+        </ol>
+        <ol>
+            <li>Elliot Hermans</li>
+            <ul>
+                <li>Front-End Developer</li>
+            </ul>
+        </ol>
+        <ol>
+            <li>Max Etmans</li>
+            <ul>
+                <li>Database Manager</li>
+            </ul>
+        </ol>
+        <ol>
+            <li>Firas Nohra</li>
+            <ul>
+                <li>Arduino Developer</li>
+            </ul>
+        </ol>
+        <ol>
+            <li>Alexia Cismaru</li>
+            <ul>
+                <li>Front-End Developer</li>
+                <li>Designer</li>
+            </ul>
+        </ol>
+    </div>
 </main>
 
 <div th:insert="~{/fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>

@@ -1,72 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Add Plant</title>
+    <link rel="icon" th:src="@{/img/icon.png}">
     <link rel="stylesheet" type="text/css" media="all" href="/css/forms.css" th:href="@{/css/forms.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/fragments.css" th:href="@{/css/fragments.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" href="/css/main.css" th:href="@{/css/main.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}">
-    </script>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
+    <script defer th:src="@{js/formvalidation.js}"></script>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script defer type="module" th:src="@{js/jsfile.js}"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/dqy2dee.css">
 </head>
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(3,${loggedInOrNot})}"></div>
 <main>
     <form class="addPlant inputForms" method="post" id="form" th:object="${plantViewModel}">
         <fieldset>
-            <p style="text-align: center">Add plant</p>
-            <div th:if="${#fields.hasAnyErrors()}" th:text="${#fields.allErrors()}" class="alert alert-danger">
-                <p>The form contained errors!</p>
-            </div>
-            <label><input type="text" id="name" name="name" placeholder="Name" required></label>
+            <p class="signintitle">Add plant</p>
+            <label><input type="text" id="name" name="name" placeholder="Name"></label>
+            <div class="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
             <label for="type"></label>
             <select name="type" id="type">
                 <!--easier to add new plantTypes-->
                 <option th:each="plantType : ${plantTypes}" th:value="${plantType}" th:text="${plantType}"></option>
-                <!-- <option value="water">Water</option>
-                <option value="desert">Desert</option>
-                <option value="mountain">Mountain</option>
-                <option value="plain">Plain</option>-->
             </select>
-            <!--        <label><input type="text" id="typeInTextForm" name="type" placeholder="Type" required></label>-->
-            <label><input type="text" id="arduinoSeries" name="arduinoSeries"
-                          placeholder="Enter Arduino Series" required ></label>
-            <label><input type="text" id="physicalAddress" name="physicalAddress"
-                          placeholder="Enter Physical Address" min="0" required></label>
+
+            <label><input type="text" id="arduinoSeries" name="arduinoSeries" placeholder="Enter Arduino Series"
+            ></label>
+            <div class="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{arduinoSeries}"></div>
+
+            <label><input type="text" id="physicalAddress" name="physicalAddress" placeholder="Enter Physical Address"
+                          min="0"></label>
+            <div class="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{physicalAddress}"></div>
+
             <button class="button" id="createPlant" type="submit">Submit</button>
-            <p class="error">Plant already exists!</p>
         </fieldset>
     </form>
 </main>
-<!--<div class="container">-->
-<!--  <div class="container-fluid">-->
-<!--    <form method="post" class="was-validated inputForms">-->
-<!--      <div class="mb-3 mt-3">-->
-<!--        <label for="name" class="form-label" >Plant Name</label>-->
-<!--        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>-->
-<!--      </div>-->
-<!--      <div class="mb-3 mt-3">-->
-<!--        <label for="plantType" class="form-label" >Plant Type</label>-->
-<!--        <input type="text" class="form-control" id="plantType" placeholder="Enter Net Worth" name="plantType"-->
-<!--               required>-->
-<!--      </div>-->
-<!--      <div class="mb-3 mt-3">-->
-<!--        <label for="arduinoSeries" class="form-label">Arduino Series</label>-->
-<!--        <input type="text" class="form-control" id="arduinoSeries" placeholder="Enter Net Worth" name="arduinoSeries"-->
-<!--               required>-->
-<!--      </div>-->
-<!--      <div class="mb-3 mt-3">-->
-<!--        <label for="physicalId" class="form-label">Physical Address</label>-->
-<!--        <input type="text" class="form-control" id="physicalId" placeholder="Enter Net Worth" name="physicalId"-->
-<!--               required>-->
-<!--      </div>-->
-<!--      <input type="submit" class="btn btn-primary" value="Submit"/>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</div>-->
-
 <div th:insert="~{/fragments/fragments::footer}">All rights reserved to Team 6&copy;</div>
 </body>
 </html>
