@@ -1,35 +1,50 @@
 package be.kdg.integration.plantifybackend.domain.hibernate;
 
+import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.PlantType;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
 @Table(name = "plant")
 public class PlantDao {
+
+    public PlantDao(String userEmail, String plantName, PlantType plantType, int physicalIdentifier) {
+        this.userEmail = userEmail;
+        this.plantName = plantName;
+        this.plantType = plantType;
+        this.physicalIdentifier = physicalIdentifier;
+        this.dateAdded = Timestamp.from(Instant.now());
+    }
+
     @Id
-    @Column(name = "plantId", nullable = false, updatable = false)
-    private int plantId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long plantid;
 
-    @ManyToOne
-    @JoinColumn(name = "userEmail", updatable = false)
-    private ClientDao client;
+    @Column(name = "useremail")
+    private String userEmail;
 
-    @Column(name = "plantName", updatable = false)
+    @Column(name = "plantname", updatable = false)
     private String plantName;
 
-    @Column(name = "plantType", updatable = false)
+    @Column(name = "planttype", updatable = false)
     @Enumerated(EnumType.STRING)
     private PlantType plantType;
 
-    @Column(name = "dateAdded", updatable = false)
+    @Column(name = "dateadded", updatable = false)
     private Timestamp dateAdded;
 
-    @OneToOne
-    @JoinColumn(name = "arduinoPhysicalIdentifier", updatable = false)
-    private ArduinoDao arduino;
+
+    @Column(name = "arduinophysicalidentifier")
+    private int physicalIdentifier;
+
+    public PlantDao() {
+
+    }
 
     public Timestamp getDateAdded() {
         return dateAdded;
@@ -43,7 +58,15 @@ public class PlantDao {
         return plantName;
     }
 
-    public int getPlantId() {
-        return plantId;
+    public Long getPlantId() {
+        return plantid;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public int getPhysicalIdentifier() {
+        return physicalIdentifier;
     }
 }

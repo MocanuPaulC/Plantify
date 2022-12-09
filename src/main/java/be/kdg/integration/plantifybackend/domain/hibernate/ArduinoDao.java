@@ -1,20 +1,21 @@
 package be.kdg.integration.plantifybackend.domain.hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name = "Arduino")
+@Table(name = "arduino")
 public class ArduinoDao {
     @Id
-    @Column(name = "physicalidentifier", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long dummyid;
+
+    @Column(name = "physicalidentifier")
     private int physicalIdentifier;
 
-    @Column(name = "series", updatable = false)
+    @Column(name = "series")
     private String series;
 
     @Column(name = "ledsetting", nullable = false)
@@ -43,7 +44,18 @@ public class ArduinoDao {
     }
 
 
+    public Long getDummyid() {
+        return dummyid;
+    }
 
+
+    public void setDummyid(Long dummyId) {
+        this.dummyid = dummyId;
+    }
+
+    public boolean isLedSetting() {
+        return ledSetting;
+    }
 
     public int getPhysicalIdentifier() {
         return physicalIdentifier;
@@ -91,5 +103,17 @@ public class ArduinoDao {
 
     public void setBlueCode(short blueCode) {
         this.blueCode = blueCode;
+    }
+
+    @Override
+    public String toString() {
+        return "ArduinoDao{" +
+                "physicalIdentifier=" + physicalIdentifier +
+                ", series='" + series + '\'' +
+                ", ledSetting=" + ledSetting +
+                ", redCode=" + redCode +
+                ", greenCode=" + greenCode +
+                ", blueCode=" + blueCode +
+                '}';
     }
 }

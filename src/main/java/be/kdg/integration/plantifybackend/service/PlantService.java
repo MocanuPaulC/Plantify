@@ -1,24 +1,23 @@
 package be.kdg.integration.plantifybackend.service;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
 
 import java.util.List;
 
 public interface PlantService {
-    Plant addPlant(String name, PlantType plantType, Arduino arduino, String emailUser);
+    Plant addPlant(String name, PlantType plantType, Arduino arduino, Client client);
 
     void getPlantFromDB();
-
-    void updatePlantData(Plant.Details details,int physicalId);
 
     void saveReadingsToDB(Plant.Details details, int plantId);
     void updateDBArchive();
 
     List<Plant> readPlants();
 
-    Arduino getPlantArduino(int plantId);
+    int getPlantPhysicalIdentifier(int plantId);
 
     void removePlant(int id);
 }

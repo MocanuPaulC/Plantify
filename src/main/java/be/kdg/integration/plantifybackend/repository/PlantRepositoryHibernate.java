@@ -1,44 +1,64 @@
 package be.kdg.integration.plantifybackend.repository;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
+import be.kdg.integration.plantifybackend.domain.RGBColor;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
 import be.kdg.integration.plantifybackend.domain.gson.PlantRowMapper;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
+import be.kdg.integration.plantifybackend.domain.hibernate.ClientDao;
+import be.kdg.integration.plantifybackend.domain.hibernate.DetailsDao;
+import be.kdg.integration.plantifybackend.domain.hibernate.PlantDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 @Repository
-public class PlantRepositoryImplementation implements PlantRepository {
-    JdbcTemplate jdbcTemplate;
+public class PlantRepositoryHibernate implements PlantRepository {
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory;
 
-    List<Plant> plantList;
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public PlantRepositoryHibernate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    public PlantRepositoryImplementation(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-        plantList = new ArrayList<>();
-
+    private Plant daoToPlant(PlantDao plantDao){
+        return new Plant(plantDao.getPlantName(), plantDao.getPlantType(),
+                new Arduino("xx", plantDao.getPhysicalIdentifier()), plantDao.getUserEmail());
     }
-
     @Override
     public List<Plant> getPlants() {
+        logger.debug("searching plants");
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        List<PlantDao> daoList = em.createQuery("select a from PlantDao a",
+                PlantDao.class).getResultList();
+        List<Plant> plantList = new ArrayList<>();
+        daoList.forEach(plantDao -> plantList.add(daoToPlant(plantDao)));
+        logger.debug("plantList created");
+        em.getTransaction().commit();
+        em.close();
         return plantList;
     }
 
     @Override
     public void getPlantsFromDB(){
-        //harro, I'm smol Asian man
+        /*
         logger.debug("getting plants from database");
         String getPlants = "SELECT plantid,useremail, plantname,planttype, arduinophysicalidentifier, series " +
                 "FROM plant " +
@@ -60,55 +80,67 @@ public class PlantRepositoryImplementation implements PlantRepository {
                 }
             }
         }
-        logger.debug(plantList.toString());
+        logger.debug(plantList.toString());*/
     }
 
 
     @Override
-    public Plant savePlant(Plant plant, String userEmail) {
+    public Plant savePlant(Plant plant, Client client) {
         logger.debug("saving plant to database");
-        String saveSql =
-                String.format("INSERT INTO plant (plantname,useremail,planttype,arduinophysicalidentifier) " +
-                        "VALUES ('%s','%s','%s',%d)", plant.getName(), userEmail, plant.getTypeOfPlant(),plant.getArduino().getPhysicalIdentifier());
-        jdbcTemplate.execute(saveSql);
-        plant.setId(plantList.stream().mapToInt(Plant::getId).max().orElse(0) + 1);
-        plant.setEmailUser(userEmail);
-        plantList.add(plant);
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(new PlantDao(
+                client.getEmail(),
+                plant.getName(),
+                plant.getTypeOfPlant(),
+                plant.getArduino().getPhysicalIdentifier()));
+        em.getTransaction().commit();
+        em.close();
         return plant;
     }
 
 
     public void saveCurrentReadingsToDB(Plant.Details details, int physicalId){
         logger.debug("saving readings to db");
-        String getPlantId = String.format("Select plantid FROM plant WHERE arduinophysicalidentifier = %d",physicalId);
-        int plantId=jdbcTemplate.queryForObject(getPlantId, Integer.class);
-        String sql=String.format("INSERT INTO details (plantid, temperature, humidity,moisture, light, refreshtime)" +
-                "VALUES (%d, %f, %f, %f, %f,CURRENT_TIMESTAMP)",plantId,details.getTemperature(),details.getHumidity(),
-                details.getMoisture(),details.getBrightness());
-        jdbcTemplate.execute(sql);
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        PlantDao plantDao =
+                em.createQuery("select p from PlantDao p where p.physicalIdentifier="+physicalId+"; ",
+                        PlantDao.class)
+                        .getSingleResult();
+        DetailsDao detailsDao = new DetailsDao(plantDao.getPlantId().intValue(), details.getTemperature(), details.getHumidity(),
+                details.getMoisture(), details.getTemperature());
+        em.persist(detailsDao);
+        logger.debug("readings saved");
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public void updatePlantData(Plant.Details details, int physicalId) {
-        logger.debug("getting plant data from database");
-        plantList.stream().filter(plant-> plant.getArduino().getPhysicalIdentifier()==physicalId)
-                .forEach(plant -> plant.setDetails(details));
-    }
-
-    @Override
-    public Arduino getArduino(int plantId) {
-        return plantList.stream().filter(plant -> plant.getId()==plantId).toList().get(0).getArduino();
+    public int getPhysicalIdentifier(int plantId) {
+        logger.debug("getting arduino");
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        PlantDao plantDao =  em.find(PlantDao.class, plantId);
+        logger.debug("arduino retrieved");
+        em.getTransaction().commit();
+        em.close();
+        return plantDao.getPhysicalIdentifier();
     }
 
     @Override
     public void deletePlant(int id){
-        logger.debug("deleting plant ");
-        String saveSql = "DELETE FROM plant WHERE plantid ="+id+"; ";
-        jdbcTemplate.execute(saveSql);
-        plantList.remove(plantList.stream().filter(plant -> plant.getId()==id).toList().get(0));
-
+        logger.debug("deleting plant");
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        PlantDao plantDao =  em.find(PlantDao.class, id);
+        em.remove(plantDao);
+        logger.debug("plant deleted");
+        em.getTransaction().commit();
+        em.close();
     }
 
+    // kept usage of jdbctemplate, might change it later if i wanna torture myself
     @Override
     public void updateDBArchive() {
         logger.debug("Archiving plant details");

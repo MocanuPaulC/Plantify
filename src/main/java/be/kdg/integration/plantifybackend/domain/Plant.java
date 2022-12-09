@@ -109,11 +109,11 @@ public class Plant implements Serializable {
      * @param typeOfPlant
      * @param arduino
      */
-    public Plant(String name, PlantType typeOfPlant, Arduino arduino) {
+    public Plant(String name, PlantType typeOfPlant, Arduino arduino, String emailUser) {
         this.name = name;
         this.typeOfPlant = typeOfPlant;
         this.arduino = arduino;
-//        this.emailUser= emailUser;
+        this.emailUser= emailUser;
     }
 
     public void setEmailUser(String emailUser) {

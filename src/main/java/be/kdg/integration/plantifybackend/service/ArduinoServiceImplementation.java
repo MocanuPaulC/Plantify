@@ -8,6 +8,7 @@ import be.kdg.integration.plantifybackend.repository.ArduinoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,41 +20,23 @@ import java.util.List;
 @Component
 public class ArduinoServiceImplementation implements ArduinoService{
 
-    private ArduinoRepository arduinoDaoRepository;
+    private final ArduinoRepository arduinoRepository;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private Arduino daoToArduino(ArduinoDao arduinoDao){
-        return new Arduino(arduinoDao.getSeries(), arduinoDao.getLedSetting(),
-                arduinoDao.getPhysicalIdentifier(), new RGBColor(arduinoDao.getRedCode(), arduinoDao.getBlueCode(),
-                arduinoDao.getGreenCode()), arduinoDao.getPhysicalIdentifier());
-    }
 
     @Autowired
     public ArduinoServiceImplementation(ArduinoRepository arduinoRepositoryHibernate) {
-        this.arduinoDaoRepository = arduinoRepositoryHibernate;
+        this.arduinoRepository = arduinoRepositoryHibernate;
     }
 
 
     @Override
     public List<Arduino> getArduinoList() {
-        List<Arduino> arduinoList = new ArrayList<>();
-        Iterable<ArduinoDao> arduinoDaoIterable= arduinoDaoRepository.findAll();
-        for (ArduinoDao arduinoDao : arduinoDaoIterable) {
-            arduinoList.add(daoToArduino(arduinoDao));
-        }
-
-        return arduinoList;
+        return arduinoRepository.getArduinoList();
     }
 
     @Override
     public void setLedSetting(int physicalId, boolean base) {
-        if(arduinoDaoRepository.findById(physicalId).isPresent()){
-            arduinoDaoRepository.findById(physicalId).get().setLedSetting(base);
-        }
-        else {
-            logger.debug(physicalId+" arduino not present");
-        }
-
+        arduinoRepository.setLedSetting(physicalId, base);
     }
 
     /**
@@ -64,9 +47,9 @@ public class ArduinoServiceImplementation implements ArduinoService{
      */
     @Override
     public Arduino addArduino(String series, int physicalIdentifier) {
-        ArduinoDao arduinoDao = new ArduinoDao(physicalIdentifier, series, false, (short)0,(short)0,(short)0);
-        arduinoDaoRepository.save(arduinoDao);
-        return daoToArduino(arduinoDao);
+        Arduino arduino = new Arduino(series,physicalIdentifier);
+        arduinoRepository.saveArduino(arduino);
+        return arduino;
     }
 
     /*@Override
@@ -76,15 +59,8 @@ public class ArduinoServiceImplementation implements ArduinoService{
 
 
     @Override
-    public void changeColor(int physicalIdentifier, short red, short green, short blue) {
-        if(arduinoDaoRepository.findById(physicalIdentifier).isPresent()){
-            arduinoDaoRepository.findById(physicalIdentifier).get().setBlueCode(blue);
-            arduinoDaoRepository.findById(physicalIdentifier).get().setRedCode(red);
-            arduinoDaoRepository.findById(physicalIdentifier).get().setGreenCode(green);
-        }
-        else {
-            logger.debug(physicalIdentifier+" arduino not present");
-        }
+    public void changeColor(int physicalIdentifier, short red, short blue, short green) {
+        arduinoRepository.changeColor(physicalIdentifier, new RGBColor(red, blue, green));
     }
 
     /**
@@ -102,11 +78,6 @@ public class ArduinoServiceImplementation implements ArduinoService{
 
     @Override
     public void removeArduino(int physicalIdentifier){
-        if(arduinoDaoRepository.findById(physicalIdentifier).isPresent()){
-            arduinoDaoRepository.delete(arduinoDaoRepository.findById(physicalIdentifier).get());
-        }
-        else {
-            logger.debug(physicalIdentifier+" arduino not present");
-        }
+        arduinoRepository.deleteArduino(physicalIdentifier);
     }
 }

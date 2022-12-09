@@ -1,6 +1,7 @@
 package be.kdg.integration.plantifybackend.repository;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public interface PlantRepository {
 
     void saveCurrentReadingsToDB(Plant.Details details, int plantId);
-    Plant savePlant(Plant plant, String userEmail);
+    Plant savePlant(Plant plant, Client client);
 
     void getPlantsFromDB();
 
@@ -16,9 +17,7 @@ public interface PlantRepository {
 
     List<Plant> getPlants();
 
-    Arduino getArduino(int plantId);
-
-    void updatePlantData(Plant.Details details,int physicalId);
+    int getPhysicalIdentifier(int plantId);
 
     void deletePlant(int id);
 }
