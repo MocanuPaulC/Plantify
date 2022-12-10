@@ -1,6 +1,7 @@
 package be.kdg.integration.plantifybackend.service;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
+import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.repository.PlantRepository;
@@ -26,12 +27,12 @@ public class PlantServiceImplementation implements PlantService{
      * @param name name of the plant
      * @param plantType enum type of the plant
      * @param arduino arduino connected to the plant
-     * @param emailUser email of the owner of the plant
-     * @return function from the repository
+     * @param client the owner of the plant
+     * @return function from the repositor y
      */
     @Override
-    public Plant addPlant(String name, PlantType plantType, Arduino arduino, String emailUser) {
-        return plantRepository.savePlant(new Plant(name,plantType,arduino), emailUser);
+    public Plant addPlant(String name, PlantType plantType, Arduino arduino, Client client) {
+        return plantRepository.savePlant(new Plant(name,plantType,arduino, client.getEmail()), client);
     }
     public void getPlantFromDB(){
         plantRepository.getPlantsFromDB();
@@ -56,8 +57,8 @@ public class PlantServiceImplementation implements PlantService{
     }
 
     @Override
-    public Arduino getPlantArduino(int plantId) {
-        return plantRepository.getArduino(plantId);
+    public int getPlantPhysicalIdentifier(int plantId) {
+        return plantRepository.getPhysicalIdentifier(plantId);
     }
 
     /**
@@ -86,8 +87,5 @@ public class PlantServiceImplementation implements PlantService{
      * @param details readings from the arduino
      * @param physicalId id from the arduino that is reading
      */
-    @Override
-    public void updatePlantData(Plant.Details details,int physicalId) {
-        plantRepository.updatePlantData(details,physicalId);
-    }
+
 }

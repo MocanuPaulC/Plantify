@@ -1,9 +1,6 @@
 package be.kdg.integration.plantifybackend.domain.hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -11,8 +8,10 @@ import java.sql.Timestamp;
 public class DetailsDao {
     @Id
     @Column(name = "id", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "plantid", nullable = false, updatable = false)
+
+    @Column(name = "plantid")
     private int plantId;
     @Column(name = "temperature", nullable = false, updatable = false)
     private double temperature;
@@ -22,8 +21,20 @@ public class DetailsDao {
     private double moisture;
     @Column(name = "light", nullable = false, updatable = false)
     private double light;
-    @Column(name = "refreshTime", updatable = false)
+    @Column(name = "refreshtime", updatable = false)
     private Timestamp refreshTime;
+
+    public DetailsDao(int plantId, double temperature, double humidity, double moisture, double light) {
+        this.plantId = plantId;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.moisture = moisture;
+        this.light = light;
+    }
+
+    public DetailsDao() {
+
+    }
 
     public Timestamp getRefreshTime() {
         return refreshTime;

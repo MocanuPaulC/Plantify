@@ -5,6 +5,8 @@ import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.ClientDao;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ClientRepository extends CrudRepository<ClientDao, String> {
-
+public interface ClientRepository {
+    Client saveClient(Client client);
+    Client searchClient(String email);
+    void deleteClient(Client client);
 }

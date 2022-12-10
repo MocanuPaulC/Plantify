@@ -104,8 +104,8 @@ public class PlantListController {
 
         logger.debug(plantSpecificViewModel.getHexadecimal());
 
-        arduinoService.setLedSetting(plantService.getPlantArduino(Integer.parseInt(id)).getPhysicalIdentifier(),true);
-        arduinoService.changeColor(plantService.getPlantArduino(Integer.parseInt(id)).getPhysicalIdentifier(),
+        arduinoService.setLedSetting(plantService.getPlantPhysicalIdentifier(Integer.parseInt(id)),true);
+        arduinoService.changeColor(plantService.getPlantPhysicalIdentifier(Integer.parseInt(id)),
                 (short) plantSpecificViewModel.getRed(),
                 (short) plantSpecificViewModel.getGreen(),
                 (short) plantSpecificViewModel.getBlue());

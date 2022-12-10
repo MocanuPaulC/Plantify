@@ -1,5 +1,10 @@
 package be.kdg.integration.plantifybackend;
 
+import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
+import be.kdg.integration.plantifybackend.repository.ArduinoRepository;
+import be.kdg.integration.plantifybackend.repository.ArduinoRepositoryHibernate;
+import be.kdg.integration.plantifybackend.service.ArduinoService;
+import be.kdg.integration.plantifybackend.service.ArduinoServiceImplementation;
 import be.kdg.integration.plantifybackend.service.PlantService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,13 +23,13 @@ public class PlantifybackendApplication{
 		// prints current plants in DB
 		//context.getBean(PlantService.class).getPlantFromDB();
 		//context.getBean(ArduinoService.class).setArduinoList(context.getBean(PlantService.class).readPlants());
-
+		//context.getBean(ArduinoService.class).addArduino("xx", 103);
 
 
 		// archiving functionality
 		ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
 		ses.scheduleAtFixedRate(context.getBean(PlantService.class)::updateDBArchive,
-				0, 10, TimeUnit.SECONDS);
+				20, 20, TimeUnit.HOURS);
 
 
 //
