@@ -47,12 +47,12 @@ public class Arduino {
         this.physicalIdentifier=physicalIdentifier;
     }
 
-    public Arduino(String series, boolean ledSetting, int physicalIdentifier, RGBColor ledColor, int id) {
+    public Arduino(String series, boolean ledSetting, int physicalIdentifier, RGBColor ledColor) {
         this.series = series;
         this.ledSetting = ledSetting;
         this.physicalIdentifier = physicalIdentifier;
         this.ledColor = ledColor;
-        this.id = id;
+
     }
 
     /**
@@ -65,16 +65,6 @@ public class Arduino {
         ledColor.setGreen(color.getGreen());
         ledColor.setRed(color.getRed());
 
-    }
-
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setSeries(String series) {
@@ -129,7 +119,7 @@ public class Arduino {
 
     @Override
     public String toString() {
-        return "Arduino{" +
+        return "Arduino{" + series+
                 ", physicalIdentifier=" + physicalIdentifier +
                 '}';
     }

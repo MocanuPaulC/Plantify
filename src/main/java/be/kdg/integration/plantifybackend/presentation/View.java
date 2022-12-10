@@ -1,4 +1,4 @@
-package be.kdg.integration.plantifybackend.presentation;
+/*package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.PlantType;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  * redundant testing class
- */
+
 @Component
 public class View {
 
@@ -67,4 +67,4 @@ public class View {
 
     }
 
-}
+}*/

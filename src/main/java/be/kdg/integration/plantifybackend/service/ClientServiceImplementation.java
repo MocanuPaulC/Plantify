@@ -14,16 +14,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ClientServiceImplementation implements ClientService {
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public ClientServiceImplementation(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
-    }
-
-    private Client daoToClient(ClientDao clientDao){
-        return new Client(clientDao.getEmail(), clientDao.getPassword());
     }
 
     /**
@@ -34,9 +30,9 @@ public class ClientServiceImplementation implements ClientService {
      */
     @Override
     public Client addClient(String email, String password) {
-        ClientDao clientDao = new ClientDao(email, password);
-        clientRepository.save(clientDao);
-        return daoToClient(clientDao);
+        Client client = new Client(email, password);
+        clientRepository.saveClient(client);
+        return client;
     }
 
     /**
@@ -46,25 +42,19 @@ public class ClientServiceImplementation implements ClientService {
      */
     @Override
     public boolean checkClient(Client client) {
-        boolean isCorrectPassword=false;
-        if(clientRepository.findById(client.getEmail()).isPresent()){
-            Client clientChecked = daoToClient(clientRepository.findById(client.getEmail()).get());
-            isCorrectPassword= client.getPassword().equals(clientChecked.getPassword());
+        logger.debug("Checking password");
+        if(clientRepository.searchClient(client.getEmail()).getPassword().equals(client.getPassword())){
+            logger.debug("Correct password");
+            return true;
         }
         else{
-            logger.debug(client.getEmail()+" does not exist in a user");
+            logger.debug("False password");
+            return false;
         }
-
-        return isCorrectPassword;
     }
 
     @Override
     public void removeClient(Client client){
-        if(clientRepository.findById(client.getEmail()).isPresent()){
-            clientRepository.delete(clientRepository.findById(client.getEmail()).get());
-        }
-        else{
-            logger.debug(client.getEmail()+" does not exist in a user");
-        }
+        clientRepository.deleteClient(client);
     }
 }

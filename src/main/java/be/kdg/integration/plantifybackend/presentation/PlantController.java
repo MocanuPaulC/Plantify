@@ -97,7 +97,6 @@ public class PlantController {
         if (!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
             plantService.saveReadingsToDB(details, physicalId );// dont know how to retrieve plantId from this, dummy data
-            this.plantService.updatePlantData(details, physicalId);
             logger.debug("post request saved");
         }
 
@@ -149,7 +148,8 @@ public class PlantController {
         logger.debug("add plant request received");
         Client client = (Client) httpSession.getAttribute("user");
         Arduino arduino = this.arduinoService.addArduino(plantViewModel.getArduinoSeries(), plantViewModel.getPhysicalAddress());
-        this.plantService.addPlant(plantViewModel.getName(), plantViewModel.getType(), arduino, client.getEmail());
+//        this.arduinoService.addArduino(arduinoSeries,Integer.parseInt(psysicalAddress));
+        this.plantService.addPlant(plantViewModel.getName(), plantViewModel.getType(), arduino, client);
         return "redirect:/plants";
     }
 
