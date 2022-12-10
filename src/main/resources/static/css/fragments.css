@@ -68,17 +68,48 @@ nav{
 .footer {
     background-color: #4a6434;
     color: white;
-    height: 3em;
+    height: 4em;
     position: absolute;
     width: 100%;
     left: 0;
 }
 .footer:not(#dashboardBody .footer){
     top: 100%;
-
 }
 
-.footer>p{
+.center-div{
+    text-align: center
+}
+
+.dropbtn {
+    font-family: quincy-cf, sans-serif;
+    background-color: white;
+    border: none;
+    margin-top: 55px;
+    margin-right: 40px;
+    font-size: 16px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
     position: absolute;
-    left: 40%;
+    background-color: #f1f1f1;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
 }
+
+.dropdown-content a {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
