@@ -1,4 +1,4 @@
-package be.kdg.integration.plantifybackend.domain;
+package be.kdg.integration.plantifybackend.Util;
 
 /**
  * RGBColor class for colors and brightness of led strip
