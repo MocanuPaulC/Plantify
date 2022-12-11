@@ -116,6 +116,14 @@ public class Plant implements Serializable {
         this.emailUser= emailUser;
     }
 
+    public Plant(String name, PlantType typeOfPlant, Arduino arduino, int id, String emailUser) {
+        this.name = name;
+        this.typeOfPlant = typeOfPlant;
+        this.arduino = arduino;
+        this.id = id;
+        this.emailUser = emailUser;
+    }
+
     public void setEmailUser(String emailUser) {
         this.emailUser = emailUser;
     }

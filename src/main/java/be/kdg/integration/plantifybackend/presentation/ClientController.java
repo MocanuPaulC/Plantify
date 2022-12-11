@@ -46,6 +46,7 @@ public class ClientController {
         List<Plant> clientPlants = plantService.readPlants().stream()
                 .filter(plant -> plant.getEmailUser().equals(email)).toList();
 
+
         clientPlants.forEach(plant -> {
             arduinoService.removeArduino(plant.getArduino().getPhysicalIdentifier());
             plantService.removePlant(plant.getId());

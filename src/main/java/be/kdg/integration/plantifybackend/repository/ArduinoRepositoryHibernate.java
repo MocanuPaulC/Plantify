@@ -114,6 +114,7 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
+//        em.fi
         ArduinoDao arduinoDao = em.find(ArduinoDao.class, physicalId);
         em.remove(arduinoDao);
         logger.debug("deletion successful");

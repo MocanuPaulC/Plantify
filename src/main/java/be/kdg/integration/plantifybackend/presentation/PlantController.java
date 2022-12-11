@@ -171,13 +171,13 @@ public class PlantController {
      * @param plantId id of the plant that was selected to be removed
      * @return dashboard.html
      */
-    @PostMapping("removePlant")
-    public String removePlant(Integer plantId) {
-
-        logger.debug("Remove plant request received");
-        this.arduinoService.removeArduino(plantService.readPlants().stream()
-                .filter(plant -> plant.getId()==plantId).toList().get(0).getArduino().getPhysicalIdentifier());
-        this.plantService.removePlant(plantId);
-        return "redirect:/plants";
-    }
+//    @PostMapping("removePlant")
+//    public String removePlant(Integer plantId) {
+//
+//        logger.debug("Remove plant request received");
+//        this.arduinoService.removeArduino(plantService.readPlants().stream()
+//                .filter(plant -> plant.getId()==plantId).toList().get(0).getArduino().getPhysicalIdentifier());
+//        this.plantService.removePlant(plantId);
+//        return "redirect:/plants";
+//    }
 }
