@@ -30,4 +30,6 @@ INSERT INTO public.plant (useremail, plantname, planttype, dateadded, arduinophy
 VALUES ('fake2@email.com', 'plantos2', 'PLAIN', '2022-12-01 20:04:00.000000', 104);
 
 
+
+SELECT MAX(plantid) FROM public.plant
 -- DELETE FROM arduino WHERE physicalIdentifier=101;

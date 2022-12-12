@@ -26,6 +26,7 @@ import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -147,10 +148,17 @@ public class PlantController {
 
         logger.debug("add plant request received");
         Client client = (Client) httpSession.getAttribute("user");
-        Arduino arduino = this.arduinoService.addArduino(plantViewModel.getArduinoSeries(), plantViewModel.getPhysicalAddress());
+        try {
+            Arduino arduino = this.arduinoService.addArduino(plantViewModel.getArduinoSeries(), plantViewModel.getPhysicalAddress());
+            this.plantService.addPlant(plantViewModel.getName(), plantViewModel.getType(), arduino, client);
+            return "redirect:/plants";
+
+        }
+        catch (SQLException e){
+            model.addAttribute("arduinoExists","This arduino already exists as a used product, please check the physical Address");
+            return "redirect:/addPlant";
+        }
 //        this.arduinoService.addArduino(arduinoSeries,Integer.parseInt(psysicalAddress));
-        this.plantService.addPlant(plantViewModel.getName(), plantViewModel.getType(), arduino, client);
-        return "redirect:/plants";
     }
 
 

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class ArduinoServiceImplementation implements ArduinoService{
      * @return function from repository
      */
     @Override
-    public Arduino addArduino(String series, int physicalIdentifier) {
+    public Arduino addArduino(String series, int physicalIdentifier) throws SQLException {
         Arduino arduino = new Arduino(series,physicalIdentifier);
         arduinoRepository.saveArduino(arduino);
         return arduino;

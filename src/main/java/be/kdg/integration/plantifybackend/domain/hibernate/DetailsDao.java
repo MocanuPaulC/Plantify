@@ -64,4 +64,16 @@ public class DetailsDao {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "DetailsDao{" +
+                "id=" + id +
+                ", plantId=" + plantId +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
+                ", moisture=" + moisture +
+                ", light=" + light +
+                ", refreshTime=" + refreshTime +
+                '}';
+    }
 }

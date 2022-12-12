@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,15 +62,19 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
     }
 
     @Override
-    public Arduino saveArduino(Arduino arduino) {
+    public Arduino saveArduino(Arduino arduino) throws SQLException {
         logger.debug("saving arduino to database");
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         ArduinoDao arduinoDao = arduinoToDao(arduino);
         em.persist(arduinoDao);
         logger.debug("added arduino to database");
-        em.getTransaction().commit();
-        em.close();
+        try {
+            em.getTransaction().commit();
+        }catch (Exception e){
+            em.close();
+            throw new SQLException("This arduino is already in use");
+        }
 
         return arduino;
     }

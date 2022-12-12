@@ -90,6 +90,12 @@ public class Plant implements Serializable {
      */
     private Details details=new Details();
 
+    public void setDetails(double moisture,double temp, double humid,double brightness){
+        this.details.setMoisture(moisture);
+        this.details.setTemperature(temp);
+        this.details.setHumidity(humid);
+        this.details.setBrightness(brightness);
+    }
     public void setDetails(Details details){
         this.details.setHumidity(details.getHumidity());
         this.details.setTemperature(details.getTemperature());

@@ -13,6 +13,7 @@ public interface PlantRepository {
 
     void getPlantsFromDB();
 
+    Plant setPlantId(Plant plant);
     void updateDBArchive();
 
     List<Plant> getPlants();

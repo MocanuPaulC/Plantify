@@ -32,8 +32,11 @@ public class PlantServiceImplementation implements PlantService{
      */
     @Override
     public Plant addPlant(String name, PlantType plantType, Arduino arduino, Client client) {
-        return plantRepository.savePlant(new Plant(name,plantType,arduino, client.getEmail()), client);
+        Plant plant = plantRepository.setPlantId(new Plant(name,plantType,arduino, client.getEmail()));
+        return plantRepository.savePlant(plant, client);
+
     }
+    @Override
     public void getPlantFromDB(){
         plantRepository.getPlantsFromDB();
     }

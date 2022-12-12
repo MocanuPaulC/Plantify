@@ -28,7 +28,6 @@ CREATE TABLE Arduino
 CREATE TABLE Plant
 (
     plantID                   INT         NOT NULL
-        GENERATED ALWAYS AS IDENTITY
         PRIMARY KEY,
     userEmail                 VARCHAR(30) NOT NULL
         CONSTRAINT fk_userEmail REFERENCES Client (email)
@@ -101,16 +100,16 @@ VALUES (103, 'xx', false, 0, 0, 0);
 INSERT INTO public.arduino (physicalidentifier, series, ledsetting, redcode, greencode, bluecode)
 VALUES (104, 'xx', true, 11, 22, 33);
 
-INSERT INTO public.plant (useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
-VALUES ('fake@email.com', 'planty', 'PLAIN', '2022-12-01 20:03:45.000000', 101);
+INSERT INTO public.plant (plantid,useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
+VALUES (1,'fake@email.com', 'planty', 'PLAIN', '2022-12-01 20:03:45.000000', 101);
 
-INSERT INTO public.plant (useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
-VALUES ('fake@email.com', 'plantos', 'PLAIN', '2022-12-01 20:04:00.000000', 102);
-INSERT INTO public.plant (useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
-VALUES ('fake2@email.com', 'planty2', 'PLAIN', '2022-12-01 20:03:45.000000', 103);
+INSERT INTO public.plant (plantid,useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
+VALUES (2,'fake@email.com', 'plantos', 'PLAIN', '2022-12-01 20:04:00.000000', 102);
+INSERT INTO public.plant (plantid,useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
+VALUES (3,'fake2@email.com', 'planty2', 'PLAIN', '2022-12-01 20:03:45.000000', 103);
 
-INSERT INTO public.plant (useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
-VALUES ('fake2@email.com', 'plantos2', 'PLAIN', '2022-12-01 20:04:00.000000', 104);
+INSERT INTO public.plant (plantid,useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
+VALUES (4,'fake2@email.com', 'plantos2', 'PLAIN', '2022-12-01 20:04:00.000000', 104);
 
 
 -- DELETE FROM arduino WHERE physicalIdentifier=101;
