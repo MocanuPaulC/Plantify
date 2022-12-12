@@ -13,9 +13,9 @@ CREATE TABLE Client
 
 CREATE TABLE Arduino
 (
-    dummyId int GENERATED ALWAYS AS IDENTITY
-        PRIMARY KEY,
-    physicalIdentifier INT         NOT NULL UNIQUE ,
+--     dummyId int GENERATED ALWAYS AS IDENTITY
+--         PRIMARY KEY,
+    physicalIdentifier INT         NOT NULL UNIQUE  PRIMARY KEY ,
     series             VARCHAR(30) NOT NULL,
     ledSetting         BOOLEAN     NOT NULL,
     redCode            SMALLINT    NOT NULL,

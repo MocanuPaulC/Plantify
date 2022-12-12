@@ -2,7 +2,7 @@ package be.kdg.integration.plantifybackend.domain.gson;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
 
-import be.kdg.integration.plantifybackend.domain.RGBColor;
+import be.kdg.integration.plantifybackend.Util.RGBColor;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;

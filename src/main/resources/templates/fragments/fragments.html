@@ -29,10 +29,10 @@
     </div>
 
     <div class="dropdown">
-        <button class="dropbtn">My Account</button>
+        <button th:if="${loggedInOrNot == true}" class="dropbtn">My Account</button>
         <div class="dropdown-content">
-            <a href="#">Log Out</a>
-            <a href="#">Delete account</a>
+            <a th:if="${loggedInOrNot == true}" th:then="${loggedInOrNot == false}">Log Out</a>
+            <a th:href="@{/removeUser}" th:if="${loggedInOrNot == true}">Delete account</a>
         </div>
     </div>
 </nav>

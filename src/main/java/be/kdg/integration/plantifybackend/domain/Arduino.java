@@ -1,6 +1,6 @@
 package be.kdg.integration.plantifybackend.domain;
 
-import javax.persistence.*;
+import be.kdg.integration.plantifybackend.Util.RGBColor;
 
 /**
  * Arduino class

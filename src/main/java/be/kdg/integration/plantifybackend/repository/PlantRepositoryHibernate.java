@@ -3,11 +3,7 @@ package be.kdg.integration.plantifybackend.repository;
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
-import be.kdg.integration.plantifybackend.domain.RGBColor;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
-import be.kdg.integration.plantifybackend.domain.gson.PlantRowMapper;
-import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
-import be.kdg.integration.plantifybackend.domain.hibernate.ClientDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.DetailsDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.PlantDao;
 import org.slf4j.Logger;
@@ -39,7 +35,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
 
     private Plant daoToPlant(PlantDao plantDao){
         return new Plant(plantDao.getPlantName(), plantDao.getPlantType(),
-                new Arduino("xx", plantDao.getPhysicalIdentifier()), plantDao.getUserEmail());
+                new Arduino("xx", plantDao.getPhysicalIdentifier()),plantDao.getPlantId(), plantDao.getUserEmail());
     }
     @Override
     public List<Plant> getPlants() {
@@ -49,10 +45,15 @@ public class PlantRepositoryHibernate implements PlantRepository {
         List<PlantDao> daoList = em.createQuery("select a from PlantDao a",
                 PlantDao.class).getResultList();
         List<Plant> plantList = new ArrayList<>();
+        logger.debug("daoList:");
+        daoList.forEach(System.out::println);
         daoList.forEach(plantDao -> plantList.add(daoToPlant(plantDao)));
         logger.debug("plantList created");
         em.getTransaction().commit();
         em.close();
+//        logger.debug();
+        logger.debug("plantList:");
+        plantList.forEach(System.out::println);
         return plantList;
     }
 
@@ -108,7 +109,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
                 em.createQuery("select p from PlantDao p where p.physicalIdentifier="+physicalId+"; ",
                         PlantDao.class)
                         .getSingleResult();
-        DetailsDao detailsDao = new DetailsDao(plantDao.getPlantId().intValue(), details.getTemperature(), details.getHumidity(),
+        DetailsDao detailsDao = new DetailsDao(plantDao.getPlantId(), details.getTemperature(), details.getHumidity(),
                 details.getMoisture(), details.getTemperature());
         em.persist(detailsDao);
         logger.debug("readings saved");

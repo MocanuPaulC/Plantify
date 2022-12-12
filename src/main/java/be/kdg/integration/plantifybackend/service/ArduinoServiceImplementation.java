@@ -1,17 +1,13 @@
 package be.kdg.integration.plantifybackend.service;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
-import be.kdg.integration.plantifybackend.domain.Plant;
-import be.kdg.integration.plantifybackend.domain.RGBColor;
-import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
+import be.kdg.integration.plantifybackend.Util.RGBColor;
 import be.kdg.integration.plantifybackend.repository.ArduinoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

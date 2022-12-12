@@ -1,3 +1,9 @@
+TRUNCATE public.details;
+TRUNCATE public.plant CASCADE ;
+TRUNCATE public.arduino CASCADE ;
+TRUNCATE public.client CASCADE ;
+TRUNCATE public.detailsarchive;
+
 INSERT INTO public.client (email, password) VALUES ('fake@email.com', '12345');
 INSERT INTO public.client (email, password) VALUES ('fake2@email.com', '12345');
 

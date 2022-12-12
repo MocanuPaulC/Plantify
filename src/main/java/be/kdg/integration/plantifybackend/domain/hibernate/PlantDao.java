@@ -22,8 +22,8 @@ public class PlantDao {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long plantid;
+    @Column(name="plantid")
+    private int plantid;
 
     @Column(name = "useremail")
     private String userEmail;
@@ -40,7 +40,7 @@ public class PlantDao {
 
 
     @Column(name = "arduinophysicalidentifier")
-    private int physicalIdentifier;
+    private Integer physicalIdentifier;
 
     public PlantDao() {
 
@@ -58,7 +58,7 @@ public class PlantDao {
         return plantName;
     }
 
-    public Long getPlantId() {
+    public int getPlantId() {
         return plantid;
     }
 
@@ -68,5 +68,17 @@ public class PlantDao {
 
     public int getPhysicalIdentifier() {
         return physicalIdentifier;
+    }
+
+    @Override
+    public String toString() {
+        return "PlantDao{" +
+                "plantid=" + plantid +
+                ", userEmail='" + userEmail + '\'' +
+                ", plantName='" + plantName + '\'' +
+                ", plantType=" + plantType +
+                ", dateAdded=" + dateAdded +
+                ", physicalIdentifier=" + physicalIdentifier +
+                '}';
     }
 }

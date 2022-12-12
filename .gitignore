@@ -11,6 +11,7 @@ build/
 **/build/
 *.json
 src/main/resources/application.properties
+src/main/resources/mock.sql
 
 ### STS ###
 .apt_generated

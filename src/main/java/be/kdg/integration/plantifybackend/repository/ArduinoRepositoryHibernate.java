@@ -1,23 +1,10 @@
 package be.kdg.integration.plantifybackend.repository;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
-import be.kdg.integration.plantifybackend.domain.Plant;
-import be.kdg.integration.plantifybackend.domain.RGBColor;
+import be.kdg.integration.plantifybackend.Util.RGBColor;
 import be.kdg.integration.plantifybackend.domain.hibernate.ArduinoDao;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -25,11 +12,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class ArduinoRepositoryHibernate implements ArduinoRepository {
@@ -114,6 +96,7 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
+//        em.fi
         ArduinoDao arduinoDao = em.find(ArduinoDao.class, physicalId);
         em.remove(arduinoDao);
         logger.debug("deletion successful");

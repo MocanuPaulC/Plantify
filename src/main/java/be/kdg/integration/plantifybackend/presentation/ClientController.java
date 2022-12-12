@@ -8,9 +8,9 @@ import be.kdg.integration.plantifybackend.service.PlantService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -36,8 +36,8 @@ public class ClientController {
     // When deleting a client, we have to delete his arduinos first
     // Then his plants
     // Then his actual account
-    public void DeleteClient(){
-
+    @GetMapping("removeUser")
+    public void deleteClient(){
         String email="fake@email.com";
         String pass ="12345";
         logger.debug("delete client request received");
@@ -45,6 +45,7 @@ public class ClientController {
         // TO del plant, we need its id
         List<Plant> clientPlants = plantService.readPlants().stream()
                 .filter(plant -> plant.getEmailUser().equals(email)).toList();
+
 
         clientPlants.forEach(plant -> {
             arduinoService.removeArduino(plant.getArduino().getPhysicalIdentifier());
@@ -54,6 +55,11 @@ public class ClientController {
 
         clientService.removeClient(new Client(email,pass));
 
+    }
+
+    @PostMapping("removeUser")
+    public String removeUser() {
+        return "redirect:/index";
     }
 
 }
