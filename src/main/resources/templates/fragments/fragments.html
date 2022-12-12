@@ -31,7 +31,7 @@
     <div class="dropdown">
         <button th:if="${loggedInOrNot == true}" class="dropbtn">My Account</button>
         <div class="dropdown-content">
-            <a th:if="${loggedInOrNot == true}" th:then="${loggedInOrNot == false}">Log Out</a>
+            <a th:if="${loggedInOrNot == true}" th:href="@{/logout}">Log Out</a>
             <a th:href="@{/removeUser}" th:if="${loggedInOrNot == true}">Delete account</a>
         </div>
     </div>

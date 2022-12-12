@@ -21,11 +21,9 @@ import javax.validation.Valid;
  * controller for login.html
  */
 @Controller
-@RequestMapping("/login")
 public class LoginController {
     ClientService clientService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     public LoginController(ClientService clientService) {
         this.clientService = clientService;
@@ -37,7 +35,7 @@ public class LoginController {
      * @param model redundant
      * @return login.html
      */
-    @GetMapping
+    @GetMapping("/login")
     public String showUserView(HttpSession httpSession,Model model){
         Client client = (Client) httpSession.getAttribute("user");
         model.addAttribute("loggedInOrNot",false);
@@ -52,7 +50,7 @@ public class LoginController {
      * @param errors used to return login.html with errors if anything is invalidated in the viewmodel
      * @return depends on errors and if the user exists
      */
-    @PostMapping
+    @PostMapping("/login")
     public String checkUser(HttpSession httpSession, @Valid @ModelAttribute("loginViewModel") LoginViewModel
             loginViewModel, BindingResult errors){
         logger.debug("Checking user");
@@ -66,12 +64,20 @@ public class LoginController {
         Client clientToCheck = new Client(loginViewModel.getEmail(), loginViewModel.getPassword());
         if(clientService.checkClient(clientToCheck)){
             httpSession.setAttribute("user", clientToCheck);
+
             return "redirect:/dashboard";
         }
         else{
             return "redirect:/login?error";
         }
 
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession, Model model){
+        httpSession.setAttribute("user", null);
+        model.addAttribute("loggedInOrNot",false);
+        model.addAttribute("loginViewModel", new LoginViewModel());
+        return "redirect:/index";
     }
 }
 
