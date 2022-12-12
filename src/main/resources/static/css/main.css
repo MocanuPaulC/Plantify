@@ -10,7 +10,10 @@ body {
   margin-bottom: 200px;
   resize: none;
 }
-
+html{
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 main:not(#tableContainer table tbody td){
   margin-top: 10em;
   text-align: center;
