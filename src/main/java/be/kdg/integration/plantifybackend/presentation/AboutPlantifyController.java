@@ -20,6 +20,8 @@ public class AboutPlantifyController {
         }else {
             model.addAttribute("loggedInOrNot",false);
         }
+        System.out.println("gets here");
         return "aboutPlantify";
+
     }
 }
