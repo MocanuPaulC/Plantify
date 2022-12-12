@@ -4,6 +4,7 @@ import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.DetailsDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.PlantDao;
 import org.slf4j.Logger;
@@ -15,9 +16,9 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.*;
 
 @Repository
 public class PlantRepositoryHibernate implements PlantRepository {
@@ -40,6 +41,13 @@ public class PlantRepositoryHibernate implements PlantRepository {
 
     private void daoToPlantDetails(DetailsDao detailsDao,Plant plant){
         plant.setDetails(detailsDao.getMoisture(),detailsDao.getTemperature(),detailsDao.getHumidity(),detailsDao.getLight());
+    }
+
+    public List<ArchiveDao> getArchiveDaos(){
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        return em.createQuery("select a from ArchiveDao a",
+                ArchiveDao.class).getResultList();
     }
     @Override
     public List<Plant> getPlants() {
@@ -259,21 +267,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
                     maximumMoisture, minimumLight, maximumLight, counter);
             jdbcTemplate.execute(postData);
         }
-        String clearTable="DROP TABLE IF EXISTS details; " +
-                "CREATE TABLE details( " +
-                "    ID INT NOT NULL " +
-                "        GENERATED ALWAYS AS IDENTITY " +
-                "        PRIMARY KEY, " +
-                "    plantID INT NOT NULL " +
-                "        CONSTRAINT fk_plantID REFERENCES plant (plantID) " +
-                "            ON DELETE CASCADE, " +
-                "    temperature NUMERIC(10) NOT NULL, " +
-                "    humidity NUMERIC(10) NOT NULL, " +
-                "    moisture NUMERIC(10) NOT NULL, " +
-                "    light NUMERIC(10) NOT NULL, " +
-                "    refreshTime TIMESTAMP NOT NULL " +
-                "        DEFAULT CURRENT_TIMESTAMP " +
-                "); ";
+        String clearTable="TRUNCATE table details;";
         jdbcTemplate.execute(clearTable);
 
         logger.debug("archive successful");

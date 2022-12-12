@@ -4,6 +4,7 @@ import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public interface PlantService {
     void updateDBArchive();
 
     List<Plant> readPlants();
+
+    List<ArchiveDao> getArchiveByPlantId(int id);
+
 
     int getPlantPhysicalIdentifier(int plantId);
 

@@ -4,6 +4,7 @@ import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,6 +48,12 @@ public class PlantServiceImplementation implements PlantService{
      */
     public List<Plant> readPlants(){
         return plantRepository.getPlants();
+    }
+
+
+    @Override
+    public List<ArchiveDao> getArchiveByPlantId(int id) {
+        return plantRepository.getArchiveDaos().stream().filter(archiveDao -> archiveDao.getPlantid()==id).toList();
     }
 
     /**
