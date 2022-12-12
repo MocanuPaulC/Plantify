@@ -37,11 +37,17 @@ public class ClientController {
     // Then his plants
     // Then his actual account
     @GetMapping("removeUser")
-    public void deleteClient(){
-        String email="fake@email.com";
-        String pass ="12345";
+    public String deleteClient(){
+
+        return "removeUser";
+    }
+
+    @PostMapping("removeUser")
+    public String removeUser() {
         logger.debug("delete client request received");
         // TO del arduino, we need its phys id
+        String email="gay";
+        String pass="gayer";
         // TO del plant, we need its id
         List<Plant> clientPlants = plantService.readPlants().stream()
                 .filter(plant -> plant.getEmailUser().equals(email)).toList();
@@ -54,12 +60,8 @@ public class ClientController {
 
 
         clientService.removeClient(new Client(email,pass));
-
-    }
-
-    @PostMapping("removeUser")
-    public String removeUser() {
         return "redirect:/index";
+
     }
 
 }
