@@ -29,11 +29,6 @@ menu {
     --width: 20px;
 }
 
-body {
-    ovewrflow: hidden;
-}
-
-
 menu a {
     padding-right: 10px;
 }
