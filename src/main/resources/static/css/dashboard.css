@@ -4,30 +4,32 @@
     font-style: normal;
 }
 
-main{
-    margin-top: 10em;
-}
 /*---------------------------main ------------------------*/
-menu{
+html{
+    overflow-x: hidden;
+}
+main {
+    margin-top: 7em;
+
+}
+
+menu {
     display: flex;
     width: 85%;
     height: 30px;
     align-items: center;
     margin-bottom: 0;
 }
-#listForm{
+
+#listForm {
     height: 100%;
 }
+
 :root {
     --width: 20px;
 }
 
-body {
-    ovewrflow: hidden;
-}
-
-
-menu a{
+menu a {
     padding-right: 10px;
 }
 
@@ -57,16 +59,19 @@ menu a{
 .arrow-box:active .arrow-round {
     transform: rotate(1turn) scale(1.2);
 }
-.arrow-round input{
+
+.arrow-round input {
     opacity: 0;
 }
+
 /**/
-body #mainContainer{
+body #mainContainer {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
-#plantContainter{
+
+#plantContainter {
     width: 90%;
     display: flex;
     flex-wrap: wrap;
@@ -78,7 +83,7 @@ body #mainContainer{
     border-radius: 50px;
 }
 
-.plant{
+.plant {
     border: 3px solid grey;
     border-radius: 35px;
     width: 31%;
@@ -92,20 +97,20 @@ body #mainContainer{
     background-size: cover;
 }
 
-.plant h3{
+.plant h3 {
     padding-left: 5px;
 }
 
-.plant p{
+.plant p {
     padding-left: 15px;
 }
 
-.plant article{
+.plant article {
     text-align: center;
 }
 
-.button{
-    text-decoration:none;
+.button {
+    text-decoration: none;
     color: black;
     font-weight: bold;
     font-size: 20px;

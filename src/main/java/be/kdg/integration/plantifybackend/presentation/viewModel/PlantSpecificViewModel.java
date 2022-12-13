@@ -9,7 +9,7 @@ public class PlantSpecificViewModel {
     private int red;
     @Min(0)
     @Max(255)
-    private int green;
+    private int green ;
     @Min(0)
     @Max(255)
     private int blue;

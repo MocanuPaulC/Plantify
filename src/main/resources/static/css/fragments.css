@@ -3,10 +3,61 @@ body {
     font-weight: 400;
     font-style: normal;
 }
+/*
 img{
     width: 20em;
+}*/
+.navbar-nav{
+    display: flex;
+    top: 0;
+    justify-content: space-between;
+    position: fixed; /*  Set the navbar to fixed position*/
+    background-color: white;
+    left: 0;
+    width: 100%;
+}
+.left-0{
+    width: 70%;
+    display: flex;
+}
+.left-0 #picture {
+    width: 30%;
+}
+.left-0 a img{
+    width: 100%;
+}
+.left-0 .links{
+    display: flex;
+    width: 70%;
+    /*justify-content: space-between;*/
+}
+.left-0 .links .linkContainers{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.navbar-nav .dropdown{
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+}
+.dropdownContainer:not(.dropdown-content){
+    display: flex;
+   /* justify-content: center;
+    align-items: center;*/
+}
+
+.linkContainers a{
+
+    font-size: 1.2em;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+    color: black;
+}
+/*
 nav{
     position: absolute;
     top: 20px;
@@ -28,9 +79,9 @@ nav{
     background-color: white;
     justify-content: space-between;
     left: 0;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
+    position: fixed; //  Set the navbar to fixed position
+    top: 0; // Position the navbar at the top of the page
+    width: 100%; // Full width
 }
 
 
@@ -64,11 +115,11 @@ nav{
     position: absolute;
     top: 3.7em;
 }
-
+*/
 .footer {
     background-color: #4a6434;
     color: white;
-    height: 4em;
+    height: 3em;
     position: absolute;
     width: 100%;
     left: 0;
@@ -85,8 +136,7 @@ nav{
     font-family: quincy-cf, sans-serif;
     background-color: white;
     border: none;
-    margin-top: 55px;
-    margin-right: 40px;
+
     font-size: 16px;
 }
 

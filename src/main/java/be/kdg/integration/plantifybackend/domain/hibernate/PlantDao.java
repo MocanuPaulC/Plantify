@@ -2,6 +2,7 @@ package be.kdg.integration.plantifybackend.domain.hibernate;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.PlantType;
+import org.springframework.data.relational.core.sql.In;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
@@ -19,6 +20,15 @@ public class PlantDao {
         this.plantType = plantType;
         this.physicalIdentifier = physicalIdentifier;
         this.dateAdded = Timestamp.from(Instant.now());
+    }
+
+    public PlantDao(int plantid, String userEmail, String plantName, PlantType plantType, int physicalIdentifier) {
+        this.plantid = plantid;
+        this.userEmail = userEmail;
+        this.plantName = plantName;
+        this.plantType = plantType;
+        this.dateAdded = Timestamp.from(Instant.now());
+        this.physicalIdentifier = physicalIdentifier;
     }
 
     @Id

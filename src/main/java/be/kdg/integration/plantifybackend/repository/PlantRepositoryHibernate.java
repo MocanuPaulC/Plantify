@@ -5,6 +5,7 @@ import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
 import be.kdg.integration.plantifybackend.domain.gson.PlantForecastingMapper;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.DetailsDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.PlantDao;
 import org.slf4j.Logger;
@@ -22,6 +23,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.*;
 
 @Repository
 public class PlantRepositoryHibernate implements PlantRepository {
@@ -41,6 +45,17 @@ public class PlantRepositoryHibernate implements PlantRepository {
         return new Plant(plantDao.getPlantName(), plantDao.getPlantType(),
                 new Arduino("xx", plantDao.getPhysicalIdentifier()),plantDao.getPlantId(), plantDao.getUserEmail());
     }
+
+    private void daoToPlantDetails(DetailsDao detailsDao,Plant plant){
+        plant.setDetails(detailsDao.getMoisture(),detailsDao.getTemperature(),detailsDao.getHumidity(),detailsDao.getLight());
+    }
+
+    public List<ArchiveDao> getArchiveDaos(){
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        return em.createQuery("select a from ArchiveDao a",
+                ArchiveDao.class).getResultList();
+    }
     @Override
     public List<Plant> getPlants() {
         logger.debug("searching plants");
@@ -49,6 +64,9 @@ public class PlantRepositoryHibernate implements PlantRepository {
         List<PlantDao> daoList = em.createQuery("select a from PlantDao a",
                 PlantDao.class).getResultList();
         List<Plant> plantList = new ArrayList<>();
+
+        List<DetailsDao> detailsDaos= em.createQuery("select  a from DetailsDao a",DetailsDao.class).getResultList();
+
         logger.debug("daoList:");
         daoList.forEach(System.out::println);
         daoList.forEach(plantDao -> plantList.add(daoToPlant(plantDao)));
@@ -56,7 +74,18 @@ public class PlantRepositoryHibernate implements PlantRepository {
         em.getTransaction().commit();
         em.close();
 //        logger.debug();
+        logger.debug("plantDetails:");
+        detailsDaos.forEach(System.out::println);
+
         logger.debug("plantList:");
+        for(Plant plant: plantList){
+            if(!detailsDaos.stream().filter(detailsDao -> detailsDao.getPlantId()==plant.getId()).toList().isEmpty()){
+                daoToPlantDetails(detailsDaos.stream().
+                        filter(detailsDao -> detailsDao.getPlantId()==plant.getId())
+                        .toList().get(0),plant);
+            }
+        }
+
         plantList.forEach(System.out::println);
         return plantList;
     }
@@ -88,6 +117,17 @@ public class PlantRepositoryHibernate implements PlantRepository {
         logger.debug(plantList.toString());*/
     }
 
+    public Plant setPlantId(Plant plant){
+        if(jdbcTemplate.queryForObject("SELECT MAX(plantid) FROM plant", Integer.class)==null){
+            plant.setId(1);
+        }
+        else {
+            plant.setId(jdbcTemplate.queryForObject("SELECT MAX(plantid) FROM plant", Integer.class)+1);
+        }
+
+        return plant;
+    }
+
 
     @Override
     public Plant savePlant(Plant plant, Client client) {
@@ -95,6 +135,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         em.persist(new PlantDao(
+                plant.getId(),
                 client.getEmail(),
                 plant.getName(),
                 plant.getTypeOfPlant(),
@@ -249,6 +290,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
     }
 
     // kept usage of jdbctemplate, might change it later if i wanna torture myself
+    // :)
     @Override
     public void updateDBArchive() {
         logger.debug("Archiving plant details");
@@ -335,21 +377,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
                     maximumMoisture, minimumLight, maximumLight, counter);
             jdbcTemplate.execute(postData);
         }
-        String clearTable="DROP TABLE IF EXISTS details; " +
-                "CREATE TABLE details( " +
-                "    ID INT NOT NULL " +
-                "        GENERATED ALWAYS AS IDENTITY " +
-                "        PRIMARY KEY, " +
-                "    plantID INT NOT NULL " +
-                "        CONSTRAINT fk_plantID REFERENCES plant (plantID) " +
-                "            ON DELETE CASCADE, " +
-                "    temperature NUMERIC(10) NOT NULL, " +
-                "    humidity NUMERIC(10) NOT NULL, " +
-                "    moisture NUMERIC(10) NOT NULL, " +
-                "    light NUMERIC(10) NOT NULL, " +
-                "    refreshTime TIMESTAMP NOT NULL " +
-                "        DEFAULT CURRENT_TIMESTAMP " +
-                "); ";
+        String clearTable="TRUNCATE table details;";
         jdbcTemplate.execute(clearTable);
 
         logger.debug("archive successful");
