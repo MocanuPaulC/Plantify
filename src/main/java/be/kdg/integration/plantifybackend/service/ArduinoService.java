@@ -1,6 +1,7 @@
 package be.kdg.integration.plantifybackend.service;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
+import be.kdg.integration.plantifybackend.domain.PlantType;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface ArduinoService {
     List<Arduino> getArduinoList();
 
     String postMapping(int PhysicalId);
-
+    String SetUpConfig(PlantType plantType);
     void removeArduino(int physicalIdentifier);
 
 }
