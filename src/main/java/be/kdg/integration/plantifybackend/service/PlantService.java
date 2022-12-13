@@ -4,6 +4,7 @@ import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.domain.gson.PlantForecastingMapper;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface PlantService {
     int getPlantPhysicalIdentifier(int plantId);
 
     void removePlant(int id);
+
+    PlantForecastingMapper getForecastingData();
 }

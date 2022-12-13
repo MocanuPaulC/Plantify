@@ -67,10 +67,10 @@ CREATE TABLE DetailsArchive
     plantID            INT         NOT NULL
         CONSTRAINT fk_plantID REFERENCES Plant (plantID)
             ON DELETE CASCADE,
-    temperatureAvg     NUMERIC(10) NOT NULL,
-    humidityAvg        NUMERIC(10) NOT NULL,
-    moistureAvg        NUMERIC(10) NOT NULL,
-    lightAvg           NUMERIC(10) NOT NULL,
+    temperatureAvg     INT NOT NULL,
+    humidityAvg        INT NOT NULL,
+    moistureAvg        INT NOT NULL,
+    lightAvg           INT NOT NULL,
     refreshTime        TIMESTAMP   NOT NULL
         DEFAULT CURRENT_TIMESTAMP,
     minimumTemperature numeric(10) NOT NULL,
