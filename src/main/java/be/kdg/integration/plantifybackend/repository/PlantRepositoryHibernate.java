@@ -192,7 +192,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
             // gets the present working directory
             String pwd= System.getProperty("user.dir");
             System.out.println(pwd);
-            // insert the location of your python in here(tutorial: https://datatofish.com/locate-python-windows/)
+            // insert the location of your python  in here(tutorial: https://datatofish.com/locate-python-windows/)
             String[] pbCommand = { "C:\\Users\\Max\\AppData\\Local\\Programs\\Python\\Python311\\python.exe", pwd+"\\src\\main\\resources\\script.py" };
 
             ProcessBuilder processBuilder = new ProcessBuilder(pbCommand);
