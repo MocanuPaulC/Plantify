@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -96,7 +97,8 @@ public class PlantListController {
             model.addAttribute("loggedInOrNot", true);
             model.addAttribute("id", id);
             List<ArchiveDao> archiveDaos = plantService.getArchiveByPlantId(Integer.parseInt(id));
-            archiveDaos.forEach(System.out::println);
+
+            model.addAttribute("archiveDaos", archiveDaos.toArray());
             return "specificPlant";
         }else {
             return "login";
