@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
- * class for usage in JPA, communicates
+ * class for usage in JPA hibernate, communicates with detailsarchive table
  */
 @Entity
 @Table(name="detailsarchive")

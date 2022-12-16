@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * class for usage in JPA hibernate, communicates with client table
+ */
 @Entity
 @Table(name = "client")
 public class ClientDao {

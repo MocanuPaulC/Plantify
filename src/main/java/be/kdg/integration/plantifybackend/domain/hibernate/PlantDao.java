@@ -10,6 +10,9 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.Instant;
 
+/**
+ * class for usage in JPA hibernate, communicates with plant table
+ */
 @Entity
 @Table(name = "plant")
 public class PlantDao {

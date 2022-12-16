@@ -2,6 +2,10 @@ package be.kdg.integration.plantifybackend.Util;
 
 import java.util.List;
 
+/**
+ * util class for calculating the moving average of a list of values over a certain period
+ * Written by ChatGPT
+ */
 public class MovingAverage {
     public static double calculate(List<Integer> values, int period) {
         if (values.size() < period) {

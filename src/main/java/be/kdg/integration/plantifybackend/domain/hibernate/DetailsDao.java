@@ -3,6 +3,9 @@ package be.kdg.integration.plantifybackend.domain.hibernate;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+/**
+ * class for usage in JPA hibernate, communicates with details table
+ */
 @Entity
 @Table(name = "details")
 public class DetailsDao {

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+/**
+ * Controller for removeUser.html
+ */
 @Controller
 public class ClientController {
 
@@ -50,6 +52,13 @@ public class ClientController {
         return "removeUser";
     }
 
+    /**
+     * runs on removal of a user, removes plants of user and arduino of these plants first, then removes the user
+     * @param email email of the user
+     * @param password password of the user
+     * @param httpSession httpsession to remove the user
+     * @return index.html
+     */
     @PostMapping("removeUser")
     public String removeUser(String email, String password, HttpSession httpSession) {
         logger.debug("delete client request received");

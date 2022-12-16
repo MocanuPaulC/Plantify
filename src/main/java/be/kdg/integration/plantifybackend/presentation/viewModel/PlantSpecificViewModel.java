@@ -2,6 +2,9 @@ package be.kdg.integration.plantifybackend.presentation.viewModel;
 
 import javax.validation.constraints.*;
 
+/**
+ * ViewModel for storing and BeanValidating custom colors from the plantList.html color picker
+ */
 public class PlantSpecificViewModel {
     private String hexadecimal;
     @Min(0)
