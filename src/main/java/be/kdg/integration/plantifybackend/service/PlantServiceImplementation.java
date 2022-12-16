@@ -92,8 +92,8 @@ public class PlantServiceImplementation implements PlantService{
     }
 
     @Override
-    public PlantForecastingMapper getForecastingData(){
-        return plantRepository.getForecastingData();
+    public PlantForecastingMapper getForecastingData(int plantId){
+        return plantRepository.getForecastingData(plantId);
     }
 
 }

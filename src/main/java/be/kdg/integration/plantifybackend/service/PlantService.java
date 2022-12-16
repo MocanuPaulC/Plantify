@@ -26,5 +26,5 @@ public interface PlantService {
 
     void removePlant(int id);
 
-    PlantForecastingMapper getForecastingData();
+    PlantForecastingMapper getForecastingData(int plantId);
 }

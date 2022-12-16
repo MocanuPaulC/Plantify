@@ -5,11 +5,12 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+/**
+ * class for usage in JPA, communicates
+ */
 @Entity
 @Table(name="detailsarchive")
 public class ArchiveDao {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;

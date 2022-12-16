@@ -25,5 +25,5 @@ public interface PlantRepository {
 
     void deletePlant(int id);
 
-    PlantForecastingMapper getForecastingData();
+    PlantForecastingMapper getForecastingData(int plantId);
 }
