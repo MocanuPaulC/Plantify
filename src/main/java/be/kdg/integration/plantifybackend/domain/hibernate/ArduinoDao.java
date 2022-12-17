@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * class for usage in JPA hibernate, communicates with arduino table
+ */
 @Entity
 @Table(name = "arduino")
 public class ArduinoDao {

@@ -2,6 +2,7 @@ package be.kdg.integration.plantifybackend.service;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.Util.RGBColor;
+import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.repository.ArduinoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,8 +70,15 @@ public class ArduinoServiceImplementation implements ArduinoService{
     public String postMapping(int physicalIdentifier) {
         logger.debug(physicalIdentifier + " is the physical identifier");
         Arduino arduino = getArduinoList().stream().filter(ar -> ar.getPhysicalIdentifier() == physicalIdentifier).toList().get(0);
-        return String.format("P%dL%dC%03d,%03d,%03d",arduino.getPumpInstruction(),arduino.getLedSetting() ? 1 : 0
+        return String.format("%dP%dL%dC%03d,%03d,%03d",1,arduino.getPumpInstruction(),arduino.getLedSetting() ? 1 : 0
                 ,arduino.getLedColor().getRed(),arduino.getLedColor().getGreen(),arduino.getLedColor().getBlue());
+//        return String.format("%d%2d%2d%2d%2d%2d%3d",1,plantType.getMinMoisture(),plantType.getMaxMoisture(),plantType.getMinHumidity(),
+//                plantType.getMinTemp(),plantType.getMaxTemp(),plantType.getMaxBrightness());
+    }
+
+    public String SetUpConfig(PlantType plantType){
+        return String.format("%d%2d%2d%2d%2d%2d%3d",2,plantType.getMinMoisture(),plantType.getMaxMoisture(),plantType.getMinHumidity(),
+                plantType.getMinTemp(),plantType.getMaxTemp(),plantType.getMaxBrightness());
     }
 
     @Override

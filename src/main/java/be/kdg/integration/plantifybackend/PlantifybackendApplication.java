@@ -10,6 +10,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import javax.script.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +33,16 @@ public class PlantifybackendApplication{
 		// archiving functionality
 		ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
 		ses.scheduleAtFixedRate(context.getBean(PlantService.class)::updateDBArchive,
-				20, 20, TimeUnit.HOURS);
+				0, 20, TimeUnit.HOURS);
+
+		/*try (PythonInterpreter pyInterp = new PythonInterpreter()) {
+			StringWriter output = new StringWriter();
+			pyInterp.setOut(output);
+			String pwd= System.getProperty("user.dir");
+			pyInterp.execfile(pwd+"\\src\\main\\resources\\script.py");
+
+			System.out.println(output);
+		}*/
 
 
 //

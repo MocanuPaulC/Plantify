@@ -4,6 +4,8 @@ import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.PlantType;
+import be.kdg.integration.plantifybackend.domain.gson.PlantForecastingMapper;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,6 +51,12 @@ public class PlantServiceImplementation implements PlantService{
         return plantRepository.getPlants();
     }
 
+
+    @Override
+    public List<ArchiveDao> getArchiveByPlantId(int id) {
+        return plantRepository.getArchiveDaos().stream().filter(archiveDao -> archiveDao.getPlantid()==id).toList();
+    }
+
     /**
      * calls function from the repository to update plant data based on ID of the plant
      * @param details readings from the arduino
@@ -83,12 +91,9 @@ public class PlantServiceImplementation implements PlantService{
         plantRepository.deletePlant(id);
     }
 
-    //    Refactor
-
-    /**
-     * calls function from the repository to update plant data based on ID of the arduino
-     * @param details readings from the arduino
-     * @param physicalId id from the arduino that is reading
-     */
+    @Override
+    public PlantForecastingMapper getForecastingData(int plantId){
+        return plantRepository.getForecastingData(plantId);
+    }
 
 }

@@ -2,6 +2,7 @@ package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.Client;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.presentation.viewModel.PlantSpecificViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controller for plantlist.html
@@ -54,6 +57,9 @@ public class PlantListController {
 //            System.out.println(plantService.readPlants().stream()
 //                    .filter(plant -> plant.getEmailUser()
 //                            .equals(email)).toList());
+//            List<Double> avgTemp= plantService.readPlants().stream()
+//                    .filter(plant -> plant.getId()==id)
+//                    .map(plant -> plant.getDetails().getTemperature()).toList();
             model.addAttribute("plants", plantService.readPlants().stream()
                     .filter(plant -> plant.getEmailUser()
                             .equals(email)).toList());
@@ -90,6 +96,9 @@ public class PlantListController {
             model.addAttribute("specPlant", plant);
             model.addAttribute("loggedInOrNot", true);
             model.addAttribute("id", id);
+            List<ArchiveDao> archiveDaos = plantService.getArchiveByPlantId(Integer.parseInt(id));
+
+            model.addAttribute("archiveDaos", archiveDaos.toArray());
             return "specificPlant";
         }else {
             return "login";

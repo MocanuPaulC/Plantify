@@ -1,0 +1,28 @@
+#folderContainer {
+    width: 100%;
+    margin-top: 10em;
+}
+#graphContainer{
+    text-align: -webkit-center;
+}
+#graphContainer .nav{
+    width: 80%;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #4a6434 !important;
+}
+.nav-pills .nav-link {
+    background: 0 0;
+    border: 0;
+    border-radius: 0.25rem;
+    color: black;
+}
+
+.tab-pane{
+    width: 80%;
+}
+.tab-pane{
+    width: 900px;
+    height: 500px;
+}

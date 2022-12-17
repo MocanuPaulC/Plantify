@@ -1,9 +1,12 @@
 package be.kdg.integration.plantifybackend.repository;
 
+import be.kdg.integration.plantifybackend.Util.MovingAverage;
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.gson.PlantDetailsRowMapper;
+import be.kdg.integration.plantifybackend.domain.gson.PlantForecastingMapper;
+import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.DetailsDao;
 import be.kdg.integration.plantifybackend.domain.hibernate.PlantDao;
 import org.slf4j.Logger;
@@ -15,9 +18,15 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.*;
 
 @Repository
 public class PlantRepositoryHibernate implements PlantRepository {
@@ -40,6 +49,13 @@ public class PlantRepositoryHibernate implements PlantRepository {
 
     private void daoToPlantDetails(DetailsDao detailsDao,Plant plant){
         plant.setDetails(detailsDao.getMoisture(),detailsDao.getTemperature(),detailsDao.getHumidity(),detailsDao.getLight());
+    }
+
+    public List<ArchiveDao> getArchiveDaos(){
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        return em.createQuery("select a from ArchiveDao a",
+                ArchiveDao.class).getResultList();
     }
     @Override
     public List<Plant> getPlants() {
@@ -171,6 +187,158 @@ public class PlantRepositoryHibernate implements PlantRepository {
         em.close();
     }
 
+    @Override
+    public PlantForecastingMapper getForecastingData(int plantId){
+        /*
+        // gets the present working directory
+        String pwd= System.getProperty("user.dir");
+        System.out.println(pwd);
+        // insert the location of your python  in here(tutorial: https://datatofish.com/locate-python-windows/)
+        String[] pbCommand = { "C:\\Users\\Max\\AppData\\Local\\Programs\\Python\\Python311\\python.exe", pwd+"\\src\\main\\resources\\script.py" };
+
+        ProcessBuilder processBuilder = new ProcessBuilder(pbCommand);
+
+        processBuilder.redirectErrorStream(true);
+
+        Process process = processBuilder.start();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String readline;
+        int line = 0;
+        boolean pastComma=false;
+        int beforeCommaPower=0;
+        int floatPower=1;
+        float number=0;*/
+        List<Integer> tempAvg = new ArrayList<>();
+        List<Integer> humidityAvg = new ArrayList<>();
+        List<Integer> moistureAvg = new ArrayList<>();
+        List<Integer> lightAvg = new ArrayList<>();
+
+        // retrieve archive data
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        List<ArchiveDao> archiveList =  em.createQuery("select a from ArchiveDao a where a.plantid="+plantId+"; ",
+                        ArchiveDao.class)
+                        .getResultList();
+        em.getTransaction().commit();
+        em.close();
+
+        // check if archive list is long enough for moving average calculation
+        if(archiveList.size()<4){
+            System.out.println("There is too little archive data, only "+archiveList.size()+" times of data");
+        }
+        else{
+            // separate archive data into lists
+            for (ArchiveDao archiveDao : archiveList) {
+                tempAvg.add(archiveDao.getTemperatureavg());
+                humidityAvg.add(archiveDao.getHumidityavg());
+                moistureAvg.add(archiveDao.getMoistureavg());
+                lightAvg.add(archiveDao.getLightavg());
+            }
+
+            // calculate moving averages and add them to the lists, repeat 4 times
+            for (int i = 0; i < 4; i++) {
+                tempAvg.add((int)MovingAverage.calculate(tempAvg, 4));
+                humidityAvg.add((int)MovingAverage.calculate(humidityAvg, 4));
+                moistureAvg.add((int)MovingAverage.calculate(moistureAvg, 4));
+                lightAvg.add((int)MovingAverage.calculate(lightAvg, 4));
+            }
+
+            ////// i created 2 options for retrieving the values, you can remove and add comments to either option,
+            // whichever is best
+
+            // option 1
+            // return the calculated averages + the old values
+            //return new PlantForecastingMapper(tempAvg, humidityAvg, moistureAvg, lightAvg);
+
+            // option 2
+            // return the calculated averages without the old values
+            int from = tempAvg.size()-4; // inclusive
+            int to = tempAvg.size(); // exclusive
+            return new PlantForecastingMapper(tempAvg.subList(from, to),
+                    humidityAvg.subList(from, to),
+                    moistureAvg.subList(from, to),
+                    lightAvg.subList(from, to));
+        }
+
+
+        /*int listCounter=0;
+
+        while ((readline = reader.readLine()) != null) {
+            System.out.println(line++ + " " + readline);
+            if(readline.charAt(0)=='['){
+                for (int i = 2; i < readline.length(); i++) {
+                    char currentChar = readline.charAt(i);
+                    if(currentChar=='.'){
+                        pastComma =true;
+                    }
+                    else if(currentChar==','){
+                        i++;
+                        if(listCounter==0){
+                            tempAvg.add((int)number);
+                        }
+                        else if(listCounter==1){
+                            humidityAvg.add((int)number);
+                        }
+                        else if(listCounter==2){
+                            moistureAvg.add((int)number);
+                        }
+                        else if(listCounter==3){
+                            lightAvg.add((int)number);
+                        }
+                        number=0;
+                        floatPower=1;
+                        beforeCommaPower=0;
+                        pastComma=false;
+                    }
+                    else if(currentChar==']'){
+                        if(!(readline.charAt(i-1)==']')){
+                            i+=3;
+                            if(listCounter==0){
+                                tempAvg.add((int)number);
+                            }
+                            else if(listCounter==1){
+                                humidityAvg.add((int)number);
+                            }
+                            else if(listCounter==2){
+                                moistureAvg.add((int)number);
+                            }
+                            else if(listCounter==3){
+                                lightAvg.add((int)number);
+                            }
+                            floatPower=1;
+                            beforeCommaPower=0;
+                            pastComma=false;
+                            number=0;
+                            listCounter++;
+                        }
+                    }
+                    else {
+                        if(floatPower<2){
+                            if(pastComma){
+                                number+=((float) (currentChar -'0') )*((((float)1)/(Math.pow(10, floatPower))));
+                                floatPower++;
+                            }
+                            else {
+                                number+=((float) (currentChar -'0') )*((Math.pow(10, beforeCommaPower)));
+                                beforeCommaPower++;
+                            }
+                        }
+
+                    }
+
+
+                };
+            }
+        }
+        System.out.println("done");
+        return new PlantForecastingMapper(tempAvg, humidityAvg, moistureAvg, lightAvg);
+
+    } catch (IOException e){
+        e.printStackTrace();
+    }*/
+        return null;
+    }
+
     // kept usage of jdbctemplate, might change it later if i wanna torture myself
     // :)
     @Override
@@ -259,21 +427,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
                     maximumMoisture, minimumLight, maximumLight, counter);
             jdbcTemplate.execute(postData);
         }
-        String clearTable="DROP TABLE IF EXISTS details; " +
-                "CREATE TABLE details( " +
-                "    ID INT NOT NULL " +
-                "        GENERATED ALWAYS AS IDENTITY " +
-                "        PRIMARY KEY, " +
-                "    plantID INT NOT NULL " +
-                "        CONSTRAINT fk_plantID REFERENCES plant (plantID) " +
-                "            ON DELETE CASCADE, " +
-                "    temperature NUMERIC(10) NOT NULL, " +
-                "    humidity NUMERIC(10) NOT NULL, " +
-                "    moisture NUMERIC(10) NOT NULL, " +
-                "    light NUMERIC(10) NOT NULL, " +
-                "    refreshTime TIMESTAMP NOT NULL " +
-                "        DEFAULT CURRENT_TIMESTAMP " +
-                "); ";
+        String clearTable="TRUNCATE table details;";
         jdbcTemplate.execute(clearTable);
 
         logger.debug("archive successful");
