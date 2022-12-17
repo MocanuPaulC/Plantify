@@ -50,13 +50,13 @@ img{
 }
 
 .linkContainers a{
-
     font-size: 1.2em;
     padding-left: 10px;
     padding-right: 10px;
     text-decoration: none;
     color: black;
 }
+
 /*
 nav{
     position: absolute;
@@ -120,10 +120,12 @@ nav{
     background-color: #4a6434;
     color: white;
     height: 3em;
-    position: absolute;
+    /*position: absolute;*/
     width: 100%;
-    left: 0;
+    /*left: 0;*/
+    /*bottom: 0;*/
 }
+
 .footer:not(#dashboardBody .footer){
     top: 100%;
 }
@@ -136,13 +138,14 @@ nav{
     font-family: quincy-cf, sans-serif;
     background-color: white;
     border: none;
-
     font-size: 16px;
 }
 
 .dropdown {
-    position: relative;
+    position: absolute;
     display: inline-block;
+    right: 2em;
+    top: 3.2em;
 }
 
 .dropdown-content {
@@ -151,6 +154,7 @@ nav{
     background-color: #f1f1f1;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
+    top: 1.5em;
 }
 
 .dropdown-content a {

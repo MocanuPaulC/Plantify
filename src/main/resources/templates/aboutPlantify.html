@@ -5,7 +5,8 @@
     <title>About Plantify</title>
     <link rel="icon" href="/img/icon.png">
     <link rel="stylesheet" type="text/css" media="all" href="/css/forms.css" th:href="@{/css/forms.css}"/>
-    <link rel="stylesheet" type="text/css" media="all" href="/css/aboutPlantify.css" th:href="@{/css/aboutPlantify.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/aboutPlantify.css"
+          th:href="@{/css/aboutPlantify.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/fragments.css" th:href="@{/css/fragments.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css} ">
@@ -17,67 +18,43 @@
 
 <main>
     <h1>About Plantify</h1>
-<!--    <p>-->
-<!--        Plantify is the first digital watering system that has a built-in reservoir. <br> It was created to make-->
-<!--        it easier to take care of plants by notifying the client that they need to water<br> their plant or that they need to refill-->
-<!--        the reservoir. By building an easy-to-understand platform,<br> makes creating an account and installing the device an-->
-<!--        easy task.-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        The watering system was created using Arduino components and C programming,<br> while the self-watering -->
-<!--        pot is made using 3D printing and connected via Wi-Fi to make Plantify wireless.-->
-<!--    </p>-->
-    <p>
-        Creating Plantify was a long and not-easy journey. We spent almost a day brainstorming ideas for our Integration project,
-        then we thought "What would be a creative way to improve our day-to-day lives as busy students?" and collectively
-        agreed that a little greenery would make us more motivated and satisfied with our surroundings. And, because taking care
-        of a bunch of plants would be too time-consuming and meticulous, therefore we decided that our product would revolve around
-        solving this issue.
-    </p>
-    <p>
-        After coming up with the idea the hard part came: building a functioning product and a user-friendly platform that
-        manages the user's and the plant's details. The product itself is made using Arduino products and coded in C language.
-        Then, we incorporated all the physical elements into a custom 3D-printed pot that was made in collaboration with Antistatic.
-        Everything is concealed by the pot and the plywood surrounding it so that the inside wires are not damaged. More, inside there
-        is a plastic pump that takes the optimal quantity of water necessary that is stored in a reservoir at the bottom of the product.
-        Around the pot, there is a LED strip that indicates the status of the plant, without having to open the computer and checking the
-        website: green means that the plant is between optimal parameters, yellow that one or two parameters are out of bound, and red
-        indicates that the plant is in critical condition.
-    </p>
+    
+    <div class="container">
+        <img th:src="@{/img/team_picture.png}" alt="picture of the team" src="../static/img/team_picture.png">
+        <div>
+            <p>
+                Creating Plantify was a long and not-easy journey. We spent almost a day brainstorming ideas for our
+                Integration project,
+                then we thought "What would be a creative way to improve our day-to-day lives as busy students?" and
+                collectively
+                agreed that a little greenery would make us more motivated and satisfied with our surroundings. And,
+                because taking care
+                of a bunch of plants would be too time-consuming and meticulous, therefore we decided that our product
+                would revolve around
+                solving this issue.
+            </p>
+            <p>
+                After coming up with the idea the hard part came: building a functioning product and a user-friendly
+                platform that
+                manages the user's and the plant's details. The product itself is made using Arduino products and coded
+                in C language.
+                Then, we incorporated all the physical elements into a custom 3D-printed pot that was made in
+                collaboration with Antistatic.
+                Everything is concealed by the pot and the plywood surrounding it so that the inside wires are not
+                damaged. More, inside there
+                is a plastic pump that takes the optimal quantity of water necessary that is stored in a reservoir at
+                the bottom of the product.
+                Around the pot, there is a LED strip that indicates the status of the plant, without having to open the
+                computer and checking the
+                website: green means that the plant is between optimal parameters, yellow that one or two parameters are
+                out of bound, and red
+                indicates that the plant is in critical condition.
+            </p>
+        </div>
+    </div>
 
-    <div>
-        <img th:src="@{/img/team_picture.png}" alt="picture of the team" src="/img/team_picture.jpeg">
-        <ol>
-            <li>Paul Mocanu</li>
-            <ul>
-                <li>Project Manager</li>
-            </ul>
-        </ol>
-        <ol>
-            <li>Elliot Hermans</li>
-            <ul>
-                <li>Front-End Developer</li>
-            </ul>
-        </ol>
-        <ol>
-            <li>Max Etmans</li>
-            <ul>
-                <li>Database Manager</li>
-            </ul>
-        </ol>
-        <ol>
-            <li>Firas Nohra</li>
-            <ul>
-                <li>Arduino Developer</li>
-            </ul>
-        </ol>
-        <ol>
-            <li>Alexia Cismaru</li>
-            <ul>
-                <li>Front-End Developer</li>
-                <li>Designer</li>
-            </ul>
-        </ol>
+    <div class="teamHierachy">
+        <img th:src="@{/img/team.png}" src="../static/img/team.png" alt="team hierarchy">
     </div>
 </main>
 

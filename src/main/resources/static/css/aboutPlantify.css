@@ -14,7 +14,7 @@ body{
     font-weight: 400;
     /*text-align: center;*/
     height: 100%;
-    margin-bottom: 200px;
+    margin: 0;
 }
 
 main{
@@ -28,4 +28,20 @@ main>h1{
 
 p{
     font-size: 20px;
+}
+
+img{
+    width: 40%;
+}
+
+.container{
+    display: flex;
+    background-color: white;
+}
+
+.teamHierachy{
+    margin-top: 10px;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
 }
