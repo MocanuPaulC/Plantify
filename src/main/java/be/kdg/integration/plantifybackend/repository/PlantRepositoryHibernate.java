@@ -21,6 +21,7 @@ import javax.persistence.PersistenceUnit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -89,33 +90,6 @@ public class PlantRepositoryHibernate implements PlantRepository {
 
         plantList.forEach(System.out::println);
         return plantList;
-    }
-
-    @Override
-    public void getPlantsFromDB(){
-        /*
-        logger.debug("getting plants from database");
-        String getPlants = "SELECT plantid,useremail, plantname,planttype, arduinophysicalidentifier, series " +
-                "FROM plant " +
-                "JOIN arduino a on a.physicalidentifier = plant.arduinophysicalidentifier";
-        plantList = jdbcTemplate.query(getPlants, new PlantRowMapper());
-        String getDetails = """
-                SELECT p.plantid, p.temperature,p.humidity,p.moisture,p.light,p.refreshtime
-                FROM details AS p
-                INNER JOIN (
-                  SELECT plantid, MAX(refreshtime) AS date
-                  FROM details
-                  GROUP BY plantid
-                ) tm ON p.plantid = tm.plantid AND p.refreshtime = tm.date;""" ;
-        List<Plant> tempPlantList = jdbcTemplate.query(getDetails,new PlantDetailsRowMapper());
-        for (Plant value : tempPlantList) {
-            for (Plant plant : plantList) {
-                if (plant.getId() == value.getId()) {
-                    plant.setDetails(value.getDetails());
-                }
-            }
-        }
-        logger.debug(plantList.toString());*/
     }
 
     public Plant setPlantId(Plant plant){
@@ -188,7 +162,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
     }
 
     @Override
-    public PlantForecastingMapper getForecastingData(int plantId){
+    public PlantForecastingMapper getForecastingData(int plantId) throws SQLException {
         /*
         // gets the present working directory
         String pwd= System.getProperty("user.dir");
@@ -225,6 +199,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
         // check if archive list is long enough for moving average calculation
         if(archiveList.size()<4){
             System.out.println("There is too little archive data, only "+archiveList.size()+" times of data");
+            throw new SQLException("Not enough data");
         }
         else{
             // separate archive data into lists
@@ -336,7 +311,6 @@ public class PlantRepositoryHibernate implements PlantRepository {
     } catch (IOException e){
         e.printStackTrace();
     }*/
-        return null;
     }
 
     // kept usage of jdbctemplate, might change it later if i wanna torture myself

@@ -38,10 +38,6 @@ public class PlantServiceImplementation implements PlantService{
         return plantRepository.savePlant(plant, client);
 
     }
-    @Override
-    public void getPlantFromDB(){
-        plantRepository.getPlantsFromDB();
-    }
 
     /**
      * gets all the plant
