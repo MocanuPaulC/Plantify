@@ -52,6 +52,8 @@ public class PlantRepositoryHibernate implements PlantRepository {
         plant.setDetails(detailsDao.getMoisture(),detailsDao.getTemperature(),detailsDao.getHumidity(),detailsDao.getLight());
     }
 
+
+
     public List<ArchiveDao> getArchiveDaos(){
         EntityManager em = entityManagerFactory.createEntityManager();
 

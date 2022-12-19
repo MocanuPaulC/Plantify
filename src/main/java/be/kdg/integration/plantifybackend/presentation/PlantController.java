@@ -101,7 +101,7 @@ public class PlantController {
             logger.debug("post request saved");
         }
 
-        model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId));
+        model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId,1,plantService.getPlantByPhysId(physicalId).getTypeOfPlant(),null));
 
         return "addetails";
     }

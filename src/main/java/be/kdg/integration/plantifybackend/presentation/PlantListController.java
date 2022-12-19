@@ -130,6 +130,18 @@ public class PlantListController {
                 (short) plantSpecificViewModel.getRed(),
                 (short) plantSpecificViewModel.getGreen(),
                 (short) plantSpecificViewModel.getBlue());
+        model.addAttribute("arduinoConfiguration", arduinoService.postMapping(plantService.getPlantPhysicalIdentifier(Integer.parseInt(id)),3,null,String.format("%3d%3d%3d",(short) plantSpecificViewModel.getRed(),
+                (short) plantSpecificViewModel.getGreen(),
+                (short) plantSpecificViewModel.getBlue())));
+        return "redirect:/plantList/{id}";
+    }
+
+    @GetMapping("/plantList/reset/{id}")
+    public String resetPlantLed(@PathVariable String id, Model model, HttpSession httpSession){
+        int physicalId=plantService.getPlantPhysicalIdentifier(Integer.parseInt(id));
+        arduinoService.setLedSetting(physicalId,false);
+        model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId,3,null,null));
+
         return "redirect:/plantList/{id}";
     }
 
