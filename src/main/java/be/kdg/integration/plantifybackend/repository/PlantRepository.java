@@ -1,10 +1,9 @@
 package be.kdg.integration.plantifybackend.repository;
 
-import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
-import be.kdg.integration.plantifybackend.domain.gson.PlantForecastingMapper;
+import be.kdg.integration.plantifybackend.domain.mappers.PlantForecastingMapper;
 
 import java.util.List;
 

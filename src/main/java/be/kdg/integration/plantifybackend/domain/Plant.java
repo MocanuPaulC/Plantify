@@ -88,20 +88,9 @@ public class Plant implements Serializable {
     /**
      * Initializer of Details of the plant
      */
-    private Details details=new Details();
+    private final Details details=new Details();
 
-    public void setDetails(double moisture,double temp, double humid,double brightness){
-        this.details.setMoisture(moisture);
-        this.details.setTemperature(temp);
-        this.details.setHumidity(humid);
-        this.details.setBrightness(brightness);
-    }
-    public void setDetails(Details details){
-        this.details.setHumidity(details.getHumidity());
-        this.details.setTemperature(details.getTemperature());
-        this.details.setMoisture(details.getMoisture());
-        this.details.setBrightness(details.getBrightness());
-    }
+
 
     /**
      * Initializer for RowMappers
@@ -128,6 +117,20 @@ public class Plant implements Serializable {
         this.arduino = arduino;
         this.id = id;
         this.emailUser = emailUser;
+    }
+
+    public void setDetails(double moisture,double temp, double humid,double brightness){
+        this.details.setMoisture(moisture);
+        this.details.setTemperature(temp);
+        this.details.setHumidity(humid);
+        this.details.setBrightness(brightness);
+    }
+
+    public void setDetails(Details details){
+        this.details.setHumidity(details.getHumidity());
+        this.details.setTemperature(details.getTemperature());
+        this.details.setMoisture(details.getMoisture());
+        this.details.setBrightness(details.getBrightness());
     }
 
     public void setEmailUser(String emailUser) {

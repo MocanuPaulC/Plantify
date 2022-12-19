@@ -17,22 +17,7 @@ import java.time.Instant;
 @Table(name = "plant")
 public class PlantDao {
 
-    public PlantDao(String userEmail, String plantName, PlantType plantType, int physicalIdentifier) {
-        this.userEmail = userEmail;
-        this.plantName = plantName;
-        this.plantType = plantType;
-        this.physicalIdentifier = physicalIdentifier;
-        this.dateAdded = Timestamp.from(Instant.now());
-    }
 
-    public PlantDao(int plantid, String userEmail, String plantName, PlantType plantType, int physicalIdentifier) {
-        this.plantid = plantid;
-        this.userEmail = userEmail;
-        this.plantName = plantName;
-        this.plantType = plantType;
-        this.dateAdded = Timestamp.from(Instant.now());
-        this.physicalIdentifier = physicalIdentifier;
-    }
 
     @Id
     @Column(name="plantid")
@@ -54,6 +39,15 @@ public class PlantDao {
 
     @Column(name = "arduinophysicalidentifier")
     private Integer physicalIdentifier;
+
+    public PlantDao(int plantid, String userEmail, String plantName, PlantType plantType, int physicalIdentifier) {
+        this.plantid = plantid;
+        this.userEmail = userEmail;
+        this.plantName = plantName;
+        this.plantType = plantType;
+        this.dateAdded = Timestamp.from(Instant.now());
+        this.physicalIdentifier = physicalIdentifier;
+    }
 
     public PlantDao() {
 

@@ -1,4 +1,4 @@
-package be.kdg.integration.plantifybackend.domain.gson;
+package be.kdg.integration.plantifybackend.domain.mappers;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
 

@@ -26,7 +26,7 @@
             <label for="type"></label>
             <select name="type" id="type">
                 <!--easier to add new plantTypes-->
-                <option th:each="plantType : ${plantTypes}" th:value="${plantType}" th:text="${plantType}"></option>
+                <option th:each="plantType : ${plantTypes}" th:value="${plantType.name()}" th:text="${plantType.name()}"></option>
             </select>
 
             <label><input type="text" id="arduinoSeries" name="arduinoSeries" placeholder="Enter Arduino Series"

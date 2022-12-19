@@ -1,4 +1,4 @@
-package be.kdg.integration.plantifybackend.domain.gson;
+package be.kdg.integration.plantifybackend.domain.mappers;
 
 import be.kdg.integration.plantifybackend.domain.Arduino;
 import be.kdg.integration.plantifybackend.domain.Plant;
@@ -32,13 +32,6 @@ public class PlantRowMapper implements RowMapper<Plant> {
         plant.setName(rs.getString("plantname"));
         plant.setTypeOfPlant(PlantType.valueOf(rs.getString("planttype").toUpperCase(Locale.ROOT)));
         plant.setArduino(arduino);
-
-
-        //hardcoded cuz we only have one arduino
-        // To change
-//        plant.setArduino(new Arduino("1",101));
-
-
         return plant;
 
     }

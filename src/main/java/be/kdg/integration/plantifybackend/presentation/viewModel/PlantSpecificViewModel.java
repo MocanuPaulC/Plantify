@@ -16,6 +16,10 @@ public class PlantSpecificViewModel {
     @Min(0)
     @Max(255)
     private int blue;
+
+    /**
+     * converts hexadecimal to Integer
+     */
     public void hex2Rgb() {
        setRed(Integer.valueOf(this.hexadecimal.substring(1, 3), 16));
        setGreen(Integer.valueOf(this.hexadecimal.substring(3, 5), 16));

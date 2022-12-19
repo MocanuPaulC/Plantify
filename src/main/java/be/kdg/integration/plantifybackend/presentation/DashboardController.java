@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class DashboardController {
     PlantService plantService;
-    Gson gson = new Gson();
     ArduinoService arduinoService;
 
     @Autowired
