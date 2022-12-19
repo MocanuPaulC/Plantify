@@ -1,4 +1,4 @@
-package be.kdg.integration.plantifybackend.domain.mappers;
+package be.kdg.integration.plantifybackend.domain.gson;
 
 import java.util.List;
 

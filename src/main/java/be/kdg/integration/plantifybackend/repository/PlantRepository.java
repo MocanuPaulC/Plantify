@@ -3,7 +3,7 @@ package be.kdg.integration.plantifybackend.repository;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
-import be.kdg.integration.plantifybackend.domain.mappers.PlantForecastingMapper;
+import be.kdg.integration.plantifybackend.domain.gson.PlantForecastingMapper;
 
 import java.sql.SQLException;
 import java.util.List;
