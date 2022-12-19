@@ -97,7 +97,7 @@ public class PlantController {
         String json = list.get(0).substring(4, list.get(0).length() - 1);
         if (!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
-            plantService.saveReadingsToDB(details, physicalId );// dont know how to retrieve plantId from this, dummy data
+            plantService.saveReadingsToDB(details, physicalId );
             logger.debug("post request saved");
         }
 

@@ -11,10 +11,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "arduino")
 public class ArduinoDao {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long dummyid;
-
     @Id
     @Column(name = "physicalidentifier")
     private int physicalIdentifier;
@@ -46,16 +42,6 @@ public class ArduinoDao {
     public ArduinoDao() {
 
     }
-
-
-//    public Long getDummyid() {
-//        return dummyid;
-//    }
-
-
-//    public void setDummyid(Long dummyId) {
-//        this.dummyid = dummyId;
-//    }
 
     public boolean isLedSetting() {
         return ledSetting;
