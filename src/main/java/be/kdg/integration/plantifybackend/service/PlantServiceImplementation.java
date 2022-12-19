@@ -9,6 +9,8 @@ import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -37,10 +39,6 @@ public class PlantServiceImplementation implements PlantService{
         Plant plant = plantRepository.setPlantId(new Plant(name,plantType,arduino, client.getEmail()));
         return plantRepository.savePlant(plant, client);
 
-    }
-    @Override
-    public void getPlantFromDB(){
-        plantRepository.getPlantsFromDB();
     }
 
     /**
@@ -92,8 +90,19 @@ public class PlantServiceImplementation implements PlantService{
     }
 
     @Override
-    public PlantForecastingMapper getForecastingData(int plantId){
+    public PlantForecastingMapper getForecastingData(int plantId) throws SQLException {
         return plantRepository.getForecastingData(plantId);
     }
+
+    @Override
+    public List<Integer> getSoilMoistureForecasting(int plantId) throws SQLException {
+        return plantRepository.getForecastingData(plantId).getMoistureAverageForecast();
+    }
+
+    @Override
+    public List<Integer> getBrightnessForecasting(int plantId) throws SQLException {
+        return plantRepository.getForecastingData(plantId).getLightAverageForecast();
+    }
+
 
 }

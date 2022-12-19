@@ -7,12 +7,11 @@ import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.domain.mappers.PlantForecastingMapper;
 import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface PlantService {
     Plant addPlant(String name, PlantType plantType, Arduino arduino, Client client);
-
-    void getPlantFromDB();
 
     void saveReadingsToDB(Plant.Details details, int plantId);
     void updateDBArchive();
@@ -26,5 +25,9 @@ public interface PlantService {
 
     void removePlant(int id);
 
-    PlantForecastingMapper getForecastingData(int plantId);
+    PlantForecastingMapper getForecastingData(int plantId) throws SQLException;
+
+    List<Integer> getSoilMoistureForecasting(int plantId) throws SQLException;
+
+    List<Integer> getBrightnessForecasting(int plantId) throws SQLException;
 }

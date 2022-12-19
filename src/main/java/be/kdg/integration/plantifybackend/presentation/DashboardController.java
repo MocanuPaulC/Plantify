@@ -3,7 +3,6 @@ package be.kdg.integration.plantifybackend.presentation;
 import be.kdg.integration.plantifybackend.domain.Client;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

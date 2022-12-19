@@ -5,6 +5,7 @@ import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.domain.mappers.PlantForecastingMapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface PlantRepository {
@@ -13,7 +14,6 @@ public interface PlantRepository {
     Plant savePlant(Plant plant, Client client);
 
     List<ArchiveDao> getArchiveDaos();
-    void getPlantsFromDB();
 
     Plant setPlantId(Plant plant);
     void updateDBArchive();
@@ -24,5 +24,5 @@ public interface PlantRepository {
 
     void deletePlant(int id);
 
-    PlantForecastingMapper getForecastingData(int plantId);
+    PlantForecastingMapper getForecastingData(int plantId) throws SQLException;
 }

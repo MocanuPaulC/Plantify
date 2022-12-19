@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,10 +97,21 @@ public class PlantListController {
             model.addAttribute("specPlant", plant);
             model.addAttribute("loggedInOrNot", true);
             model.addAttribute("id", id);
-            List<ArchiveDao> archiveDaos = plantService.getArchiveByPlantId(Integer.parseInt(id));
+          //  List<ArchiveDao> archiveDaos = plantService.getArchiveByPlantId(Integer.parseInt(id));
+         //   archiveDaos.toArray()
+            try {
+                model.addAttribute("forecastingSoilMoisture", plantService.getSoilMoistureForecasting(Integer.parseInt(id)).toArray());
+                model.addAttribute("archiveDaos", plantService.getArchiveByPlantId(Integer.parseInt(id)).toArray());
 
-            model.addAttribute("archiveDaos", archiveDaos.toArray());
+                model.addAttribute("forecastingBrightness", plantService.getBrightnessForecasting(Integer.parseInt(id)).toArray());
+
+                model.addAttribute("exception",false);
+            } catch (SQLException sqlException){
+                model.addAttribute("exception",true);
+            }
+
             return "specificPlant";
+
         }else {
             return "login";
         }
