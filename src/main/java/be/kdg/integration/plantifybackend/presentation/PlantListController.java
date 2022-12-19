@@ -2,7 +2,6 @@ package be.kdg.integration.plantifybackend.presentation;
 
 import be.kdg.integration.plantifybackend.domain.Plant;
 import be.kdg.integration.plantifybackend.domain.Client;
-import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 import be.kdg.integration.plantifybackend.presentation.viewModel.PlantSpecificViewModel;
 import be.kdg.integration.plantifybackend.service.ArduinoService;
 import be.kdg.integration.plantifybackend.service.PlantService;
@@ -10,7 +9,6 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Controller for plantlist.html
@@ -104,6 +100,8 @@ public class PlantListController {
                 model.addAttribute("archiveDaos", plantService.getArchiveByPlantId(Integer.parseInt(id)).toArray());
 
                 model.addAttribute("forecastingBrightness", plantService.getBrightnessForecasting(Integer.parseInt(id)).toArray());
+                model.addAttribute("forecastingHumidity", plantService.getAirhumidityForecasting(Integer.parseInt(id)).toArray());
+                model.addAttribute("forecastingTemp", plantService.getTemperatureForecasting(Integer.parseInt(id)).toArray());
 
                 model.addAttribute("exception",false);
             } catch (SQLException sqlException){

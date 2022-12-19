@@ -103,6 +103,12 @@ public class PlantServiceImplementation implements PlantService{
     public List<Integer> getBrightnessForecasting(int plantId) throws SQLException {
         return plantRepository.getForecastingData(plantId).getLightAverageForecast();
     }
-
-
+    @Override
+    public List<Integer> getAirhumidityForecasting(int plantId) throws SQLException {
+        return plantRepository.getForecastingData(plantId).getHumidityAverageForecast();
+    }
+    @Override
+    public List<Integer> getTemperatureForecasting(int plantId) throws SQLException {
+        return plantRepository.getForecastingData(plantId).getTemperatureAverageForecast();
+    }
 }
