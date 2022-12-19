@@ -67,18 +67,23 @@ public class ArduinoServiceImplementation implements ArduinoService{
      * @return all information retrieved from the arduino in a formatted string
      */
     @Override
-    public String postMapping(int physicalIdentifier) {
+    public String postMapping(int physicalIdentifier, int command,PlantType plantType,String color) {
         logger.debug(physicalIdentifier + " is the physical identifier");
         Arduino arduino = getArduinoList().stream().filter(ar -> ar.getPhysicalIdentifier() == physicalIdentifier).toList().get(0);
+        switch (command){
+            case 1:
+                return String.format("%d%2d%2d%2d%2d%2d%4d",1,plantType.getMinMoisture(),plantType.getMaxMoisture(),plantType.getMinHumidity(),
+                plantType.getMinTemp(),plantType.getMaxTemp(),plantType.getMaxBrightness());
+            case 2:
+                return "2"+color;
+            case 3:
+                return "3";
+        }
+
         return String.format("%dP%dL%dC%03d,%03d,%03d",1,arduino.getPumpInstruction(),arduino.getLedSetting() ? 1 : 0
                 ,arduino.getLedColor().getRed(),arduino.getLedColor().getGreen(),arduino.getLedColor().getBlue());
-//        return String.format("%d%2d%2d%2d%2d%2d%3d",1,plantType.getMinMoisture(),plantType.getMaxMoisture(),plantType.getMinHumidity(),
+//        return String.format("%d%2d%2d%2d%2d%2d%4d",1,plantType.getMinMoisture(),plantType.getMaxMoisture(),plantType.getMinHumidity(),
 //                plantType.getMinTemp(),plantType.getMaxTemp(),plantType.getMaxBrightness());
-    }
-
-    public String SetUpConfig(PlantType plantType){
-        return String.format("%d%2d%2d%2d%2d%2d%3d",2,plantType.getMinMoisture(),plantType.getMaxMoisture(),plantType.getMinHumidity(),
-                plantType.getMinTemp(),plantType.getMaxTemp(),plantType.getMaxBrightness());
     }
 
     @Override

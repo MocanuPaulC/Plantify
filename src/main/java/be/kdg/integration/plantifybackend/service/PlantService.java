@@ -16,6 +16,8 @@ public interface PlantService {
     void saveReadingsToDB(Plant.Details details, int plantId);
     void updateDBArchive();
 
+    Plant getPlantByPhysId(int physId);
+
     List<Plant> readPlants();
 
     List<ArchiveDao> getArchiveByPlantId(int id);

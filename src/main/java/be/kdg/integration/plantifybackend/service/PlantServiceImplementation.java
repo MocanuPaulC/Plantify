@@ -51,6 +51,12 @@ public class PlantServiceImplementation implements PlantService{
 
 
     @Override
+    public Plant getPlantByPhysId(int physId) {
+        return plantRepository.getPlants().stream().filter(plant -> plant.getArduino().getPhysicalIdentifier()==physId).toList().get(0);
+
+    }
+
+    @Override
     public List<ArchiveDao> getArchiveByPlantId(int id) {
         return plantRepository.getArchiveDaos().stream().filter(archiveDao -> archiveDao.getPlantid()==id).toList();
     }
