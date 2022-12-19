@@ -96,4 +96,11 @@ public class PlantServiceImplementation implements PlantService{
         return plantRepository.getForecastingData(plantId);
     }
 
+    @Override
+    public List<Integer> getSoilMoistureForecasting(int plantId){
+        return plantRepository.getForecastingData(plantId).getMoistureAverageForecast();
+    }
+
+
+
 }

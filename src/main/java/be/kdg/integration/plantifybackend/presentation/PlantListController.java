@@ -96,9 +96,10 @@ public class PlantListController {
             model.addAttribute("specPlant", plant);
             model.addAttribute("loggedInOrNot", true);
             model.addAttribute("id", id);
-            List<ArchiveDao> archiveDaos = plantService.getArchiveByPlantId(Integer.parseInt(id));
-
-            model.addAttribute("archiveDaos", archiveDaos.toArray());
+          //  List<ArchiveDao> archiveDaos = plantService.getArchiveByPlantId(Integer.parseInt(id));
+         //   archiveDaos.toArray()
+            model.addAttribute("forecastingSoilMoisture",plantService.getSoilMoistureForecasting(Integer.parseInt(id)).toArray());
+            model.addAttribute("archiveDaos", plantService.getArchiveByPlantId(Integer.parseInt(id)).toArray());
             return "specificPlant";
         }else {
             return "login";

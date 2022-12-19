@@ -27,4 +27,6 @@ public interface PlantService {
     void removePlant(int id);
 
     PlantForecastingMapper getForecastingData(int plantId);
+
+    List<Integer> getSoilMoistureForecasting(int plantId);
 }

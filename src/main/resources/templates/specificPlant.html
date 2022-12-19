@@ -24,45 +24,9 @@
     </script>
     <script defer th:inline="javascript">
         getDataList([[${archiveDaos}]]);
-    </script><!--
-
-    <script type="text/javascript" th:inline="javascript">
-        let predictedValues = /*[[${archiveDaos}]]*/ 'default';
-
-        console.log(predictedValues);
-        let moisturePredictedValues = [];
-        moisturePredictedValues.push(['Timestamp', 'Lower bound (Minimal optimum', 'Moisture (in %)', 'Upper bound (maximal optimum)'])
-        for (let i = 0; i < predictedValues.length; i++) {
-            console.log(predictedValues.at(i).moistureavg);
-            let timestamp = predictedValues.at(i).refreshtime;
-            timestamp = timestamp.toLocaleString().substring(0, 10);
-            moisturePredictedValues.push([timestamp, 60, predictedValues.at(i).moistureavg, 90])
-        }
-        /*]]>*/
-
-        // Load the Visualization API and the corechart package.
-        google.charts.load('current', {'packages': ['corechart']});
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawChart() {
-            data = google.visualization.arrayToDataTable(moisturePredictedValues);
-
-            //set chart options
-            var options = {
-                title: 'Average soil moisture level per day',
-                curveType: 'function',
-                legend: {position: 'bottom'}
-            };
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.LineChart(document.getElementById('pills-profile'));
-            chart.draw(data, options);
-        }
-    </script>-->
+        console.log([[${forecastingSoilMoisture}]])
+        getForecastingData([[${forecastingSoilMoisture}]]);
+    </script>
 </head>
 <body>
 <div th:replace="~{fragments/fragments::navigationbar(3,${loggedInOrNot})}"></div>

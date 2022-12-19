@@ -216,7 +216,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
         // retrieve archive data
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        List<ArchiveDao> archiveList =  em.createQuery("select a from ArchiveDao a where a.plantid="+plantId+"; ",
+        List<ArchiveDao> archiveList =  em.createQuery("select a from ArchiveDao a where a.plantid="+plantId+" ",
                         ArchiveDao.class)
                         .getResultList();
         em.getTransaction().commit();
