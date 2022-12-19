@@ -25,7 +25,7 @@
 
             <label for="type"></label>
             <select name="type" id="type">
-                <!--easier to add new plantTypes-->
+                <!--easier to add new plantTypes -->
                 <option th:each="plantType : ${plantTypes}" th:value="${plantType.name()}" th:text="${plantType.name()}"></option>
             </select>
 
