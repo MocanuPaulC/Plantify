@@ -45,8 +45,8 @@ img{
 }
 .dropdownContainer:not(.dropdown-content){
     display: flex;
-   /* justify-content: center;
-    align-items: center;*/
+    /* justify-content: center;
+     align-items: center;*/
 }
 
 .linkContainers a{
@@ -120,7 +120,7 @@ nav{
     background-color: #4a6434;
     color: white;
     height: 3em;
-    /*position: absolute;*/
+    position: absolute;
     width: 100%;
     /*left: 0;*/
     /*bottom: 0;*/
