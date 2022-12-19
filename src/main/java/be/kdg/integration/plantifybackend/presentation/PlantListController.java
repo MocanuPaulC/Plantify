@@ -128,9 +128,7 @@ public class PlantListController {
                 (short) plantSpecificViewModel.getRed(),
                 (short) plantSpecificViewModel.getGreen(),
                 (short) plantSpecificViewModel.getBlue());
-        model.addAttribute("arduinoConfiguration", arduinoService.postMapping(plantService.getPlantPhysicalIdentifier(Integer.parseInt(id)),3,null,String.format("%3d%3d%3d",(short) plantSpecificViewModel.getRed(),
-                (short) plantSpecificViewModel.getGreen(),
-                (short) plantSpecificViewModel.getBlue())));
+
         return "redirect:/plantList/{id}";
     }
 

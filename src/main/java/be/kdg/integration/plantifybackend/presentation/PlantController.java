@@ -100,9 +100,16 @@ public class PlantController {
             plantService.saveReadingsToDB(details, physicalId );
             logger.debug("post request saved");
         }
-
-        model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId,1,plantService.getPlantByPhysId(physicalId).getTypeOfPlant(),null));
-
+        Arduino arduino=arduinoService.getArduinoList().stream().filter(arduino1 -> arduino1.getPhysicalIdentifier()==physicalId).toList().get(0);
+        if(arduino.isSetup()){
+            model.addAttribute("arduinoConfiguration", arduinoService.postMapping(plantService.getPlantPhysicalIdentifier(Integer.parseInt(String.valueOf(physicalId))),2,null,String.format("%3d%3d%3d",(short) arduino.getRed(),
+                    (short) arduino.getGreen(),
+                    (short) arduino.getBlue())));
+        }
+        else {
+            arduino.setSetup(true);
+            model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId, 1, plantService.getPlantByPhysId(physicalId).getTypeOfPlant(), null));
+        }
         return "addetails";
     }
 

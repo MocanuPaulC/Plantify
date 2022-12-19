@@ -70,11 +70,13 @@ public class ArduinoServiceImplementation implements ArduinoService{
     public String postMapping(int physicalIdentifier, int command,PlantType plantType,String color) {
         logger.debug(physicalIdentifier + " is the physical identifier");
         Arduino arduino = getArduinoList().stream().filter(ar -> ar.getPhysicalIdentifier() == physicalIdentifier).toList().get(0);
+        logger.debug("command is"+command);
         switch (command){
             case 1:
                 return String.format("%d%2d%2d%2d%2d%2d%4d",1,plantType.getMinMoisture(),plantType.getMaxMoisture(),plantType.getMinHumidity(),
                 plantType.getMinTemp(),plantType.getMaxTemp(),plantType.getMaxBrightness());
             case 2:
+                logger.debug("2"+color);
                 return "2"+color;
             case 3:
                 return "3";

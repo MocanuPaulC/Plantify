@@ -128,7 +128,7 @@ public class PlantRepositoryHibernate implements PlantRepository {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         PlantDao plantDao =
-                em.createQuery("select p from PlantDao p where p.physicalIdentifier="+physicalId+"; ",
+                em.createQuery("select p from PlantDao p where p.physicalIdentifier="+physicalId,
                         PlantDao.class)
                         .getSingleResult();
         DetailsDao detailsDao = new DetailsDao(plantDao.getPlantId(), details.getTemperature(), details.getHumidity(),

@@ -51,7 +51,7 @@ CREATE TABLE Details
     humidity    NUMERIC(10) NOT NULL,
     moisture    NUMERIC(10) NOT NULL,
     light       NUMERIC(10) NOT NULL,
-    refreshTime TIMESTAMP   NOT NULL
+    refreshTime TIMESTAMP
         DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -67,7 +67,7 @@ CREATE TABLE DetailsArchive
     humidityAvg        INT NOT NULL,
     moistureAvg        INT NOT NULL,
     lightAvg           INT NOT NULL,
-    refreshTime        TIMESTAMP   NOT NULL
+    refreshTime        TIMESTAMP
         DEFAULT CURRENT_TIMESTAMP,
     minimumTemperature numeric(10) NOT NULL,
     maximumTemperature numeric(10) NOT NULL,
