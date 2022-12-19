@@ -64,23 +64,23 @@ public class ClientController {
         logger.debug("delete client request received");
         logger.debug(email);
         logger.debug(password);
-        // TO del arduino, we need its phys id
-//        String email="gay";
-//        String pass="gayer";
-        // TO del plant, we need its id
+
+        // get plants of client
         List<Plant> clientPlants = plantService.readPlants().stream()
                 .filter(plant -> plant.getEmailUser().equals(email)).toList();
 
-
+        // delete each plant and its arduino of the client
         clientPlants.forEach(plant -> {
             arduinoService.removeArduino(plant.getArduino().getPhysicalIdentifier());
             plantService.removePlant(plant.getId());
         });
 
-
+        // delete the client in repository
         clientService.removeClient(new Client(email,password));
 
+        // delete the client in the browser
         httpSession.removeAttribute("user");
+
         return "redirect:/index";
 
     }
