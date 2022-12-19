@@ -7,6 +7,7 @@ import be.kdg.integration.plantifybackend.domain.PlantType;
 import be.kdg.integration.plantifybackend.domain.gson.PlantForecastingMapper;
 import be.kdg.integration.plantifybackend.domain.hibernate.ArchiveDao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface PlantService {
@@ -24,7 +25,9 @@ public interface PlantService {
 
     void removePlant(int id);
 
-    PlantForecastingMapper getForecastingData(int plantId);
+    PlantForecastingMapper getForecastingData(int plantId) throws SQLException;
 
-    List<Integer> getSoilMoistureForecasting(int plantId);
+    List<Integer> getSoilMoistureForecasting(int plantId) throws SQLException;
+
+    List<Integer> getBrightnessForecasting(int plantId) throws SQLException;
 }
