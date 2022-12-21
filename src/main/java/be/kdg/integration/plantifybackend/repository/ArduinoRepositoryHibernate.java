@@ -31,7 +31,7 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
 
     private ArduinoDao arduinoToDao(Arduino arduino){
         return new ArduinoDao(arduino.getPhysicalIdentifier(), arduino.getSeries(),
-                arduino.getLedSetting(), arduino.getRed(), arduino.getGreen(), arduino.getBlue());
+                arduino.getLedSetting(), arduino.getRed(), arduino.getGreen(), arduino.getBlue(), arduino.isConfigured());
     }
 
     @Override
@@ -108,6 +108,14 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
         em.close();
 
 
+    }
+
+    @Override
+    public void configureArduino(int physicalId) {
+        logger.debug("configuring arduino");
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.find(ArduinoDao.class, physicalId).getBlueCode();
     }
 
 

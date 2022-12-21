@@ -29,14 +29,17 @@ public class ArduinoDao {
 
     @Column(name = "bluecode", nullable = false)
     private short blueCode;
+    @Column(name = "configured", nullable = false)
+    private boolean isConfigured;
 
-    public ArduinoDao(int physicalIdentifier, String series, boolean ledSetting, short redCode, short greenCode, short blueCode) {
+    public ArduinoDao(int physicalIdentifier, String series, boolean ledSetting, short redCode, short greenCode, short blueCode, boolean isConfigured) {
         this.physicalIdentifier = physicalIdentifier;
         this.series = series;
         this.ledSetting = ledSetting;
         this.redCode = redCode;
         this.greenCode = greenCode;
         this.blueCode = blueCode;
+        this.isConfigured = isConfigured;
     }
 
     public ArduinoDao() {
@@ -93,6 +96,10 @@ public class ArduinoDao {
 
     public void setBlueCode(short blueCode) {
         this.blueCode = blueCode;
+    }
+
+    public void setConfiguration(boolean state){
+        this.isConfigured = state;
     }
 
     @Override

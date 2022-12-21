@@ -67,8 +67,6 @@ public class PlantController {
             System.out.println("not logged in");
             return "login";
         }
-
-
     }
 
     //this method needs to be ran to do JS for refresh of data automatically
@@ -94,20 +92,20 @@ public class PlantController {
 
 
         int physicalId = Integer.parseInt(list.get(0).substring(0, 3));
-        String json = list.get(0).substring(4, list.get(0).length() - 1);
+        String json = list.get(0).substring(4, list.get(0).length() - 1); // needs to be shortened because one more field was added
         if (!json.contains("[")) {
             Plant.Details details = gson.fromJson(json, Plant.Details.class);
             plantService.saveReadingsToDB(details, physicalId );
             logger.debug("post request saved");
         }
-        Arduino arduino=arduinoService.getArduinoList().stream().filter(arduino1 -> arduino1.getPhysicalIdentifier()==physicalId).toList().get(0);
-        if(arduino.isSetup()){
+        Arduino arduino = arduinoService.getArduinoList().stream().filter(arduino1 -> arduino1.getPhysicalIdentifier()==physicalId).toList().get(0);
+        if(arduino.isConfigured()){
             model.addAttribute("arduinoConfiguration", arduinoService.postMapping(plantService.getPlantPhysicalIdentifier(Integer.parseInt(String.valueOf(physicalId))),2,null,String.format("%3d%3d%3d",(short) arduino.getRed(),
                     (short) arduino.getGreen(),
                     (short) arduino.getBlue())));
         }
         else {
-            arduino.setSetup(true);
+            //arduino.setConfiguration(true);
             model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId, 1, plantService.getPlantByPhysId(physicalId).getTypeOfPlant(), null));
         }
         return "addetails";

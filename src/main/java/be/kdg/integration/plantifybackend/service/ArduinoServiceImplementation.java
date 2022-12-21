@@ -80,12 +80,9 @@ public class ArduinoServiceImplementation implements ArduinoService{
                 return "2"+color;
             case 3:
                 return "3";
+            default:
+                return "0";
         }
-
-        return String.format("%dP%dL%dC%03d,%03d,%03d",1,arduino.getPumpInstruction(),arduino.getLedSetting() ? 1 : 0
-                ,arduino.getLedColor().getRed(),arduino.getLedColor().getGreen(),arduino.getLedColor().getBlue());
-//        return String.format("%d%2d%2d%2d%2d%2d%4d",1,plantType.getMinMoisture(),plantType.getMaxMoisture(),plantType.getMinHumidity(),
-//                plantType.getMinTemp(),plantType.getMaxTemp(),plantType.getMaxBrightness());
     }
 
     @Override
