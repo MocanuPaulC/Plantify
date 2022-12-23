@@ -18,6 +18,10 @@ body{
 }
 
 main{
+    margin-bottom: 3em;
+}
+
+main{
     margin-top: 10em;
     text-align: center;
 }
