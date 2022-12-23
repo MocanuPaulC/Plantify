@@ -32,4 +32,7 @@ public interface PlantService {
     List<Integer> getSoilMoistureForecasting(int plantId) throws SQLException;
 
     List<Integer> getBrightnessForecasting(int plantId) throws SQLException;
+
+    List<Integer> getAirhumidityForecasting(int plantId) throws SQLException;
+    List<Integer> getTemperatureForecasting(int plantId) throws SQLException;
 }

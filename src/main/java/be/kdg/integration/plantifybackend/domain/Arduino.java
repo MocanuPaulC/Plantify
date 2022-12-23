@@ -34,6 +34,11 @@ public class Arduino {
     /**
      * Initializer for RowMapper
      */
+
+    private boolean isConfigured = false;
+    /**
+     * Initializer arduino state
+     */
     public Arduino() {
     }
 
@@ -117,12 +122,22 @@ public class Arduino {
         return ledColor.getGreen();
     }
 
+    public boolean isConfigured() {
+        return isConfigured;
+    }
+
+    public void setConfiguration(boolean configured) {
+        isConfigured = configured;
+    }
+
     @Override
     public String toString() {
         return "Arduino{" + series+
                 ", physicalIdentifier=" + physicalIdentifier +
                 '}';
     }
+
+
 
 
 }

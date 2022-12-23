@@ -15,4 +15,6 @@ public interface ArduinoRepository {
     void changeColor(int physicalId, RGBColor color);
     void deleteArduino(int physicalId);
 
+    void configureArduino(int physicalId);
+
 }

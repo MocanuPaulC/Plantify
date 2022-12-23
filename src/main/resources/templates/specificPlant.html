@@ -20,13 +20,14 @@
             crossorigin="anonymous"></script>
     <script type="text/javascript" th:src="@{https://www.gstatic.com/charts/loader.js}"></script>
     <script type="text/javascript" th:inline="javascript"></script>
-    <script th:src="@{/js/chartSoilMoisture.js}"></script>
+    <script th:src="@{/js/charts.js}"></script>
    <!-- <script th:src="@{/js/chartBrightness.js}"></script>-->
     <script defer th:inline="javascript">
         getDataList([[${archiveDaos}]]);
-        //getDataListBrightness([[${archiveDaos}]]);
-        getForecastingData([[${forecastingSoilMoisture}]]);
-       // getForecastingDataBrightness([[${forecastingBrightness}]])
+        getForecastingData([[${forecastingSoilMoisture}]]
+            ,[[${forecastingBrightness}]]
+            ,[[${forecastingHumidity}]]
+            ,[[${forecastingTemp}]]);
     </script>
 
 
@@ -73,21 +74,26 @@
                     <button class="nav-link active" id="pills-home-tab"
                             data-bs-toggle="pill" data-bs-target="#pills-home"
                             type="button" role="tab" aria-controls="pills-home"
-                            aria-selected="true">Moisture Level
+                            aria-selected="true">Moisture
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-profile-tab"
                             data-bs-toggle="pill" data-bs-target="#pills-profile"
                             type="button" role="tab" aria-controls="pills-profile"
-                            aria-selected="false">Predicted Moisture Level
+                            aria-selected="false">Brightness
                     </button>
                 </li>
-                <!-- <li class="nav-item" role="presentation">
+                <li class="nav-item" role="presentation">
                      <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
                              data-bs-target="#pills-contact" type="button" role="tab"
-                             aria-controls="pills-contact" aria-selected="false">Contact</button>
-                 </li>-->
+                             aria-controls="pills-contact" aria-selected="false">Air Humidity</button>
+                 </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-temp-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-contact" type="button" role="tab"
+                            aria-controls="pills-contact" aria-selected="false">Temperature</button>
+                </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home"
@@ -97,8 +103,12 @@
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                      aria-labelledby="pills-profile-tab">
                 </div>
-                <!--<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...
-                </div>-->
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                     aria-labelledby="pills-contact-tab">
+                </div>
+                <div class="tab-pane fade" id="pills-temp" role="tabpanel"
+                     aria-labelledby="pills-contact-tab">
+                </div>
             </div>
         </div>
     </div>
