@@ -31,11 +31,11 @@
 
             <label><input type="text" id="arduinoSeries" name="arduinoSeries" placeholder="Enter Arduino Series"
             ></label>
-            <div class="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{arduinoSeries}"></div>
+            <div class="alert" th:if="${#fields.hasErrors('arduinoSeries')}" th:errors="*{arduinoSeries}"></div>
 
             <label><input type="text" id="physicalAddress" name="physicalAddress" placeholder="Enter Physical Address"
                           min="0"></label>
-            <div class="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{physicalAddress}"></div>
+            <div class="alert" th:if="${#fields.hasErrors('physicalAddress')}" th:errors="*{physicalAddress}"></div>
 
             <button class="button" id="createPlant" type="submit">Submit</button>
         </fieldset>
