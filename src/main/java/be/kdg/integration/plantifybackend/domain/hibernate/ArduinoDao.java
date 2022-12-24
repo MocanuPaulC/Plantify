@@ -29,7 +29,7 @@ public class ArduinoDao {
 
     @Column(name = "bluecode", nullable = false)
     private short blueCode;
-    @Column(name = "configured", nullable = false)
+    @Column(name = "isconfigured", nullable = false)
     private boolean isConfigured;
 
     public ArduinoDao(int physicalIdentifier, String series, boolean ledSetting, short redCode, short greenCode, short blueCode, boolean isConfigured) {
@@ -44,6 +44,14 @@ public class ArduinoDao {
 
     public ArduinoDao() {
 
+    }
+
+    public boolean isConfigured() {
+        return isConfigured;
+    }
+
+    public void setConfigured(boolean configured) {
+        isConfigured = configured;
     }
 
     public boolean isLedSetting() {

@@ -20,23 +20,10 @@ public class PlantifybackendApplication{
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(PlantifybackendApplication.class,args);
 
-		// prints current plants in DB
-		//context.getBean(PlantService.class).getPlantFromDB();
-		//context.getBean(ArduinoService.class).setArduinoList(context.getBean(PlantService.class).readPlants());
-		//context.getBean(ArduinoService.class).addArduino("xx", 103);
-
-
 		// archiving functionality
 		ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
 		ses.scheduleAtFixedRate(context.getBean(PlantService.class)::updateDBArchive,
-				0, 20, TimeUnit.HOURS);
-
-
-//
-//		Gson gson = new Gson();
-//		String json="{\"humidity\":44,\"temperature\":23.3,\"brightness\":19.1395,\"moisture\":2}";
-//		Plant.Details details = gson.fromJson(json,Plant.Details.class);
-//		System.out.println(details);
+				0, 24, TimeUnit.HOURS);
 
 
 

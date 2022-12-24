@@ -26,7 +26,7 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
     private Arduino daoToArduino(ArduinoDao arduinoDao){
         return new Arduino(arduinoDao.getSeries(), arduinoDao.getLedSetting(),
                 arduinoDao.getPhysicalIdentifier(), new RGBColor(arduinoDao.getRedCode(), arduinoDao.getBlueCode(),
-                arduinoDao.getGreenCode()));
+                arduinoDao.getGreenCode()),arduinoDao.isConfigured());
     }
 
     private ArduinoDao arduinoToDao(Arduino arduino){
@@ -55,6 +55,7 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
         arduinoDao.setRedCode(color.getRed());
         arduinoDao.setGreenCode(color.getGreen());
         arduinoDao.setBlueCode(color.getBlue());
+
         logger.debug("Set color of "+physicalId +" to " + color);
         em.getTransaction().commit();
         em.close();
@@ -111,11 +112,16 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
     }
 
     @Override
-    public void configureArduino(int physicalId) {
+    public void configureArduino(int physicalId, boolean b) {
         logger.debug("configuring arduino");
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        em.find(ArduinoDao.class, physicalId).getBlueCode();
+        ArduinoDao arduinoDao = em.find(ArduinoDao.class, physicalId);
+//        em.remove(arduinoDao);
+        arduinoDao.setConfiguration(b);
+        logger.debug("configured");
+        em.getTransaction().commit();
+        em.close();
     }
 
 

@@ -120,14 +120,12 @@ public class PlantListController {
     PlantSpecificViewModel plantSpecificViewModel, Model model) {
         model.addAttribute("id", id);
         plantSpecificViewModel.hex2Rgb();
-
-        logger.debug(plantSpecificViewModel.getHexadecimal());
-
         arduinoService.setLedSetting(plantService.getPlantPhysicalIdentifier(Integer.parseInt(id)),true);
         arduinoService.changeColor(plantService.getPlantPhysicalIdentifier(Integer.parseInt(id)),
                 (short) plantSpecificViewModel.getRed(),
                 (short) plantSpecificViewModel.getGreen(),
                 (short) plantSpecificViewModel.getBlue());
+
 
         return "redirect:/plantList/{id}";
     }
@@ -136,6 +134,7 @@ public class PlantListController {
     public String resetPlantLed(@PathVariable String id, Model model, HttpSession httpSession){
         int physicalId=plantService.getPlantPhysicalIdentifier(Integer.parseInt(id));
         arduinoService.setLedSetting(physicalId,false);
+        arduinoService.changeColor(plantService.getPlantPhysicalIdentifier(Integer.parseInt(id)),(short)0,(short)0,(short)0);
         model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId,3,null,null));
 
         return "redirect:/plantList/{id}";

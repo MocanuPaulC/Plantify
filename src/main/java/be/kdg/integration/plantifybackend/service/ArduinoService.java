@@ -22,4 +22,5 @@ public interface ArduinoService {
     void removeArduino(int physicalIdentifier);
 
 
+    void setConfigured(int physicalId,boolean b);
 }

@@ -145,10 +145,12 @@ public class PlantRepositoryHibernate implements PlantRepository {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         PlantDao plantDao =  em.find(PlantDao.class, plantId);
+
         logger.debug("arduino retrieved");
+        Plant plant = daoToPlant(plantDao);
         em.getTransaction().commit();
         em.close();
-        return plantDao.getPhysicalIdentifier();
+        return plant.getArduino().getPhysicalIdentifier();
     }
 
     @Override

@@ -4,9 +4,9 @@ package be.kdg.integration.plantifybackend.Util;
  * RGBColor class for colors and brightness of led strip
  */
 public class RGBColor {
-    private short red;
-    private short blue;
-    private short green;
+    private short red=0;
+    private short blue=0;
+    private short green=0;
     private short brightness;
 
     public RGBColor() {

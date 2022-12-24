@@ -18,7 +18,8 @@ CREATE TABLE Arduino
     ledSetting         BOOLEAN     NOT NULL,
     redCode            SMALLINT    NOT NULL,
     greenCode          SMALLINT    NOT NULL,
-    blueCode           SMALLINT    NOT NULL
+    blueCode           SMALLINT    NOT NULL,
+    isConfigured       bool DEFAULT false
 );
 
 

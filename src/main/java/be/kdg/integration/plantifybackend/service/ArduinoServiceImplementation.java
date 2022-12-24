@@ -86,6 +86,11 @@ public class ArduinoServiceImplementation implements ArduinoService{
     }
 
     @Override
+    public void setConfigured(int physicalId,boolean b) {
+        arduinoRepository.configureArduino(physicalId,b);
+    }
+
+    @Override
     public void removeArduino(int physicalIdentifier){
         arduinoRepository.deleteArduino(physicalIdentifier);
     }

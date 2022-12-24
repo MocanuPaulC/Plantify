@@ -31,6 +31,7 @@ public class Arduino {
      */
     private RGBColor ledColor= new RGBColor();
 
+
     /**
      * Initializer for RowMapper
      */
@@ -52,12 +53,13 @@ public class Arduino {
         this.physicalIdentifier=physicalIdentifier;
     }
 
-    public Arduino(String series, boolean ledSetting, int physicalIdentifier, RGBColor ledColor) {
+
+    public Arduino(String series, boolean ledSetting, int physicalIdentifier, RGBColor ledColor, boolean isConfigured) {
         this.series = series;
         this.ledSetting = ledSetting;
         this.physicalIdentifier = physicalIdentifier;
         this.ledColor = ledColor;
-
+        this.isConfigured = isConfigured;
     }
 
     /**
@@ -134,6 +136,7 @@ public class Arduino {
     public String toString() {
         return "Arduino{" + series+
                 ", physicalIdentifier=" + physicalIdentifier +
+                ", COLOR=" + ledColor +
                 '}';
     }
 
