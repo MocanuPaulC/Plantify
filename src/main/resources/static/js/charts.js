@@ -59,6 +59,11 @@ google.charts.setOnLoadCallback(drawChartBrightness);
 
 google.charts.load('current', {'packages': ['corechart']});
 google.charts.setOnLoadCallback(drawChartHumidity);
+
+
+google.charts.load('current', {'packages': ['corechart']});
+google.charts.setOnLoadCallback(drawChartTemp);
+
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
@@ -83,7 +88,7 @@ function drawChartBrightness() {
 
     //set chart options
     var options = {
-        title: 'Average soil moisture level per day',
+        title: 'Average brightness level per day',
         curveType: 'function',
         legend: {position: 'bottom'}
         ,height: 500
@@ -99,7 +104,7 @@ function drawChartHumidity() {
 
     //set chart options
     var options = {
-        title: 'Average soil moisture level per day',
+        title: 'Average air humidity % level per day',
         curveType: 'function',
         legend: {position: 'bottom'}
         ,height: 500
@@ -108,5 +113,21 @@ function drawChartHumidity() {
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.LineChart(document.getElementById('pills-contact'));
+    chart.draw(data, options);
+}
+function drawChartTemp() {
+    let data = google.visualization.arrayToDataTable(temperatureArchive);
+
+    //set chart options
+    var options = {
+        title: 'Average air temperature level per day',
+        curveType: 'function',
+        legend: {position: 'bottom'}
+        ,height: 500
+        ,width: 900
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('pills-temp'));
     chart.draw(data, options);
 }
