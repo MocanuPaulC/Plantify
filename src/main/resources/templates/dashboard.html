@@ -21,10 +21,11 @@
     <div id="mainContainer">
 
         <menu class="arrow-box">
-          <!--  <a class="button" id="button2" type="button" th:href="@{/removePlant}">- Remove Plant</a>-->
             <a class="addPlant" id="button" type="button" th:href="@{/addPlant}">+ Add Plant</a>
             <form id="listForm" method="post">
-                <div class="arrow-round"> <input type="submit" value="Submit"></div>
+                <a th:href="@{/dashboard}">
+                    <div  class="arrow-round"></div>
+                </a>
             </form>
         </menu>
         <main id="plantContainter">
@@ -39,7 +40,7 @@
                     </p>
                     <p>
 
-                       Brightness: <span th:text="${plant.details.brightness}"></span> lux
+                        Brightness: <span th:text="${plant.details.brightness}"></span> lux
                     </p>
                     <p>
                         Soil Moisture: <span th:text="${plant.details.moisture}"></span> %
