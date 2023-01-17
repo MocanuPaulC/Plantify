@@ -19,15 +19,15 @@ INSERT INTO public.arduino (physicalidentifier, series, ledsetting, redcode, gre
 VALUES (104, 'xx', true, 11, 22, 33);
 
 INSERT INTO public.plant (plantid,useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
-VALUES (1,'fake@email.com', 'planty', 'PLAIN', '2022-12-01 20:03:45.000000', 101);
+VALUES (1,'fake@email.com', 'planty', 'CREEPERS', '2022-12-01 20:03:45.000000', 101);
 
 INSERT INTO public.plant (plantid,useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
-VALUES (2,'fake@email.com', 'plantos', 'PLAIN', '2022-12-01 20:04:00.000000', 102);
+VALUES (2,'fake@email.com', 'plantos', 'CREEPERS', '2022-12-01 20:04:00.000000', 102);
 INSERT INTO public.plant (plantid,useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
-VALUES (3,'fake2@email.com', 'planty2', 'PLAIN', '2022-12-01 20:03:45.000000', 103);
+VALUES (3,'fake2@email.com', 'planty2', 'CREEPERS', '2022-12-01 20:03:45.000000', 103);
 
 INSERT INTO public.plant (plantid,useremail, plantname, planttype, dateadded, arduinophysicalidentifier)
-VALUES (4,'fake2@email.com', 'plantos2', 'PLAIN', '2022-12-01 20:04:00.000000', 104);
+VALUES (4,'fake2@email.com', 'plantos2', 'CREEPERS', '2022-12-01 20:04:00.000000', 104);
 
 
 INSERT INTO public.detailsarchive (plantid, temperatureavg, humidityavg, moistureavg, lightavg, minimumtemperature, maximumtemperature, minimumhumidity, maximumhumidity, minimummoisture, maximummoisture, minimumlight, maximumlight, totalrowsarchived)
