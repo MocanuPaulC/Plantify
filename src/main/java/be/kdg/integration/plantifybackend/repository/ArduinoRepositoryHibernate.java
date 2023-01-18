@@ -99,7 +99,6 @@ public class ArduinoRepositoryHibernate implements ArduinoRepository {
     @Override
     public void deleteArduino(int physicalId){
         logger.debug("removing arduino from database and arduino list");
-
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
         ArduinoDao arduinoDao = em.find(ArduinoDao.class, physicalId);
