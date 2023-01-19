@@ -4,11 +4,11 @@ package be.kdg.integration.plantifybackend.domain;
  * Different types of plants, useful for future AI in determining water usagepublic
  */
 public enum PlantType {
-    HERBS(20,40,50,15,21,700),
-    SHRUBS(21,40,60,21,24,700),
-    TREES(21,40,40,20,38,700),
-    CLIMBERS(60,80,40,20,38,700),
-    CREEPERS(21,40,50,21,27,700);
+    HERBS(20,60,50,15,21,1500),
+    SHRUBS(21,60,60,21,24,1500),
+    TREES(21,60,40,20,38,1500),
+    CLIMBERS(60,80,40,20,38,1500),
+    CREEPERS(21,60,50,21,27,1500);
 
     private int minMoisture;
     private int maxMoisture;
