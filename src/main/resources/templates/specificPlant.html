@@ -22,11 +22,13 @@
     <script type="text/javascript" th:inline="javascript"></script>
     <script th:src="@{/js/charts.js}"></script>
     <script defer th:inline="javascript">
-        getDataList([[${archiveDaos}]]);
+        getDataList([[${archiveDaos}]],[[${plantBounds}]]);
         getForecastingData([[${forecastingSoilMoisture}]]
             ,[[${forecastingBrightness}]]
             ,[[${forecastingHumidity}]]
-            ,[[${forecastingTemp}]]);
+            ,[[${forecastingTemp}]]
+            ,[[${plantBounds}]]
+        );
     </script>
 
 

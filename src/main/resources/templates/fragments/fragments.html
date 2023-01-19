@@ -23,7 +23,7 @@
                    th:class="${index==1}?'nav-item nav-link active':'nav-item nav-link'" >Plant List</a>
             </div>
             <div class="linkContainers" th:if="${loggedInOrNot == true}">
-                <a th:if="${loggedInOrNot == true}" th:href="@{/dashboard}"
+                    <a th:if="${loggedInOrNot == true}" th:href="@{/dashboard}"
                     th:class="${index==2}?'nav-item nav-link active':'nav-item nav-link'">Dashboard</a>
             </div>
             <div class="linkContainers"><a th:href="@{/aboutPlantify}"

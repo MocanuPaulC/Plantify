@@ -167,25 +167,6 @@ public class PlantRepositoryHibernate implements PlantRepository {
 
     @Override
     public PlantForecastingMapper getForecastingData(int plantId) throws SQLException {
-        /*
-        // gets the present working directory
-        String pwd= System.getProperty("user.dir");
-        System.out.println(pwd);
-        // insert the location of your python  in here(tutorial: https://datatofish.com/locate-python-windows/)
-        String[] pbCommand = { "C:\\Users\\Max\\AppData\\Local\\Programs\\Python\\Python311\\python.exe", pwd+"\\src\\main\\resources\\script.py" };
-
-        ProcessBuilder processBuilder = new ProcessBuilder(pbCommand);
-
-        processBuilder.redirectErrorStream(true);
-
-        Process process = processBuilder.start();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String readline;
-        int line = 0;
-        boolean pastComma=false;
-        int beforeCommaPower=0;
-        int floatPower=1;
-        float number=0;*/
         List<Integer> tempAvg = new ArrayList<>();
         List<Integer> humidityAvg = new ArrayList<>();
         List<Integer> moistureAvg = new ArrayList<>();
@@ -239,82 +220,6 @@ public class PlantRepositoryHibernate implements PlantRepository {
                     lightAvg.subList(from, to));
         }
 
-
-        /*int listCounter=0;
-
-        while ((readline = reader.readLine()) != null) {
-            System.out.println(line++ + " " + readline);
-            if(readline.charAt(0)=='['){
-                for (int i = 2; i < readline.length(); i++) {
-                    char currentChar = readline.charAt(i);
-                    if(currentChar=='.'){
-                        pastComma =true;
-                    }
-                    else if(currentChar==','){
-                        i++;
-                        if(listCounter==0){
-                            tempAvg.add((int)number);
-                        }
-                        else if(listCounter==1){
-                            humidityAvg.add((int)number);
-                        }
-                        else if(listCounter==2){
-                            moistureAvg.add((int)number);
-                        }
-                        else if(listCounter==3){
-                            lightAvg.add((int)number);
-                        }
-                        number=0;
-                        floatPower=1;
-                        beforeCommaPower=0;
-                        pastComma=false;
-                    }
-                    else if(currentChar==']'){
-                        if(!(readline.charAt(i-1)==']')){
-                            i+=3;
-                            if(listCounter==0){
-                                tempAvg.add((int)number);
-                            }
-                            else if(listCounter==1){
-                                humidityAvg.add((int)number);
-                            }
-                            else if(listCounter==2){
-                                moistureAvg.add((int)number);
-                            }
-                            else if(listCounter==3){
-                                lightAvg.add((int)number);
-                            }
-                            floatPower=1;
-                            beforeCommaPower=0;
-                            pastComma=false;
-                            number=0;
-                            listCounter++;
-                        }
-                    }
-                    else {
-                        if(floatPower<2){
-                            if(pastComma){
-                                number+=((float) (currentChar -'0') )*((((float)1)/(Math.pow(10, floatPower))));
-                                floatPower++;
-                            }
-                            else {
-                                number+=((float) (currentChar -'0') )*((Math.pow(10, beforeCommaPower)));
-                                beforeCommaPower++;
-                            }
-                        }
-
-                    }
-
-
-                };
-            }
-        }
-        System.out.println("done");
-        return new PlantForecastingMapper(tempAvg, humidityAvg, moistureAvg, lightAvg);
-
-    } catch (IOException e){
-        e.printStackTrace();
-    }*/
     }
 
     // kept usage of jdbctemplate, might change it later if i wanna torture myself

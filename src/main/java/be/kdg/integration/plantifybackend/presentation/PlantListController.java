@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Controller for plantlist.html
@@ -102,7 +103,12 @@ public class PlantListController {
                 model.addAttribute("forecastingBrightness", plantService.getBrightnessForecasting(Integer.parseInt(id)).toArray());
                 model.addAttribute("forecastingHumidity", plantService.getAirhumidityForecasting(Integer.parseInt(id)).toArray());
                 model.addAttribute("forecastingTemp", plantService.getTemperatureForecasting(Integer.parseInt(id)).toArray());
-
+                model.addAttribute("plantBounds",new int[] {plant.getTypeOfPlant().getMaxBrightness(),
+                        plant.getTypeOfPlant().getMaxMoisture(),
+                        plant.getTypeOfPlant().getMinMoisture(),
+                        plant.getTypeOfPlant().getMaxTemp(),
+                        plant.getTypeOfPlant().getMinTemp(),
+                        plant.getTypeOfPlant().getMinHumidity()});
                 model.addAttribute("exception",false);
             } catch (SQLException sqlException){
                 model.addAttribute("exception",true);
@@ -125,8 +131,6 @@ public class PlantListController {
                 (short) plantSpecificViewModel.getRed(),
                 (short) plantSpecificViewModel.getGreen(),
                 (short) plantSpecificViewModel.getBlue());
-
-
         return "redirect:/plantList/{id}";
     }
 

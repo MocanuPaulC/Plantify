@@ -38,7 +38,6 @@ public class PlantServiceImplementation implements PlantService{
     public Plant addPlant(String name, PlantType plantType, Arduino arduino, Client client) {
         Plant plant = plantRepository.setPlantId(new Plant(name,plantType,arduino, client.getEmail()));
         return plantRepository.savePlant(plant, client);
-
     }
 
     /**

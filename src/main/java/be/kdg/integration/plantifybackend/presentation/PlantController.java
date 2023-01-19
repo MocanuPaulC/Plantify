@@ -80,17 +80,12 @@ public class PlantController {
     public String demo(HttpServletRequest httpServletRequest,Model model) {
         ServletInputStream inputStream;
         logger.debug("post request received");
-
         try {
             inputStream = httpServletRequest.getInputStream();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        final List<String> list = new BufferedReader(new InputStreamReader(inputStream))
-                .lines().toList();
-
-
+        final List<String> list = new BufferedReader(new InputStreamReader(inputStream)).lines().toList();
         int physicalId = Integer.parseInt(list.get(0).substring(0, 3));
         String json = list.get(0).substring(4, list.get(0).length() - 1); // needs to be shortened because one more field was added
         if (!json.contains("[")) {
@@ -112,9 +107,6 @@ public class PlantController {
             model.addAttribute("arduinoConfiguration", arduinoService.postMapping(physicalId, 1, plantService.getPlantByPhysId(physicalId).getTypeOfPlant(), null));
 //            arduino.setConfiguration(true);
             arduinoService.setConfigured(arduino.getPhysicalIdentifier(),true);
-
-
-
         }
         return "addetails";
     }

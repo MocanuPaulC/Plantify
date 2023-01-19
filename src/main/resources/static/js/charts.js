@@ -4,7 +4,7 @@ let brightnessArchive = [];
 let humidityArchive = [];
 let temperatureArchive = [];
 
-function getDataList(dataPassedThrough){
+function getDataList(dataPassedThrough, boundsPassedThrough){
     brightnessArchive.push(['Timestamp','Lower bound (Minimal optimum)','Brightness (in LUX)','Upper bound (maximal optimum)','Forecasted Brightness in LUX'])
     moistureArchive.push(['Timestamp','Lower bound (Minimal optimum)','Moisture (in %)','Upper bound (maximal optimum)','Forecasted soil moisture in %'])
     humidityArchive.push(['Timestamp','Lower bound (Minimal optimum)','Humidity (in %)','Upper bound (maximal optimum)','Forecasted Humidity in %'])
@@ -14,39 +14,35 @@ function getDataList(dataPassedThrough){
 
         let timestamp = dataPassedThrough.at(i).refreshtime;
         timestamp = timestamp.toLocaleString().substring(0,10);
-        moistureArchive.push([timestamp,60,dataPassedThrough.at(i).moistureavg,90,null]);
-        brightnessArchive.push([timestamp,0,dataPassedThrough.at(i).lightavg,700,null]);
-        humidityArchive.push([timestamp,10,dataPassedThrough.at(i).humidityavg,100,null]);
-        temperatureArchive.push([timestamp,10,dataPassedThrough.at(i).temperatureavg,50,null]);
+        moistureArchive.push([timestamp,boundsPassedThrough[2],dataPassedThrough.at(i).moistureavg,boundsPassedThrough[1],null]);
+        brightnessArchive.push([timestamp,null,dataPassedThrough.at(i).lightavg,boundsPassedThrough[0],null]);
+        humidityArchive.push([timestamp,boundsPassedThrough[5],dataPassedThrough.at(i).humidityavg,null,null]);
+        temperatureArchive.push([timestamp,boundsPassedThrough[4],dataPassedThrough.at(i).temperatureavg,boundsPassedThrough[3],null]);
 
     }
 }
 
 
-function getForecastingData(forecastedData,forecastedDataBrightness,forecastedDataHumidity,forecastedTemp){
-    console.log(forecastedData)
-    console.log("this is in charts.js")
+function getForecastingData(forecastedData,forecastedDataBrightness,forecastedDataHumidity,forecastedTemp,boundsPassedThrough ){
+    console.log(boundsPassedThrough)
+    console.log("above is data /////////////////////////")
     for (let i = 0; i < forecastedData.length; i++) {
         console.log(forecastedData.at(i));
         if (i === 0){
-            brightnessArchive.push(["2022-12-14",0,forecastedDataBrightness.at(0),700,forecastedDataBrightness.at(i)]);
-            moistureArchive.push(["2022-12-14",60,forecastedData.at(0),90,forecastedData.at(i)]);
-            humidityArchive.push(["2022-12-14",10,forecastedDataHumidity.at(0),100,forecastedDataHumidity.at(i)]);
-            temperatureArchive.push(["2022-12-14",10,forecastedTemp.at(0),50,forecastedTemp.at(i)]);
+            brightnessArchive.push(["2022-12-14",0,forecastedDataBrightness.at(0),boundsPassedThrough[0],forecastedDataBrightness.at(i)]);
+            moistureArchive.push(["2022-12-14",boundsPassedThrough[2],forecastedData.at(0),boundsPassedThrough[1],forecastedData.at(i)]);
+            humidityArchive.push(["2022-12-14",boundsPassedThrough[5],forecastedDataHumidity.at(0),null,forecastedDataHumidity.at(i)]);
+            temperatureArchive.push(["2022-12-14",boundsPassedThrough[4],forecastedTemp.at(0),boundsPassedThrough[3],forecastedTemp.at(i)]);
         }else {
-            brightnessArchive.push(["2022-12-14",0,null,700,forecastedDataBrightness.at(i)]);
-            moistureArchive.push(["2022-12-14",60,null,90,forecastedData.at(i)]);
-            humidityArchive.push(["2022-12-14",10,null,100,forecastedDataHumidity.at(i)]);
-            temperatureArchive.push(["2022-12-14",10,null,50,forecastedTemp.at(i)]);
-
+            brightnessArchive.push(["2022-12-14",null,null,boundsPassedThrough[0],forecastedDataBrightness.at(i)]);
+            moistureArchive.push(["2022-12-14",boundsPassedThrough[2],null,boundsPassedThrough[1],forecastedData.at(i)]);
+            humidityArchive.push(["2022-12-14",boundsPassedThrough[5],null,0,forecastedDataHumidity.at(i)]);
+            temperatureArchive.push(["2022-12-14",boundsPassedThrough[4],null,boundsPassedThrough[3],forecastedTemp.at(i)]);
         }
+
     }
 
 }
-
-console.log("//////////////////////////")
-console.log(moistureArchive);
-console.log("//////////////////////////")
 
 
 // Load the Visualization API and the corechart package.
